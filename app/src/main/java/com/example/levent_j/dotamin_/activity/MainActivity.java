@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -134,7 +135,8 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab:
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+                String s = (String) pageFragmentAdapter.getPageTitle(viewPager.getCurrentItem());
+                Snackbar.make(v, "搜索"+s+"相关的内容", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 break;
         }
