@@ -16,12 +16,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.fragment.HeroFragment;
 import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
+import com.example.levent_j.dotamin_.utils.InputDialog;
 import com.example.levent_j.dotamin_.utils.Util;
 
 import java.util.ArrayList;
@@ -47,6 +50,8 @@ public class MainActivity extends BaseActivity
     private MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
     private int[] tabicon = {R.drawable.ic_user,R.drawable.ic_history,R.drawable.ic_dota};
+    private int searchFlag;
+    private String searchTitle;
 
     @Override
     protected void init() {
@@ -141,13 +146,58 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         switch (v.getId()){
             case R.id.fab:
-                String s = (String) myFragmentAdapter.getTitle(viewPager.getCurrentItem());
-                Snackbar.make(v, "搜索"+s+"相关的内容", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                msg("url","url is http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamids="+ Util.get64Id(129639720));
+                String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
+                if (s.equals("User")){
+                    searchFlag = 1;
+                    searchTitle = "steam id";
+                }else if (s.equals("History")){
+                    searchFlag = 2;
+                    searchTitle = "比赛 id";
+                }else {
+                    searchFlag = 3;
+                    searchTitle = "英雄名称";
+                }
+                new InputDialog.Builder(this)
+                        .setTitle("搜索")
+                        .setInputMaxWords(9)
+                        .setInputHint("在此填入" + searchTitle)
+                        .setPositiveButton("搜索", new InputDialog.ButtonActionListener() {
+                            @Override
+                            public void onClick(CharSequence inputText) {
+                                switch (searchFlag){
+                                    case 1:
+                                        if (inputText.length() != 9) {
+                                            Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
+                                                    .setAction("Action", null).show();
+                                        } else {
+                                            String s = inputText.toString().trim();
+                                            UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+                                            userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+                                        }
+                                        break;
+                                    case 2:
+                                        //搜索比赛的活动
+                                        break;
+                                    case 3:
+                                        //搜索英雄的活动
+                                        break;
+                                }
+
+                            }
+                        })
+                        .setNegativeButton("取消", new InputDialog.ButtonActionListener() {
+                            @Override
+                            public void onClick(CharSequence inputText) {
+                                //取消之后的动作
+                            }
+                        })
+                        .show();
+
+
+                msg("url", "url is http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamids=" + Util.get64Id(129639720));
                 break;
         }
 

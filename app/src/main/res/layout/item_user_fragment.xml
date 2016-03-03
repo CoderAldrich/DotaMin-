@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="15dp">
     <ImageView
         android:layout_width="240px"
         android:layout_height="240px"
-        android:background="@color/colorBlack"
+        android:background="@drawable/default_avater"
         android:id="@+id/iv_user_avater"/>
     <TextView
         android:layout_width="wrap_content"
@@ -14,15 +15,15 @@
         android:id="@+id/tv_user_state"
         android:text="在线"
         android:textColor="@color/colorBlack"
-        android:textSize="12pt"
-        android:layout_alignTop="@+id/tv_user_name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="8pt"
+        android:layout_above="@+id/tv_last_logoff"
+        android:layout_alignLeft="@+id/tv_last_logoff"
+        android:layout_alignStart="@+id/tv_last_logoff" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_user_name"
-        android:text="UserName"
+        android:text="昵称（暂无）"
         android:textColor="@color/colorBlack"
         android:textSize="14pt"
         android:layout_marginLeft="30dp"
@@ -36,7 +37,7 @@
         android:id="@+id/tv_user_id"
         android:textSize="8pt"
         android:textColor="@color/colorBlack"
-        android:text="steamid: xxxxxxxxxx"
+        android:text="steamid"
         android:layout_below="@+id/iv_user_avater"
         android:layout_alignLeft="@+id/iv_user_avater"
         android:layout_alignStart="@+id/iv_user_avater"
@@ -45,9 +46,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_last_logoff"
-        android:text="lastlogoff"
+        android:text="上次在线时间"
         android:textColor="@color/colorBlack"
-        android:textSize="10pt"
+        android:textSize="8pt"
         android:layout_alignBottom="@+id/iv_user_avater"
         android:layout_alignLeft="@+id/tv_user_name"
         android:layout_alignStart="@+id/tv_user_name" />
@@ -57,7 +58,7 @@
         android:id="@+id/tv_steam_url"
         android:textColor="@color/colorBlack"
         android:textSize="10pt"
-        android:text="http://xxxxxxxxxxxxxxxxxxxxxxxx"
+        android:text="社区链接"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/tv_user_id"
         android:layout_alignLeft="@+id/tv_user_id"
@@ -74,3 +75,5 @@
         android:layout_alignStart="@+id/tv_steam_url"
         android:layout_marginTop="12dp" />
 </RelativeLayout>
+
+
