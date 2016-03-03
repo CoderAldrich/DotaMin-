@@ -22,6 +22,7 @@ import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.fragment.HeroFragment;
 import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
+import com.example.levent_j.dotamin_.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity
 
     private MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
+    private int[] tabicon = {R.drawable.ic_user,R.drawable.ic_history,R.drawable.ic_dota};
 
     @Override
     protected void init() {
@@ -63,6 +65,11 @@ public class MainActivity extends BaseActivity
         viewPager.setAdapter(myFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        //为tab的标题设置icon
+        for (int i=0;i<tabLayout.getTabCount();i++){
+            tabLayout.getTabAt(i).setIcon(tabicon[i]);
+        }
     }
 
     @Override
@@ -137,9 +144,10 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab:
-                String s = (String) myFragmentAdapter.getPageTitle(viewPager.getCurrentItem());
+                String s = (String) myFragmentAdapter.getTitle(viewPager.getCurrentItem());
                 Snackbar.make(v, "搜索"+s+"相关的内容", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                msg("url","url is http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamids="+ Util.get64Id(129639720));
                 break;
         }
 
@@ -148,7 +156,7 @@ public class MainActivity extends BaseActivity
     private class MyFragmentAdapter extends FragmentPagerAdapter{
 
         private final List<Fragment> fragmentList;
-        private final List<String> titleList;
+        public final List<String> titleList;
         private Context context;
 
         public MyFragmentAdapter(FragmentManager fm, Context context) {
@@ -163,28 +171,37 @@ public class MainActivity extends BaseActivity
             return fragmentList.get(position);
         }
 
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            switch (position){
+//                case 0:
+//                    return "User";
+//                case 1:
+//                    return "History";
+//                default:
+//                    return "hero";
+//            }
+//        }
+
         @Override
         public int getCount() {
             return titleList.size();
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:
-                    return "用户主页";
-                case 1:
-                    return "比赛记录";
-                case 2:
-                    return "英雄数据";
-                default:
-                    return null;
-            }
-        }
-
         public void addFragment(Fragment fragment,String title){
             fragmentList.add(fragment);
             titleList.add(title);
+        }
+
+        public String getTitle(int position){
+            switch (position){
+                case 0:
+                    return "User";
+                case 1:
+                    return "History";
+                default:
+                    return "hero";
+            }
         }
     }
 }

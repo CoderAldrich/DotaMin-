@@ -105,7 +105,7 @@ api密钥（key）:（填入自己密钥即可）
             -  suffix(图片要求：sb.png/ lg.png/full.png/vert.png) 
 
 
-###(GetPlayerSummaries)玩家id
+###(GetPlayerSummaries)玩家信息
 
 - URL：http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=< key >&steamids=< steamids >
 - Merthod:GET
@@ -113,7 +113,7 @@ api密钥（key）:（填入自己密钥即可）
           - key(必填)
           - steamids(64-bit):STEAMID32 + 76561197960265728 = STEAMID64
 - results:  
-    -  players：好友列表
+    -  players：用户列表
      - steamid：用户的64bitid
    - communityvisibilitystate：资料开放状态（1:privite 2:Friends only 3:Friends of Friends 4:Friends of Friends 5:Public)
     - personaname：用户昵称
@@ -122,4 +122,21 @@ api密钥（key）:（填入自己密钥即可）
     - avatar:32*32的头像
     -avatarmedium:64*64的头像
      -avatarfull：128*128的头像
-   -personastate：当前状态（0：离线 1：在线 2：忙碌 3：离开 4：打盹 5：正在浏览商品 6：正在玩游戏）
+   -personastate：当前状态（0：离线 1：在线 2：忙碌 3：离开 4：打盹 5：正在浏览商品 6：正在玩游戏）  
+   
+   
+###(GetItems)物品信息
+
+- URL：https://api.steampowered.com/IEconDOTA2_570/GetGameItems/V001/?key=< key >
+- Merthod:GET
+- param:  
+          - key(必填)
+- results:  
+    -  items:物品列表
+        - id：id：物品id
+        - name：物品名称
+        - cost：所需金钱
+        - secret_shop：是否在神秘商店
+        - side_shop：是否在边路商店
+        - recipe：是否为卷轴（0：否 1：是）
+    -  status:响应

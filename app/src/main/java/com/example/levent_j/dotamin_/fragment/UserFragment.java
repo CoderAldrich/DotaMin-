@@ -13,9 +13,6 @@ import butterknife.Bind;
  * Created by levent_j on 16-3-3.
  */
 public class UserFragment extends BaseFragment{
-    @Bind(R.id.usertxt)
-    TextView textView;
-
     private static final String ARGS = "USER";
     private static final String KEY_USER = "User";
     private String mPage;
@@ -41,7 +38,6 @@ public class UserFragment extends BaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView.setText(mPage);
     }
 
     @Override
