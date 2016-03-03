@@ -10,28 +10,21 @@ import com.example.levent_j.dotamin_.base.BaseFragment;
 import butterknife.Bind;
 
 /**
- * Created by levent_j on 16-3-1.
+ * Created by levent_j on 16-3-3.
  */
-public class PageFragment extends BaseFragment{
-    @Bind(R.id.txt)
+public class UserFragment extends BaseFragment{
+    @Bind(R.id.usertxt)
     TextView textView;
-    private static final String ARGS = "ARGS";
+
+    private static final String ARGS = "USER";
     private static final String KEY_USER = "User";
-    private static final String KEY_HISTORY = "History";
-    private static final String KEY_HERO = "Hero";
     private String mPage;
 
-    public static PageFragment newInstance(String title) {
+    public static UserFragment newInstance(String title) {
 
         Bundle args = new Bundle();
-        if (title.equals(KEY_USER)){
-            args.putString(ARGS,KEY_USER);
-        }else if (title.equals(KEY_HISTORY)){
-            args.putString(ARGS,KEY_HISTORY);
-        }else {
-            args.putString(ARGS,KEY_HERO);
-        }
-        PageFragment fragment = new PageFragment();
+        args.putString(ARGS,KEY_USER);
+        UserFragment fragment = new UserFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,6 +56,6 @@ public class PageFragment extends BaseFragment{
 
     @Override
     protected int setRootViewId() {
-        return R.layout.item_layout;
+        return R.layout.item_user_fragment;
     }
 }

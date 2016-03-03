@@ -1,7 +1,6 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -20,7 +19,9 @@ import android.view.MenuItem;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.base.BaseActivity;
-import com.example.levent_j.dotamin_.fragment.PageFragment;
+import com.example.levent_j.dotamin_.fragment.HeroFragment;
+import com.example.levent_j.dotamin_.fragment.HistoryFragment;
+import com.example.levent_j.dotamin_.fragment.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
-    private PageFragmentAdapter pageFragmentAdapter;
+    private MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
 
     @Override
@@ -54,11 +55,12 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        pageFragmentAdapter = new PageFragmentAdapter(getSupportFragmentManager(),this);
-        for (int i=0;i<TITLE.length;i++){
-            pageFragmentAdapter.addFragment(PageFragment.newInstance(TITLE[i]),TITLE[i]);
-        }
-        viewPager.setAdapter(pageFragmentAdapter);
+        myFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager(),this);
+
+        myFragmentAdapter.addFragment(UserFragment.newInstance(TITLE[0]),TITLE[0]);
+        myFragmentAdapter.addFragment(HistoryFragment.newInstance(TITLE[1]),TITLE[1]);
+        myFragmentAdapter.addFragment(HeroFragment.newInstance(TITLE[2]),TITLE[2]);
+        viewPager.setAdapter(myFragmentAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
@@ -135,7 +137,7 @@ public class MainActivity extends BaseActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab:
-                String s = (String) pageFragmentAdapter.getPageTitle(viewPager.getCurrentItem());
+                String s = (String) myFragmentAdapter.getPageTitle(viewPager.getCurrentItem());
                 Snackbar.make(v, "搜索"+s+"相关的内容", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 break;
@@ -143,13 +145,13 @@ public class MainActivity extends BaseActivity
 
     }
 
-    private class PageFragmentAdapter extends FragmentPagerAdapter{
+    private class MyFragmentAdapter extends FragmentPagerAdapter{
 
         private final List<Fragment> fragmentList;
         private final List<String> titleList;
         private Context context;
 
-        public PageFragmentAdapter(FragmentManager fm,Context context) {
+        public MyFragmentAdapter(FragmentManager fm, Context context) {
             super(fm);
             this.context = context;
             fragmentList = new ArrayList<>();
