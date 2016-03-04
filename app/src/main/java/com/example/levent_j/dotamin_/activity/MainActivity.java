@@ -180,6 +180,7 @@ public class MainActivity extends BaseActivity
                                             String s = inputText.toString().trim();
                                             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
                                             userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+                                            userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
                                             userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
                                         }
                                         break;

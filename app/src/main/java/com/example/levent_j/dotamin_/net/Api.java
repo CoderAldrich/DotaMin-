@@ -1,5 +1,6 @@
 package com.example.levent_j.dotamin_.net;
 
+import com.example.levent_j.dotamin_.pojo.FriendResult;
 import com.example.levent_j.dotamin_.pojo.User;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.google.gson.Gson;
@@ -25,6 +26,8 @@ public class Api {
 
     //我的steam web api专属key
     private static final String KEY = "A7CAFA33562B6310ACDC0C3864B9DC1B";
+
+    private static final String RELATION = "friend";
 
     private ApiService apiService;
 
@@ -60,10 +63,22 @@ public class Api {
                 .subscribe(observer);
     }
 
+    public void getFriends(String id,Observer<FriendResult> observer){
+        apiService.getFriends(KEY,id,RELATION)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
     public interface ApiService{
         //ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamid=76561198089905448
         @GET("ISteamUser/GetPlayerSummaries/v0002/")
         Observable<User> getUsers(@Query("key") String key,
                                   @Query("steamids") String id);
+        //ISteamUser/GetFriendList/v1/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamid=76561198089905448&relationship=friend
+        @GET("ISteamUser/GetFriendList/v1/")
+        Observable<FriendResult> getFriends(@Query("key") String key,
+                                            @Query("steamid") String id,
+                                            @Query("relationship") String relationship);
     }
 }

@@ -121,9 +121,24 @@ api密钥（key）:（填入自己密钥即可）
     - profileurl：steam社区页面的url
     - avatar:32*32的头像
     -avatarmedium:64*64的头像
-     -avatarfull：128*128的头像
-   -personastate：当前状态（0：离线 1：在线 2：忙碌 3：离开 4：打盹 5：正在浏览商品 6：正在玩游戏）  
+    -avatarfull：128*128的头像  
+    - personastate：当前状态（0：离线 1：在线 2：忙碌 3：离开 4：打盹 5：正在浏览商品 6：正在玩游戏）  
    
+
+###(GetFriendList)玩家好友列表
+
+- URL：http://api.steampowered.com/ISteamUser/GetFriendList/v1/?key=< key >&steamid=< id >&relationship=< all(or)friend >
+- Merthod:GET
+- param:  
+          - key(必填)
+          - steamids(64-bit):STEAMID32 + 76561197960265728 = STEAMID64
+          - relationship:allORfriend
+- results:  
+    -  friendslist:好友列表
+        -  friends:好友数组
+                -  steamid:64bit id
+                -  relationship:好友关系
+                -  friend_since:添加时间
    
 ###(GetItems)物品信息
 
