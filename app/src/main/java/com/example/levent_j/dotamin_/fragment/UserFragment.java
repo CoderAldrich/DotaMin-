@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import rx.Observer;
+import xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint;
 
 /**
  * Created by levent_j on 16-3-3.
@@ -37,6 +38,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     TextView steamid;
     @Bind(R.id.tv_steam_url)
     TextView steamurl;
+    @Bind(R.id.loadingpoppoint)
+    public LoadingPopPoint loadingPopPoint;
 
     private static final String ARGS = "USER";
     private static final String KEY_USER = "User";
@@ -66,7 +69,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         steamurl.setOnClickListener(this);
-
+        loadingPopPoint.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -102,6 +105,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             msg("Net", "NET_SUCCESS");
             msg("Net","name is "+muser.getResponse().getPlayers().get(0).getPersonaname());
             changeView(muser);
+            loadingPopPoint.setVisibility(View.INVISIBLE);
         }
 
         @Override

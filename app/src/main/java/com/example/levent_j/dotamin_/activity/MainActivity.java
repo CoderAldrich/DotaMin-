@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity
     ViewPager viewPager;
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
+
 
     private MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
@@ -75,6 +77,8 @@ public class MainActivity extends BaseActivity
         for (int i=0;i<tabLayout.getTabCount();i++){
             tabLayout.getTabAt(i).setIcon(tabicon[i]);
         }
+
+
     }
 
     @Override
@@ -176,6 +180,7 @@ public class MainActivity extends BaseActivity
                                             String s = inputText.toString().trim();
                                             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
                                             userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+                                            userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
                                         }
                                         break;
                                     case 2:
