@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity
     TabLayout tabLayout;
 
 
-    private MyFragmentAdapter myFragmentAdapter;
+    public MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
     private int[] tabicon = {R.drawable.ic_user,R.drawable.ic_history,R.drawable.ic_dota};
     private int searchFlag;
@@ -78,6 +78,17 @@ public class MainActivity extends BaseActivity
             tabLayout.getTabAt(i).setIcon(tabicon[i]);
         }
 
+
+        //在此处理显示好友信息界面
+        String s = getIntent().getStringExtra("id");
+        if (s==null){
+            msg("Intent","First come");
+        }else {
+            msg("Intent","again and s is:"+s);
+            UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+            userFragment.loadUserDate(s);
+            userFragment.loadFrinedsDate(s);
+        }
 
     }
 
@@ -153,7 +164,7 @@ public class MainActivity extends BaseActivity
     public void onClick(final View v) {
         switch (v.getId()){
             case R.id.fab:
-                String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
+                final String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
                 if (s.equals("User")){
                     searchFlag = 1;
                     searchTitle = "steam id";

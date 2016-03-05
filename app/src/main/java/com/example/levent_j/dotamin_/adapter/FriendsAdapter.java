@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.style.ImageSpan;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
+import com.example.levent_j.dotamin_.activity.MainActivity;
+import com.example.levent_j.dotamin_.fragment.UserFragment;
 import com.example.levent_j.dotamin_.net.Api;
 import com.example.levent_j.dotamin_.pojo.Friend;
 import com.example.levent_j.dotamin_.pojo.FriendResult;
@@ -60,6 +63,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
         holder.name.setText(playerArrayList.get(position).getPersonaname());
         holder.state.setText(Util.getState(playerArrayList.get(position).getPersonastate()));
         Picasso.with(context).load(playerArrayList.get(position).getAvatar()).into(holder.avater);
+        holder.last.setText("上次登陆："+Util.formRelativeDate(playerArrayList.get(position).getLastlogoff()));
 
     }
 
@@ -77,17 +81,34 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
 
     }
 
-    class mViewHolder extends RecyclerView.ViewHolder{
+    class mViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.tv_friend_name)
         TextView name;
         @Bind(R.id.iv_friend_avater)
         ImageView avater;
         @Bind(R.id.tv_friend_state)
         TextView state;
+        @Bind(R.id.tv_friend_last)
+        TextView last;
 
         public mViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            name.setOnClickListener(this);
+            avater.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.tv_friend_name:
+                case R.id.iv_friend_avater:
+                    String s = playerArrayList.get(getPosition()).getSteamid();
+                    Intent intent = new Intent(context,MainActivity.class);
+                    intent.putExtra("id",s);
+                    context.startActivity(intent);
+                    break;
+            }
         }
     }
 

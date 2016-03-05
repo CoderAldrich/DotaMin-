@@ -8,7 +8,9 @@
     app:overlay="false"
     app:wave_show="true"
     app:wave_color="@color/colorPrimary"
-    app:wave_height_type="normal">
+    app:wave_height_type="normal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

@@ -19,6 +19,7 @@ import com.example.levent_j.dotamin_.pojo.FriendResult;
 import com.example.levent_j.dotamin_.pojo.Friends;
 import com.example.levent_j.dotamin_.pojo.Player;
 import com.example.levent_j.dotamin_.pojo.User;
+import com.example.levent_j.dotamin_.utils.DividerItemDecoration;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.squareup.picasso.Picasso;
 
@@ -85,7 +86,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         mfrienduser = new User();
         mfriends = new FriendResult();
         friendsAdapter = new FriendsAdapter(getActivity());
-        count = 10;
+        count = 5;
         flag = true;
         isClear = true;
     }
@@ -96,6 +97,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         steamurl.setOnClickListener(this);
         loadingPopPoint.setVisibility(View.INVISIBLE);
         recyclerView_friends.setLayoutManager(new LinearLayoutManager(recyclerView_friends.getContext()));
+        recyclerView_friends.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL_LIST));
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -125,7 +127,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     public void loadMore(String id){
         //在此发起网络请求
         //Api......
-        count=count+10;
+        count=count+1;
         msg("load","load more,count is "+count);
         steamID = id;
         flag = true;
@@ -202,9 +204,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private Observer<User> userFriendObserver = new Observer<User>() {
         @Override
         public void onCompleted() {
-            if (mfrienduser.getResponse().getPlayers().get(0).getPersonastate()!=0){
-                basePlayerList.add(mfrienduser.getResponse().getPlayers().get(0));
-            }
+            basePlayerList.add(mfrienduser.getResponse().getPlayers().get(0));
         }
 
         @Override
