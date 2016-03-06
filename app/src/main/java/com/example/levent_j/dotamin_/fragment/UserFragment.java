@@ -63,7 +63,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     FriendsAdapter friendsAdapter;
     private ArrayList<Player> basePlayerList;
     private int count;
-    private boolean flag;
+    public boolean flag;
     private boolean isClear;
 
     public static UserFragment newInstance(String title) {
@@ -166,7 +166,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onCompleted() {
             msg("Net", "NET_SUCCESS");
-            if (flag&&mfriends.getFriendslist().getFriends().size()<2){
+            if (flag&&mfriends.getFriendslist().getFriends().size()<count){
                 count = mfriends.getFriendslist().getFriends().size();
                 flag = false;
                 msg("load","in if,count is"+count);

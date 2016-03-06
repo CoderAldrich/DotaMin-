@@ -88,6 +88,9 @@ public class MainActivity extends BaseActivity
             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
             userFragment.loadUserDate(s);
             userFragment.loadFrinedsDate(s);
+            userFragment.flag=true;
+            HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+            historyFragment.loadDate(s);
         }
 
     }
@@ -193,6 +196,9 @@ public class MainActivity extends BaseActivity
                                             userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
                                             userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
                                             userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
+                                            //在此同时加载比赛记录列表
+                                            HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+                                            historyFragment.loadDate(s);
                                         }
                                         break;
                                     case 2:

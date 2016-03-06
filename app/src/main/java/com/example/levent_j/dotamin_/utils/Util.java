@@ -43,6 +43,14 @@ public class Util {
         return date.toString();
     }
 
+    public static boolean isRadiant(int slot){
+        if (slot<4){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public static String getState(int personastate) {
         switch (personastate){
             case 0:

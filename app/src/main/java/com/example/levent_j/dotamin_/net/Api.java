@@ -1,6 +1,10 @@
 package com.example.levent_j.dotamin_.net;
 
+import android.util.Log;
+
 import com.example.levent_j.dotamin_.pojo.FriendResult;
+import com.example.levent_j.dotamin_.pojo.Match;
+import com.example.levent_j.dotamin_.pojo.MatchesHistory;
 import com.example.levent_j.dotamin_.pojo.User;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.google.gson.Gson;
@@ -64,7 +68,21 @@ public class Api {
     }
 
     public void getFriends(String id,Observer<FriendResult> observer){
-        apiService.getFriends(KEY,id,RELATION)
+        apiService.getFriends(KEY, id, RELATION)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    public void getMatchesHistory(String id,String num,Observer<MatchesHistory> observer){
+        apiService.getMatchesHistory(KEY, id, num)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    public void getMatchDeatials(String id,Observer<Match> observer){
+        apiService.getMatchDetails(KEY, id)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -80,5 +98,15 @@ public class Api {
         Observable<FriendResult> getFriends(@Query("key") String key,
                                             @Query("steamid") String id,
                                             @Query("relationship") String relationship);
+        //IDOTA2Match_570/GetMatchHistory/v001/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&account_id=129639720&matches_requested=3
+        @GET("IDOTA2Match_570/GetMatchHistory/v001/")
+        Observable<MatchesHistory> getMatchesHistory(@Query("key") String key,
+                                                     @Query("account_id") String id,
+                                                     @Query("matches_requested") String num);
+
+        //IDOTA2Match_570/GetMatchDetails/V001/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&match_id=2199956955
+        @GET("IDOTA2Match_570/GetMatchDetails/V001/")
+        Observable<Match> getMatchDetails(@Query("key") String key,
+                                          @Query("match_id") String id);
     }
 }
