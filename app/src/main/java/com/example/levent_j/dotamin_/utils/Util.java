@@ -19,7 +19,7 @@ public class Util {
 
     public static String get32Id(long id){
         long add = 76561197960265728L;
-        return String.valueOf(id-add);
+        return String.valueOf(id - add);
     }
 
     public static String formDate(long microSecond) {
@@ -48,6 +48,36 @@ public class Util {
             return true;
         }else {
             return false;
+        }
+    }
+
+    public static String Second2Minute(int second){
+        int minute = second/60;
+        return String.valueOf(minute);
+    }
+
+    public static String getLobby(int lobby){
+        switch (lobby){
+            case 0:
+                return "公共比赛";
+            case 1:
+                return "练习赛";
+            case 2:
+                return "联赛";
+            case 3:
+                return "教程";
+            case 4:
+                return "人机对战";
+            case 5:
+                return "团队比赛";
+            case 6:
+                return "队列solo";
+            case 7:
+                return "天梯比赛";
+            case 8:
+                return "中路solo";
+            default:
+                return "无效的";
         }
     }
 

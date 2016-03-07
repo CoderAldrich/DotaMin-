@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -13,7 +12,6 @@ import com.example.levent_j.dotamin_.adapter.HistoryAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
 import com.example.levent_j.dotamin_.net.Api;
 import com.example.levent_j.dotamin_.pojo.HistoryItemBean;
-import com.example.levent_j.dotamin_.pojo.HistoryResult;
 import com.example.levent_j.dotamin_.pojo.Match;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.pojo.Matches;
@@ -45,6 +43,7 @@ public class HistoryFragment extends BaseFragment{
     private Match match;
     private List<HistoryItemBean> historyItemBeans;
     private int flag;
+    private int count;
 
     public static HistoryFragment newInstance(String title) {
 
@@ -67,6 +66,7 @@ public class HistoryFragment extends BaseFragment{
         match = new Match();
         historyItemBeans = new ArrayList<>();
         flag = 1;
+        count = 10;
     }
 
     @Override
@@ -89,10 +89,9 @@ public class HistoryFragment extends BaseFragment{
 
     public void loadDate(String s) {
         //在此发起网络请求获取数据
-        msg("History", " https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v001/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&account_id=" + s + "&matches_requested=" + 3);
         //s是64 bit
         id = s;
-        Api.getInstance().getMatchesHistory(s,"10",matchesHistoryObserver);
+        Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
     }
 
     @Override
@@ -150,22 +149,9 @@ public class HistoryFragment extends BaseFragment{
         public void onCompleted() {
             HistoryItemBean historyItemBean = new HistoryItemBean();
 
-            historyItemBean.setTime("比赛时长" + Util.formRelativeDate(match.getResult().getDuration()));
-            historyItemBean.setType("比赛类型" + match.getResult().getLobbyType());
+            historyItemBean.setTime(Util.formRelativeDate(match.getResult().getStart_time()));
+            historyItemBean.setType(Util.getLobby(match.getResult().getLobbyType()));
 
-//            msg("ComPare","我的id是"+id);
-//            for (int i=0;i<match.getResult().getPlayers().size();i++){
-//                msg("ComPare","他的id时"+match.getResult().getPlayers().get(i).getAccountId());
-//                if (String.valueOf(match.getResult().getPlayers().get(i).getAccountId()).equals(id)){
-//                    msg("ComPare","我俩一样");
-//
-//                }else {
-//                    msg("ComPare","我俩不一样");
-//                }
-//                msg("Compare","死了"+match.getResult().getPlayers().get(i).getDeaths()+"次");
-//
-//            }
-            //先做一个遍历，找出玩家使用的英雄
             for (int i =0;i<match.getResult().getPlayers().size();i++){
                 msg("His","in the for");
                 msg("His","my id is"+id+"but this id is"+match.getResult().getPlayers().get(i).getAccountId());
@@ -173,7 +159,7 @@ public class HistoryFragment extends BaseFragment{
                     msg("His","break");
                     MatchPlayer player = match.getResult().getPlayers().get(i);
                     //查询英雄名
-                    historyItemBean.setHeroName("hero id :" +player.getHeroId());
+                    historyItemBean.setHeroName(""+player.getHero_id());
                     //查询阵营名
 
                     msg("Match","队伍"+historyItemBean.getTeam());
@@ -192,7 +178,6 @@ public class HistoryFragment extends BaseFragment{
                     historyItemBean.setK(player.getKills());
                     historyItemBean.setD(player.getDeaths());
                     historyItemBean.setA(player.getAssists());
-                    msg("kda", historyItemBean.getK() + ":" +historyItemBean.getD() + ":" + historyItemBean.getA());
 
                     break;
                 }

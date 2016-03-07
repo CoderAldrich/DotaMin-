@@ -8,27 +8,27 @@ import java.util.List;
 public class MatchPlayer {
     private String account_id;
     private int player_slot;
-    private int heroId;
-    private int item0;
-    private int item1;
-    private int item2;
-    private int item3;
-    private int item4;
-    private int item5;
+    private int hero_id;
+    private int item_0;
+    private int item_1;
+    private int item_2;
+    private int item_3;
+    private int item_4;
+    private int item_5;
     private int kills;
     private int deaths;
     private int assists;
     private int leaverStatus;
-    private int lastHits;
+    private int last_hits;
     private int denies;
-    private int goldPerMin;
-    private int xpPerMin;
+    private int gold_per_min;
+    private int xp_per_min;
     private int level;
     private int gold;
     private int goldSpent;
-    private int heroDamage;
-    private int towerDamage;
-    private int heroHealing;
+    private int hero_damage;
+    private int tower_damage;
+    private int hero_healing;
     private List<AbilityUpgrades> abilityUpgrades;
 
 
@@ -48,59 +48,59 @@ public class MatchPlayer {
     }
 
 
-    public void setHeroId(int heroId) {
-        this.heroId = heroId;
+    public void setHero_id(int hero_id) {
+        this.hero_id = hero_id;
     }
-    public int getHeroId() {
-        return heroId;
+    public int getHero_id() {
+        return hero_id;
     }
 
 
     public void setItem0(int item0) {
-        this.item0 = item0;
+        this.item_0 = item0;
     }
     public int getItem0() {
-        return item0;
+        return item_0;
     }
 
 
     public void setItem1(int item1) {
-        this.item1 = item1;
+        this.item_1 = item1;
     }
     public int getItem1() {
-        return item1;
+        return item_1;
     }
 
 
     public void setItem2(int item2) {
-        this.item2 = item2;
+        this.item_2 = item2;
     }
     public int getItem2() {
-        return item2;
+        return item_2;
     }
 
 
-    public void setItem3(int item3) {
-        this.item3 = item3;
+    public void setItem_3(int item_3) {
+        this.item_3 = item_3;
     }
-    public int getItem3() {
-        return item3;
-    }
-
-
-    public void setItem4(int item4) {
-        this.item4 = item4;
-    }
-    public int getItem4() {
-        return item4;
+    public int getItem_3() {
+        return item_3;
     }
 
 
-    public void setItem5(int item5) {
-        this.item5 = item5;
+    public void setItem_4(int item_4) {
+        this.item_4 = item_4;
     }
-    public int getItem5() {
-        return item5;
+    public int getItem_4() {
+        return item_4;
+    }
+
+
+    public void setItem_5(int item_5) {
+        this.item_5 = item_5;
+    }
+    public int getItem_5() {
+        return item_5;
     }
 
 
@@ -136,11 +136,11 @@ public class MatchPlayer {
     }
 
 
-    public void setLastHits(int lastHits) {
-        this.lastHits = lastHits;
+    public void setLast_hits(int last_hits) {
+        this.last_hits = last_hits;
     }
-    public int getLastHits() {
-        return lastHits;
+    public int getLast_hits() {
+        return last_hits;
     }
 
 
@@ -152,19 +152,19 @@ public class MatchPlayer {
     }
 
 
-    public void setGoldPerMin(int goldPerMin) {
-        this.goldPerMin = goldPerMin;
+    public void setGold_per_min(int gold_per_min) {
+        this.gold_per_min = gold_per_min;
     }
-    public int getGoldPerMin() {
-        return goldPerMin;
+    public int getGold_per_min() {
+        return gold_per_min;
     }
 
 
-    public void setXpPerMin(int xpPerMin) {
-        this.xpPerMin = xpPerMin;
+    public void setXp_per_min(int xp_per_min) {
+        this.xp_per_min = xp_per_min;
     }
-    public int getXpPerMin() {
-        return xpPerMin;
+    public int getXp_per_min() {
+        return xp_per_min;
     }
 
 
@@ -192,27 +192,27 @@ public class MatchPlayer {
     }
 
 
-    public void setHeroDamage(int heroDamage) {
-        this.heroDamage = heroDamage;
+    public void setHero_damage(int hero_damage) {
+        this.hero_damage = hero_damage;
     }
-    public int getHeroDamage() {
-        return heroDamage;
-    }
-
-
-    public void setTowerDamage(int towerDamage) {
-        this.towerDamage = towerDamage;
-    }
-    public int getTowerDamage() {
-        return towerDamage;
+    public int getHero_damage() {
+        return hero_damage;
     }
 
 
-    public void setHeroHealing(int heroHealing) {
-        this.heroHealing = heroHealing;
+    public void setTower_damage(int tower_damage) {
+        this.tower_damage = tower_damage;
     }
-    public int getHeroHealing() {
-        return heroHealing;
+    public int getTower_damage() {
+        return tower_damage;
+    }
+
+
+    public void setHero_healing(int hero_healing) {
+        this.hero_healing = hero_healing;
+    }
+    public int getHero_healing() {
+        return hero_healing;
     }
 
 

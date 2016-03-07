@@ -9,18 +9,18 @@ public class MatchResult {
 
     private List<MatchPlayer> players;
     private boolean radiant_win;
-    private int duration;
-    private int startTime;
+    private String duration;
+    private int start_time;
     private String match_id;
-    private int matchSeqNum;
-    private int towerStatusRadiant;
-    private int towerStatusDire;
-    private int barracksStatusRadiant;
-    private int barracksStatusDire;
+    private int match_seq_num;
+    private int tower_status_radiant;
+    private int tower_status_dire;
+    private int barracks_status_radiant;
+    private int barracks_status_dire;
     private int cluster;
-    private int firstBloodTime;
-    private int lobbyType;
-    private int humanPlayers;
+    private int first_blood_time;
+    private int lobby_type;
+    private int human_players;
     private int leagueid;
     private int positiveVotes;
     private int negativeVotes;
@@ -42,19 +42,19 @@ public class MatchResult {
     }
 
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
 
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
+    public void setStart_time(int start_time) {
+        this.start_time = start_time;
     }
-    public int getStartTime() {
-        return startTime;
+    public int getStart_time() {
+        return start_time;
     }
 
     public boolean isRadiantWin() {
@@ -69,43 +69,43 @@ public class MatchResult {
         this.match_id = match_id;
     }
 
-    public void setMatchSeqNum(int matchSeqNum) {
-        this.matchSeqNum = matchSeqNum;
+    public void setMatch_seq_num(int match_seq_num) {
+        this.match_seq_num = match_seq_num;
     }
-    public int getMatchSeqNum() {
-        return matchSeqNum;
-    }
-
-
-    public void setTowerStatusRadiant(int towerStatusRadiant) {
-        this.towerStatusRadiant = towerStatusRadiant;
-    }
-    public int getTowerStatusRadiant() {
-        return towerStatusRadiant;
+    public int getMatch_seq_num() {
+        return match_seq_num;
     }
 
 
-    public void setTowerStatusDire(int towerStatusDire) {
-        this.towerStatusDire = towerStatusDire;
+    public void setTower_status_radiant(int tower_status_radiant) {
+        this.tower_status_radiant = tower_status_radiant;
     }
-    public int getTowerStatusDire() {
-        return towerStatusDire;
-    }
-
-
-    public void setBarracksStatusRadiant(int barracksStatusRadiant) {
-        this.barracksStatusRadiant = barracksStatusRadiant;
-    }
-    public int getBarracksStatusRadiant() {
-        return barracksStatusRadiant;
+    public int getTower_status_radiant() {
+        return tower_status_radiant;
     }
 
 
-    public void setBarracksStatusDire(int barracksStatusDire) {
-        this.barracksStatusDire = barracksStatusDire;
+    public void setTower_status_dire(int tower_status_dire) {
+        this.tower_status_dire = tower_status_dire;
     }
-    public int getBarracksStatusDire() {
-        return barracksStatusDire;
+    public int getTower_status_dire() {
+        return tower_status_dire;
+    }
+
+
+    public void setBarracks_status_radiant(int barracks_status_radiant) {
+        this.barracks_status_radiant = barracks_status_radiant;
+    }
+    public int getBarracks_status_radiant() {
+        return barracks_status_radiant;
+    }
+
+
+    public void setBarracks_status_dire(int barracks_status_dire) {
+        this.barracks_status_dire = barracks_status_dire;
+    }
+    public int getBarracks_status_dire() {
+        return barracks_status_dire;
     }
 
 
@@ -117,27 +117,27 @@ public class MatchResult {
     }
 
 
-    public void setFirstBloodTime(int firstBloodTime) {
-        this.firstBloodTime = firstBloodTime;
+    public void setFirst_blood_time(int first_blood_time) {
+        this.first_blood_time = first_blood_time;
     }
-    public int getFirstBloodTime() {
-        return firstBloodTime;
+    public int getFirst_blood_time() {
+        return first_blood_time;
     }
 
 
     public void setLobbyType(int lobbyType) {
-        this.lobbyType = lobbyType;
+        this.lobby_type = lobbyType;
     }
     public int getLobbyType() {
-        return lobbyType;
+        return lobby_type;
     }
 
 
-    public void setHumanPlayers(int humanPlayers) {
-        this.humanPlayers = humanPlayers;
+    public void setHuman_players(int human_players) {
+        this.human_players = human_players;
     }
-    public int getHumanPlayers() {
-        return humanPlayers;
+    public int getHuman_players() {
+        return human_players;
     }
 
 

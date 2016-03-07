@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.pojo.HistoryItemBean;
+import com.example.levent_j.dotamin_.utils.Heroes;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,14 +46,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         //设置view
         HistoryItemBean bean = historyItemBeanArrayList.get(position);
 
-        holder.name.setText(bean.getHeroName());
-//        Picasso.with(context).load(bean.getHeroAvaterUrl()).into(holder.avater);
+        holder.name.setText(Heroes.HERO_NAME[Integer.parseInt(bean.getHeroName())-1]);
+        Picasso.with(context).load(Heroes.HERO_IMAGE_FULL[Integer.parseInt(bean.getHeroName())-1]).into(holder.avater);
         holder.team.setText(bean.getTeam());
         holder.team.setText(bean.getTeam());
         holder.win.setText(bean.isWin());
         holder.k.setText("K:"+bean.getK());
         holder.d.setText("D:"+bean.getD());
         holder.a.setText("A:"+bean.getA());
+        holder.time.setText(bean.getTime());
+        holder.type.setText(bean.getType());
     }
 
     @Override
