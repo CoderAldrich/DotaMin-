@@ -63,7 +63,6 @@ public class HistoryFragment extends BaseFragment{
         //填充list
         mymatchesHistory = new MatchesHistory();
         historyAdapter = new HistoryAdapter(getActivity());
-        match = new Match();
         historyItemBeans = new ArrayList<>();
         flag = 1;
         count = 10;
@@ -145,20 +144,18 @@ public class HistoryFragment extends BaseFragment{
         public void onCompleted() {
             HistoryItemBean historyItemBean = new HistoryItemBean();
 
+
+            historyItemBean.setResult(match.getResult());
             historyItemBean.setTime(Util.formRelativeDate(match.getResult().getStart_time()));
             historyItemBean.setType(Util.getLobby(match.getResult().getLobbyType()));
 
             for (int i =0;i<match.getResult().getPlayers().size();i++){
-                msg("His","in the for");
-                msg("His","my id is"+id+"but this id is"+match.getResult().getPlayers().get(i).getAccountId());
                 if (id.equals(match.getResult().getPlayers().get(i).getAccountId())){
-                    msg("His","break");
                     MatchPlayer player = match.getResult().getPlayers().get(i);
                     //查询英雄名
-                    historyItemBean.setHeroName(""+player.getHero_id());
+                    historyItemBean.setHeroName("" + player.getHero_id());
                     //查询阵营名
 
-                    msg("Match","队伍"+historyItemBean.getTeam());
                     if (Util.isRadiant(player.getPlayerSlot())){
                         historyItemBean.setTeam("天辉");
                     }else {
@@ -201,11 +198,6 @@ public class HistoryFragment extends BaseFragment{
                 msg("Match","no match!");
             }else {
                 msg("Match","id is"+m.getResult().getMatchId());
-                if (m.getResult().isRadiantWin()){
-                    msg("Match","win");
-                }else {
-                    msg("Match","false");
-                }
                 match = m;
             }
 

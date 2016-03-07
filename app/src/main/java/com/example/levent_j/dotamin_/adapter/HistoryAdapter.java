@@ -1,6 +1,9 @@
 package com.example.levent_j.dotamin_.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
+import com.example.levent_j.dotamin_.activity.MainActivity;
+import com.example.levent_j.dotamin_.activity.MatchDetailActivity;
 import com.example.levent_j.dotamin_.pojo.HistoryItemBean;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.squareup.picasso.Picasso;
@@ -70,7 +75,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         notifyDataSetChanged();
     }
 
-    class mViewHolder extends RecyclerView.ViewHolder {
+    class mViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.tv_history_hero_name)
         TextView name;
         @Bind(R.id.tv_history_team)
@@ -89,10 +94,24 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         ImageView avater;
         @Bind(R.id.tv_history_time)
         TextView time;
+        @Bind(R.id.card_view)
+        CardView cardView;
 
         public mViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
+            cardView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.card_view:
+                    Intent intent = new Intent(context, MatchDetailActivity.class);
+                    intent.putExtra("match", historyItemBeanArrayList.get(getPosition()).getResult());
+                    context.startActivity(intent);
+                    break;
+            }
         }
     }
 }

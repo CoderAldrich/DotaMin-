@@ -1,11 +1,14 @@
 package com.example.levent_j.dotamin_.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by levent_j on 16-3-6.
  */
-public class MatchResult {
+public class MatchResult implements Parcelable{
 
     private List<MatchPlayer> players;
     private boolean radiant_win;
@@ -28,6 +31,40 @@ public class MatchResult {
     private int flags;
     private int engine;
 
+
+    protected MatchResult(Parcel in) {
+        radiant_win = in.readByte() != 0;
+        duration = in.readString();
+        start_time = in.readInt();
+        match_id = in.readString();
+        match_seq_num = in.readInt();
+        tower_status_radiant = in.readInt();
+        tower_status_dire = in.readInt();
+        barracks_status_radiant = in.readInt();
+        barracks_status_dire = in.readInt();
+        cluster = in.readInt();
+        first_blood_time = in.readInt();
+        lobby_type = in.readInt();
+        human_players = in.readInt();
+        leagueid = in.readInt();
+        positiveVotes = in.readInt();
+        negativeVotes = in.readInt();
+        gameMode = in.readInt();
+        flags = in.readInt();
+        engine = in.readInt();
+    }
+
+    public static final Creator<MatchResult> CREATOR = new Creator<MatchResult>() {
+        @Override
+        public MatchResult createFromParcel(Parcel in) {
+            return new MatchResult(in);
+        }
+
+        @Override
+        public MatchResult[] newArray(int size) {
+            return new MatchResult[size];
+        }
+    };
 
     public void setPlayers(List<MatchPlayer> players) {
         this.players = players;
@@ -186,5 +223,33 @@ public class MatchResult {
     }
     public int getEngine() {
         return engine;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (radiant_win ? 1 : 0));
+        dest.writeString(duration);
+        dest.writeInt(start_time);
+        dest.writeString(match_id);
+        dest.writeInt(match_seq_num);
+        dest.writeInt(tower_status_radiant);
+        dest.writeInt(tower_status_dire);
+        dest.writeInt(barracks_status_radiant);
+        dest.writeInt(barracks_status_dire);
+        dest.writeInt(cluster);
+        dest.writeInt(first_blood_time);
+        dest.writeInt(lobby_type);
+        dest.writeInt(human_players);
+        dest.writeInt(leagueid);
+        dest.writeInt(positiveVotes);
+        dest.writeInt(negativeVotes);
+        dest.writeInt(gameMode);
+        dest.writeInt(flags);
+        dest.writeInt(engine);
     }
 }

@@ -65,6 +65,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private int count;
     public boolean flag;
     private boolean isClear;
+    private int recount;
 
     public static UserFragment newInstance(String title) {
 
@@ -87,6 +88,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         mfriends = new FriendResult();
         friendsAdapter = new FriendsAdapter(getActivity());
         count = 5;
+        recount = 0;
         flag = true;
         isClear = true;
     }
@@ -169,19 +171,16 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             if (flag&&mfriends.getFriendslist().getFriends().size()<count){
                 count = mfriends.getFriendslist().getFriends().size();
                 flag = false;
-                msg("load","in if,count is"+count);
             }
-            msg("load","not if,count is"+count);
-
             for (int i =0;i<count;i++){
                 Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(i).getSteamid(),userFriendObserver);
             }
-            msg("load","first,size is"+basePlayerList.size());
-            friendsAdapter.updateFriends(basePlayerList, isClear);
-            recyclerView_friends.setAdapter(friendsAdapter);
-            materialRefreshLayout.finishRefresh();
+            msg("load", "first,size is" + basePlayerList.size());
+//            friendsAdapter.updateFriends(basePlayerList, isClear);
+//            recyclerView_friends.setAdapter(friendsAdapter);
+//            materialRefreshLayout.finishRefresh();
             materialRefreshLayout.finishRefreshLoadMore();
-            basePlayerList.clear();
+
             msg("load", "now,size is" + basePlayerList.size());
         }
 
@@ -205,6 +204,13 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onCompleted() {
             basePlayerList.add(mfrienduser.getResponse().getPlayers().get(0));
+            if (recount==count){
+                friendsAdapter.updateFriends(basePlayerList, isClear);
+                recyclerView_friends.setAdapter(friendsAdapter);
+                materialRefreshLayout.finishRefresh();
+                recount = 0;
+                basePlayerList.clear();
+            }
         }
 
         @Override
@@ -214,6 +220,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onNext(User user) {
+            recount++;
             mfrienduser.setResponse(user.getResponse());
         }
     };
