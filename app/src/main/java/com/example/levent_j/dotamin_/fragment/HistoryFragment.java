@@ -108,16 +108,11 @@ public class HistoryFragment extends BaseFragment{
                 Api.getInstance().getMatchDeatials(""+matchesList.get(i).getMatch_id(), matchObserver);
             }
 
-//            for (int i=0;i<matchesList.size();i++){
-//                //自定义一个list，发起网络请求
-//                Api.getInstance().getMatchDeatials(matchesList.get(0).getMatch_id(),matchObserver);
-//            }
-            //遍历matchesList,对于list中的每一次比赛，通过获取比赛id发起网络请求获取其战况，并在next中填充新的list,在complete中把新的list传递到adpter中。这个新的list属于自己定义的。
-            //下一步，先写recyclerview的adapter，然后写比赛详情的api，最后自定义一个list，将其填充到adapter中
-
-            msg("His", "显示完毕");
-            msg("His", "match list is:" + matchesList.size());
-            msg("His", "my bean list is:" + historyItemBeans.size());
+            for (int i=0;i<3;i++){
+                for (int j=0;j<matchesList.size();j++){
+                    msg("Test","第"+i+"次遍历，the games are:"+matchesList.get(j).getMatch_id());
+                }
+            }
 
             historyAdapter.updateHistoryList(historyItemBeans);
             historyrecyclerView.setAdapter(historyAdapter);
@@ -139,8 +134,9 @@ public class HistoryFragment extends BaseFragment{
                 msg("His","Null");
             }else {
                 msg("His","it is"+matchesHistory);
+                mymatchesHistory = matchesHistory;
             }
-            mymatchesHistory = matchesHistory;
+
         }
     };
 

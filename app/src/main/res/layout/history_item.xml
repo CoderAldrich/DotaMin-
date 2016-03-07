@@ -48,8 +48,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:id="@+id/linearLayout"
-                android:layout_alignRight="@+id/linearLayout2"
-                android:layout_alignEnd="@+id/linearLayout2">
+                android:layout_toLeftOf="@+id/tv_history_win"
+                android:layout_toStartOf="@+id/tv_history_win">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,16 +97,17 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/linearLayout2">
+                android:id="@+id/linearLayout2"
+                android:layout_alignRight="@+id/linearLayout"
+                android:layout_alignEnd="@+id/linearLayout">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_history_team"
                     android:text="天辉"
+                    android:textSize="7pt"
                     android:layout_weight="1"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/tv_history_type"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
@@ -115,18 +116,9 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_history_time"
-                    android:text="比赛时间"
-                    android:layout_alignTop="@+id/tv_history_team"
-                    android:layout_toRightOf="@+id/tv_history_team"
-                    android:layout_toEndOf="@+id/tv_history_team" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/tv_history_type"
                     android:text="比赛模式"
+                    android:textSize="7pt"
                     android:layout_alignParentTop="true"
                     android:layout_alignRight="@+id/tv_history_win"
                     android:layout_alignEnd="@+id/tv_history_win" />
@@ -137,16 +129,26 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/tv_history_win"
                 android:text="胜利"
+                android:gravity="center"
                 android:textSize="12pt"
                 android:textStyle="italic"
-                android:layout_marginRight="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_history_time"
+                android:textSize="7pt"
+                android:text="比赛时间"
                 android:layout_centerVertical="true"
-                android:layout_alignRight="@+id/linearLayout"
-                android:layout_alignEnd="@+id/linearLayout" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 
 

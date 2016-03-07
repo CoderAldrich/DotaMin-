@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity
             userFragment.loadFrinedsDate(s);
             userFragment.flag=true;
             HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
-            historyFragment.loadDate(s);
+            historyFragment.loadDate(Util.get32Id(Long.parseLong(s)));
         }
 
     }
