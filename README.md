@@ -1,7 +1,12 @@
 # DotaMin-
 Dota2战绩查询app，模仿DotaMax+，android练手项目
 
-官方api文档地址：http://dev.dota2.com/showthread.php?t=58317
+##Api文档
+
+由于官方提供的只有英文文档，我在这里梳理了一下，把需要用到的一些做了翻译，希望能对其他使用者有所帮助  
+
+官方api文档地址：http://dev.dota2.com/showthread.php?t=58317  
+密钥获取：http://steamcommunity.com/dev/apikey
 
 ---
 
@@ -30,8 +35,8 @@ api密钥（key）:（填入自己密钥即可）
           -	 match_seq_num：比赛匹配的序列号  
           -	 start_time：比赛日期  
           -	 lobby_type：匹配模式  
-          -	 players：比赛玩家数组  
-          -	matches:比赛数组  
+          -	 players：比赛玩家列表  
+          -	matches:比赛列表  
             - account_id:玩家id（32bit）  
             - player_slot:玩家阵营（0-4：天辉  >4：夜魇）
             - hero_id:英雄id
@@ -48,10 +53,10 @@ api密钥（key）:（填入自己密钥即可）
 	- duration:比赛时长
 	-	match_id: 比赛id
 	-	match_seq_num: 比赛匹配的序列号 
-	-	tower_status_radiant: 天辉防御塔数量？
-	-	tower_status_dire: 夜魇防御塔数量？
-	-	barracks_status_radiant: 天辉兵营数量？
-	-	barracks_status_radiant: 夜魇兵营数量？
+	-	tower_status_radiant: 天辉防御塔数量
+	-	tower_status_dire: 夜魇防御塔数量
+	-	barracks_status_radiant: 天辉兵营数量
+	-	barracks_status_dire: 夜魇兵营数量
 	-	first_blood_time: 一血时间
 	-	 human_players：人类玩家数
 	-	 lobby_type：匹配模式
@@ -79,7 +84,6 @@ api密钥（key）:（填入自己密钥即可）
           -	 hero_damage：对英雄造成的总伤害 
           -	 tower_damage：对建筑造成的总伤害 
           -	 hero_healing：总治疗量 
-          -	 level：等级 
           -	 level：等级 
 
 ### (GetHeroes)英雄列表
@@ -131,13 +135,13 @@ api密钥（key）:（填入自己密钥即可）
 - Merthod:GET
 - param:  
           - key(必填)
-          - steamids(64-bit):STEAMID32 + 76561197960265728 = STEAMID64
+          - steamids(64-bit):STEAMID32 + 76561197960265728 = STEAMID64  
           - relationship:allORfriend
 - results:  
     -  friendslist:好友列表
         -  friends:好友数组
-                -  steamid:64bit id
-                -  relationship:好友关系
+                -  steamid:64bit id  
+                -  relationship:好友关系  
                 -  friend_since:添加时间
    
 ###(GetItems)物品信息
