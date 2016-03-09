@@ -108,7 +108,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
             switch (v.getId()){
                 case R.id.card_view:
                     Intent intent = new Intent(context, MatchDetailActivity.class);
-                    intent.putExtra("match", historyItemBeanArrayList.get(getPosition()).getResult());
+                    intent.putExtra("matchid", historyItemBeanArrayList.get(getPosition()).getMatchid());
                     context.startActivity(intent);
                     break;
             }

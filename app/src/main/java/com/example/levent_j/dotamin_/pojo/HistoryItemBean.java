@@ -13,14 +13,14 @@ public class HistoryItemBean {
     private int D;
     private int A;
     private String win;
-    private MatchResult result;
+    private String matchid;
 
-    public void setResult(MatchResult result) {
-        this.result = result;
+    public void setMatchid(String matchid) {
+        this.matchid = matchid;
     }
 
-    public MatchResult getResult() {
-        return result;
+    public String getMatchid() {
+        return matchid;
     }
 
     public void setHeroName(String heroName) {

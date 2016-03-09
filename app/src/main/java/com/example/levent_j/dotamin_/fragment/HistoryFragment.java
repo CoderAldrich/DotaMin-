@@ -145,7 +145,7 @@ public class HistoryFragment extends BaseFragment{
             HistoryItemBean historyItemBean = new HistoryItemBean();
 
 
-            historyItemBean.setResult(match.getResult());
+            historyItemBean.setMatchid(match.getResult().getMatchId());
             historyItemBean.setTime(Util.formRelativeDate(match.getResult().getStart_time()));
             historyItemBean.setType(Util.getLobby(match.getResult().getLobbyType()));
 
