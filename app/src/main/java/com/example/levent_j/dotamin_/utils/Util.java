@@ -81,6 +81,31 @@ public class Util {
         }
     }
 
+    public static String getMode(int mode){
+        switch (mode){
+            case 0:
+                return "未知";
+            case 1:
+                return "全阵营";
+            case 2:
+                return "队长模式";
+            case 3:
+                return "随机征召";
+            case 4:
+                return "英雄限定";
+            case 5:
+                return "全体随机";
+            case 6:
+                return "INTRO/DEATH";
+            case 7:
+                return "夜魇暗潮";
+            case 8:
+                return "反对长模式";
+            default:
+                return "无效的";
+        }
+    }
+
     public static String getState(int personastate) {
         switch (personastate){
             case 0:
