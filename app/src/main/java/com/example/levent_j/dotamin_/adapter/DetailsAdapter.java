@@ -6,21 +6,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.utils.Heroes;
+import com.example.levent_j.dotamin_.utils.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by levent_j on 16-3-9.
  */
 public class DetailsAdapter extends BaseExpandableListAdapter {
+    @Bind(R.id.tv_hero_name)
+    TextView heroname;
+    @Bind(R.id.tv_hero_level)
+    TextView herolevel;
+    @Bind(R.id.tv_hero_team)
+    TextView heroteam;
+    @Bind(R.id.tv_hero_kill)
+    TextView herokill;
+    @Bind(R.id.tv_hero_death)
+    TextView herodeath;
+    @Bind(R.id.tv_hero_ass)
+    TextView heroass;
+    @Bind(R.id.iv_hero_avater)
+    ImageView avater;
 
     private Context context;
     private List<MatchPlayer> matchPlayerList;
@@ -73,13 +93,21 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.layout_parent,null);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.parent);
-        textView.setText(Heroes.HERO_NAME[matchPlayerList.get(groupPosition).getHero_id()-1]);
-        return textView;
+        ButterKnife.bind(this, convertView);
+        MatchPlayer matchPlayer = matchPlayerList.get(groupPosition);
+        heroname.setText(Heroes.HERO_NAME[matchPlayer.getHero_id() - 1]);
+        herolevel.setText("等级"+matchPlayer.getLevel());
+        heroteam.setText((Util.isRadiant(matchPlayer.getPlayerSlot()))?"天辉":"夜魇");
+        herokill.setText("击杀："+matchPlayer.getKills());
+        herodeath.setText("死亡："+matchPlayer.getDeaths());
+        heroass.setText("助攻："+matchPlayer.getAssists());
+        Picasso.with(context).load(Heroes.HERO_IMAGE_FULL[matchPlayer.getHero_id() - 1]).into(avater);
+        return convertView;
     }
 
     @Override

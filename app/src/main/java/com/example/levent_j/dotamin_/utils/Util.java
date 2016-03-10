@@ -44,7 +44,7 @@ public class Util {
     }
 
     public static boolean isRadiant(int slot){
-        if (slot<4){
+        if (slot<5){
             return true;
         }else {
             return false;
