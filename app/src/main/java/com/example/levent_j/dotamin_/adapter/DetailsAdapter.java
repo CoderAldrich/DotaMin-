@@ -35,7 +35,7 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
     private TextView herodeath;
     private TextView heroass;
     private ImageView avater;
-    private TextView kda;
+
 
     private TextView hits;
     private TextView denis;
@@ -44,6 +44,8 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
     private TextView heroDamage;
     private TextView towerDamage;
     private TextView heroHealing;
+    private TextView kda;
+    private TextView fight;
 
     private Context context;
     private List<MatchPlayer> matchPlayerList;
@@ -137,17 +139,18 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         heroDamage = (TextView) convertView.findViewById(R.id.tv_hero_damage);
         towerDamage = (TextView) convertView.findViewById(R.id.tv_tower_damage);
         heroHealing = (TextView) convertView.findViewById(R.id.tv_hero_healing);
-//        kda = (TextView) convertView.findViewById(R.id.tv_hero_kda);
+        kda = (TextView) convertView.findViewById(R.id.tv_hero_kda);
+        fight = (TextView) convertView.findViewById(R.id.tv_hero_fight);
 
         hits.setText("正补数："+info.getHits());
         denis.setText("反补数：" + info.getDenies());
-        xpm.setText("每分钟经验：" + info.getXPM());
-        gpm.setText("每分钟金钱：" + info.getGPM());
+        xpm.setText("XPM：" + info.getXPM());
+        gpm.setText("GPM：" + info.getGPM());
         heroDamage.setText("英雄伤害：" + info.getHeroDamage());
         towerDamage.setText("建筑伤害：" + info.getTowerDamage());
         heroHealing.setText("治疗量：" + info.getHealing());
-//        kda.setText("KDA："+info.getKda());
-
+        kda.setText("KDA："+info.getKda());
+        fight.setText("参战率："+info.getFight()+"%");
         return convertView;
     }
 

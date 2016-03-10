@@ -124,4 +124,32 @@ public class Util {
                 return "游戏中";
         }
     }
+
+    public static int getTowerNumber(int tower){
+        String s = Integer.toBinaryString(tower);
+        char[] c = s.toCharArray();
+        int number = 0;
+        for (int i =0;i<c.length;i++){
+            Log.d("Tower",""+c[i]);
+
+            if (c[i] == '1'){
+                number++;
+            }
+        }
+        return number;
+    }
+
+    public static int getBarNumber(int tower){
+        String s = Integer.toBinaryString(tower);
+        char[] c = s.toCharArray();
+        int number = 0;
+        for (int i =0;i<c.length;i++){
+            Log.d("Tower",""+c[i]);
+
+            if (c[i] == '1'){
+                number++;
+            }
+        }
+        return number;
+    }
 }

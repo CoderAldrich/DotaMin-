@@ -81,10 +81,10 @@ public class MatchDetailActivity extends BaseActivity {
         matchTime.setText(Util.Second2Minute(Integer.parseInt(match.getResult().getDuration()))+"分钟");
         matchLobby.setText(Util.getLobby(match.getResult().getLobbyType()));
         matchMode.setText(Util.getMode(match.getResult().getGameMode()));
-        radTower.setText("防御塔数："+match.getResult().getTower_status_radiant());
-        radBar.setText("兵营数："+match.getResult().getBarracks_status_radiant());
-        dirWower.setText("防御塔数："+match.getResult().getTower_status_dire());
-        dirBar.setText("兵营数：" + match.getResult().getBarracks_status_dire());
+        radTower.setText("防御塔数："+Util.getTowerNumber(match.getResult().getTower_status_radiant()));
+        radBar.setText("兵营数："+Util.getBarNumber(match.getResult().getBarracks_status_radiant()));
+        dirWower.setText("防御塔数："+Util.getTowerNumber(match.getResult().getTower_status_dire()));
+        dirBar.setText("兵营数：" + Util.getBarNumber(match.getResult().getBarracks_status_dire()));
 
         if (match.getResult().isRadiantWin()){
             radName.setText("天辉（胜）");
@@ -101,9 +101,9 @@ public class MatchDetailActivity extends BaseActivity {
             father.add(match.getResult().getPlayers().get(i));
 
             if (Util.isRadiant(match.getResult().getPlayers().get(i).getPlayerSlot())){
-                RadKill++;
+                RadKill = RadKill + match.getResult().getPlayers().get(i).getKills();
             }else {
-                DirKill++;
+                DirKill = DirKill + match.getResult().getPlayers().get(i).getKills();
             }
         }
 
@@ -125,17 +125,23 @@ public class MatchDetailActivity extends BaseActivity {
 
             //计算参战率
             if (Util.isRadiant(father.get(j).getPlayerSlot())){
-                player.setFight((father.get(j).getKills()+father.get(j).getAssists())/RadKill);
+                msg("Fig","he"+((father.get(j).getKills() + father.get(j).getAssists())/RadKill));
+                float f = ((father.get(j).getKills() + father.get(j).getAssists())/RadKill)*100;
+                msg("Fig","*之后"+f);
+                player.setFight(f);
             }else {
-                player.setFight((father.get(j).getKills()+father.get(j).getAssists())/DirKill);
+                float f = ((father.get(j).getKills() + father.get(j).getAssists())/RadKill)*100;
+                player.setFight(f);
             }
+            msg("Fig",""+player.getFight());
             //计算kda
             int d=father.get(j).getDeaths();
             if (d==0){
                 d=1;
             }
-            player.setKda((father.get(j).getKills()+father.get(j).getAssists())/d);
-
+            msg("d",""+d);
+            player.setKda((float)((father.get(j).getKills()+father.get(j).getAssists()) / d));
+            msg("d",""+player.getKda());
             list.add(player);
             map.put(father.get(j),list);
         }
@@ -143,8 +149,6 @@ public class MatchDetailActivity extends BaseActivity {
         detailsAdapter = new DetailsAdapter(father,map,this);
         expandableListView.setAdapter(detailsAdapter);
         expandableListView.setGroupIndicator(null);
-
-
     }
 
     @Override

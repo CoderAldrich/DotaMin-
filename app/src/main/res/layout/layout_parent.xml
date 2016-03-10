@@ -66,28 +66,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="击杀"
             android:id="@+id/tv_hero_kill"/>
         <TextView
+            android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="死亡"
             android:id="@+id/tv_hero_death"/>
         <TextView
+            android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="助攻"
             android:id="@+id/tv_hero_ass"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="KDA"
-            android:id="@+id/tv_hero_kda"/>
     </LinearLayout>
 </LinearLayout>

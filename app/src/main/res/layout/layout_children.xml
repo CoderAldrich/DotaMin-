@@ -5,61 +5,95 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/linearLayout6"
+        android:layout_toLeftOf="@+id/linearLayout6"
+        android:layout_toStartOf="@+id/linearLayout6">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="正补"
                 android:id="@+id/tv_hits"/>
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="反补"
                 android:id="@+id/tv_denis"/>
+            <TextView
+                android:textSize="7pt"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="参战率"
+                android:id="@+id/tv_hero_fight"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="GMP"
                 android:id="@+id/tv_GPM"/>
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="XPM"
                 android:id="@+id/tv_XPM"/>
+            <TextView
+                android:textSize="7pt"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="KDA"
+                android:id="@+id/tv_hero_kda"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="英雄伤害"
                 android:id="@+id/tv_hero_damage"/>
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="建筑伤害"
                 android:id="@+id/tv_tower_damage"/>
             <TextView
                 android:textSize="7pt"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="治疗量"
                 android:id="@+id/tv_hero_healing"/>
@@ -71,39 +105,42 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout6"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/material_blue"/>
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/colorBlack"/>
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/material_blue"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/colorBlack"/>
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/material_blue"/>
             <ImageView
                 android:layout_width="100px"
-                android:layout_height="65px"
+                android:layout_height="70px"
                 android:background="@color/colorBlack"/>
         </LinearLayout>
     </LinearLayout>
