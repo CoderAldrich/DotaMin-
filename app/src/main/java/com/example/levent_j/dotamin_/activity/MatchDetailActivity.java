@@ -106,7 +106,6 @@ public class MatchDetailActivity extends BaseActivity {
                 DirKill = DirKill + match.getResult().getPlayers().get(i).getKills();
             }
         }
-
         radKills.setText("人头:"+RadKill);
         dirKills.setText("人头:"+DirKill);
 
