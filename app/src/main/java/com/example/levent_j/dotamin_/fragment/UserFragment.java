@@ -67,6 +67,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private boolean isClear;
     private int recount;
 
+    private Bundle savedState;
+
     public static UserFragment newInstance(String title) {
 
         Bundle args = new Bundle();
@@ -138,7 +140,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     public void loadUserDate(String id) {
         //在此发起网络请求获取数据
-        Api.getInstance().getUsers(id,userObserver);
+        Api.getInstance().getUsers(id, userObserver);
     }
 
     private void changeUserView(User u){
@@ -150,13 +152,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         steamurl.setText("点击访问社区页面");
         state.setText("当前："+Util.getState(player.getPersonastate()));
         Picasso.with(getContext()).load(player.getAvatarfull()).into(avater);
-    }
-    private void changeFriendsView(FriendResult f){
-        Friends friends = f.getFriendslist();
-        msg("Net","size is"+friends.getFriends().size());
-        //填充adapter
-        //把friends传入adapter
-        recyclerView_friends.setAdapter(friendsAdapter);
     }
 
     @Override

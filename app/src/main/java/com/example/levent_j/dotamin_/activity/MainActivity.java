@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity
         myFragmentAdapter.addFragment(HistoryFragment.newInstance(TITLE[1]),TITLE[1]);
         myFragmentAdapter.addFragment(HeroFragment.newInstance(TITLE[2]),TITLE[2]);
         viewPager.setAdapter(myFragmentAdapter);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
@@ -251,17 +253,6 @@ public class MainActivity extends BaseActivity
             return fragmentList.get(position);
         }
 
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            switch (position){
-//                case 0:
-//                    return "User";
-//                case 1:
-//                    return "History";
-//                default:
-//                    return "hero";
-//            }
-//        }
 
         @Override
         public int getCount() {

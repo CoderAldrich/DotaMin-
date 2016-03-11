@@ -31,6 +31,7 @@ public abstract class BaseFragment extends Fragment{
         ButterKnife.unbind(this);
     }
 
+
     protected void msg(String tag,String s){
         Log.d(tag,s);
     }
