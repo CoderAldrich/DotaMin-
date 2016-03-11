@@ -70,7 +70,6 @@ public class HistoryFragment extends BaseFragment{
         flag = 1;
         count = 10;
         isLoading = true;
-        historyItemBeans.clear();
     }
 
     @Override
@@ -84,13 +83,6 @@ public class HistoryFragment extends BaseFragment{
                 isLoading = true;
                 loadDate(id);
             }
-
-            @Override
-            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                super.onRefreshLoadMore(materialRefreshLayout);
-                count=count+5;
-                loadDate(id);
-            }
         });
     }
 
@@ -101,6 +93,7 @@ public class HistoryFragment extends BaseFragment{
     }
 
     public void loadDate(String s) {
+        historyItemBeans = new ArrayList<>();
         historyItemBeans.clear();
         //在此发起网络请求获取数据
         //s是64 bit
@@ -136,7 +129,6 @@ public class HistoryFragment extends BaseFragment{
                         .setAction("Action", null).show();
                 materialRefreshLayout.finishRefresh();
             }else if (e.getLocalizedMessage().equals("HTTP 503 Service Unavailable")){
-//                loadDate(id);
                 //如果服务器炸了，就在此发起网络请求
                 Snackbar.make(getView(), "网络链接失败，请重试", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -181,7 +173,6 @@ public class HistoryFragment extends BaseFragment{
                     }else {
                         historyItemBean.setWin("失败");
                     }
-                    msg("Win", ""+Heroes.HERO_NAME[Integer.parseInt(historyItemBean.getHeroName())-1]+historyItemBean.isWin());
                     //查询kda
                     historyItemBean.setK(player.getKills());
                     historyItemBean.setD(player.getDeaths());
