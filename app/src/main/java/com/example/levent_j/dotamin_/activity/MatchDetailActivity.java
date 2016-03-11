@@ -1,5 +1,6 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
@@ -11,6 +12,8 @@ import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.DetailsAdapter;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.net.Api;
+import com.example.levent_j.dotamin_.pojo.Item;
+import com.example.levent_j.dotamin_.pojo.Items;
 import com.example.levent_j.dotamin_.pojo.Match;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.pojo.MatchResult;
@@ -65,6 +68,8 @@ public class MatchDetailActivity extends BaseActivity {
     private DetailsAdapter detailsAdapter;
     private MatchResult matchResult;
     private Match match;
+    private Map<Integer,String> itemUrl;
+    private Item item;
 
     @Override
     protected void init() {
@@ -73,47 +78,14 @@ public class MatchDetailActivity extends BaseActivity {
         msg("Details", "intent ,id is" + matchID);
         match = new Match();
         //发起网络请求
-        Api.getInstance().getMatchDeatials(matchID,matchObserver);
+//        Api.getInstance().getMatchDeatials(matchID, matchObserver);
 
+        Api.getInstance().getItems(itemObserver);
         father = new ArrayList<>();
         map = new HashMap<>();
-        //加载list数据
-
-        expandableListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                msg("scroll","scrollstate "+scrollState);
-                switch (scrollState){
-                    case 0:
-                        //松开
-                        break;
-                    case 1:
-                        //滑动
-                        break;
-                    case 2:
-                        //慢慢滑动
-                        break;
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                msg("scroll","first"+firstVisibleItem+"visivle"+visibleItemCount+"total"+totalItemCount);
-                if (firstVisibleItem==4){
-                    linearLayout.setVisibility(View.INVISIBLE);
-                }else {
-                    linearLayout.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-//            expandableListView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//                @Override
-//                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                    msg("SCROLL","scrollX"+scrollX+"scrollY"+scrollY+"oldScrollX"+oldScrollX+"oldScrollY"+oldScrollY);
-//                }
-//            });
-
+//        for (int i=0;i<1500)
+        itemUrl = new HashMap<>();
+        item = new Item();
     }
 
     private void initListData() {
@@ -163,10 +135,16 @@ public class MatchDetailActivity extends BaseActivity {
             player.setTowerDamage(father.get(j).getTower_damage());
             player.setHealing(father.get(j).getHero_healing());
 
+            player.setItemUrl_1(itemUrl.get(father.get(j).getItem0()));
+            player.setItemUrl_2(itemUrl.get(father.get(j).getItem1()));
+            player.setItemUrl_3(itemUrl.get(father.get(j).getItem2()));
+            player.setItemUrl_4(itemUrl.get(father.get(j).getItem3()));
+            player.setItemUrl_5(itemUrl.get(father.get(j).getItem4()));
+            player.setItemUrl_6(itemUrl.get(father.get(j).getItem5()));
+
             //计算参战率
             if (Util.isRadiant(father.get(j).getPlayerSlot())){
                 int he = father.get(j).getKills()+father.get(j).getAssists();
-//                msg("Fig",);
                 player.setFight((float)(he*100/RadKill));
             }else {
                 int he = father.get(j).getKills()+father.get(j).getAssists();
@@ -220,6 +198,32 @@ public class MatchDetailActivity extends BaseActivity {
                 match.setResult(m.getResult());
             }
 
+        }
+    };
+
+    private Observer<Item> itemObserver = new Observer<Item>() {
+        @Override
+        public void onCompleted() {
+            for (int i=0;i<item.getItemResult().getItmes().size();i++){
+                //http://cdn.dota2.com/apps/dota2/images/items/<name>_lg.png
+                String url = "http://cdn.dota2.com/apps/dota2/images/items/"+item.getItemResult().getItmes().get(i).getName().substring(5) + "_lg.png";
+                itemUrl.put(item.getItemResult().getItmes().get(i).getId(),url);
+            }
+            Api.getInstance().getMatchDeatials(matchID, matchObserver);
+            msg("item",""+itemUrl.get(1));
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            e.printStackTrace();
+            msg("item","error:"+e.getLocalizedMessage());
+        }
+
+        @Override
+        public void onNext(Item i) {
+            item.setItemResult(i.getItemResult());
+            msg("item",""+item.getItemResult().getItmes().size());
         }
     };
 }

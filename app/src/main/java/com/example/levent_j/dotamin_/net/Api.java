@@ -3,6 +3,7 @@ package com.example.levent_j.dotamin_.net;
 import android.util.Log;
 
 import com.example.levent_j.dotamin_.pojo.FriendResult;
+import com.example.levent_j.dotamin_.pojo.Item;
 import com.example.levent_j.dotamin_.pojo.Match;
 import com.example.levent_j.dotamin_.pojo.MatchesHistory;
 import com.example.levent_j.dotamin_.pojo.User;
@@ -32,6 +33,7 @@ public class Api {
     private static final String KEY = "A7CAFA33562B6310ACDC0C3864B9DC1B";
 
     private static final String RELATION = "friend";
+    private static final String LANGUAGE = "zh";
 
     private ApiService apiService;
 
@@ -88,6 +90,13 @@ public class Api {
                 .subscribe(observer);
     }
 
+    public void getItems(Observer<Item> observer){
+        apiService.getItems(KEY,LANGUAGE)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
     public interface ApiService{
         //ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamid=76561198089905448
         @GET("ISteamUser/GetPlayerSummaries/v0002/")
@@ -108,5 +117,10 @@ public class Api {
         @GET("IDOTA2Match_570/GetMatchDetails/V001/")
         Observable<Match> getMatchDetails(@Query("key") String key,
                                           @Query("match_id") String id);
+
+        //IEconDOTA2_570/GetGameItems/V001/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&language=zh
+        @GET("IEconDOTA2_570/GetGameItems/V001/")
+        Observable<Item> getItems(@Query("key") String key,
+                                  @Query("language") String zh);
     }
 }

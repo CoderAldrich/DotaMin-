@@ -80,26 +80,26 @@ public class MatchPlayer {
     }
 
 
-    public void setItem_3(int item_3) {
+    public void setItem3(int item_3) {
         this.item_3 = item_3;
     }
-    public int getItem_3() {
+    public int getItem3() {
         return item_3;
     }
 
 
-    public void setItem_4(int item_4) {
+    public void setItem4(int item_4) {
         this.item_4 = item_4;
     }
-    public int getItem_4() {
+    public int getItem4() {
         return item_4;
     }
 
 
-    public void setItem_5(int item_5) {
+    public void setItem5(int item_5) {
         this.item_5 = item_5;
     }
-    public int getItem_5() {
+    public int getItem5() {
         return item_5;
     }
 

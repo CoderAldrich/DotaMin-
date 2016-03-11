@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
+import com.example.levent_j.dotamin_.pojo.Item;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.pojo.PlayerDetailBean;
 import com.example.levent_j.dotamin_.utils.Heroes;
@@ -46,6 +47,12 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
     private TextView heroHealing;
     private TextView kda;
     private TextView fight;
+    private ImageView item0;
+    private ImageView item1;
+    private ImageView item2;
+    private ImageView item3;
+    private ImageView item4;
+    private ImageView item5;
 
     private Context context;
     private List<MatchPlayer> matchPlayerList;
@@ -141,6 +148,12 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         heroHealing = (TextView) convertView.findViewById(R.id.tv_hero_healing);
         kda = (TextView) convertView.findViewById(R.id.tv_hero_kda);
         fight = (TextView) convertView.findViewById(R.id.tv_hero_fight);
+        item0 = (ImageView) convertView.findViewById(R.id.iv_item_0);
+        item1 = (ImageView) convertView.findViewById(R.id.iv_item_1);
+        item2 = (ImageView) convertView.findViewById(R.id.iv_item_2);
+        item3 = (ImageView) convertView.findViewById(R.id.iv_item_3);
+        item4 = (ImageView) convertView.findViewById(R.id.iv_item_4);
+        item5 = (ImageView) convertView.findViewById(R.id.iv_item_5);
 
         hits.setText("正补数："+info.getHits());
         denis.setText("反补数：" + info.getDenies());
@@ -151,6 +164,15 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         heroHealing.setText("治疗量：" + info.getHealing());
         kda.setText("KDA："+info.getKda());
         fight.setText("参战率："+info.getFight()+"%");
+
+        Picasso.with(context).load(info.getItemUrl_1()).into(item0);
+        Picasso.with(context).load(info.getItemUrl_2()).into(item1);
+        Picasso.with(context).load(info.getItemUrl_3()).into(item2);
+        Picasso.with(context).load(info.getItemUrl_4()).into(item3);
+        Picasso.with(context).load(info.getItemUrl_5()).into(item4);
+        Picasso.with(context).load(info.getItemUrl_6()).into(item5);
+
+
         return convertView;
     }
 
