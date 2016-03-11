@@ -1,7 +1,11 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.DetailsAdapter;
@@ -52,6 +56,9 @@ public class MatchDetailActivity extends BaseActivity {
     @Bind(R.id.tv_dir_name)
     TextView dirName;
 
+    @Bind(R.id.linearLayout4)
+    LinearLayout linearLayout;
+
     private String matchID;
     public List<MatchPlayer> father;
     public Map<MatchPlayer,List<PlayerDetailBean>> map;
@@ -72,12 +79,46 @@ public class MatchDetailActivity extends BaseActivity {
         map = new HashMap<>();
         //加载list数据
 
+        expandableListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                msg("scroll","scrollstate "+scrollState);
+                switch (scrollState){
+                    case 0:
+                        //松开
+                        break;
+                    case 1:
+                        //滑动
+                        break;
+                    case 2:
+                        //慢慢滑动
+                        break;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                msg("scroll","first"+firstVisibleItem+"visivle"+visibleItemCount+"total"+totalItemCount);
+                if (firstVisibleItem==4){
+                    linearLayout.setVisibility(View.INVISIBLE);
+                }else {
+                    linearLayout.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+//            expandableListView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//                @Override
+//                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                    msg("SCROLL","scrollX"+scrollX+"scrollY"+scrollY+"oldScrollX"+oldScrollX+"oldScrollY"+oldScrollY);
+//                }
+//            });
 
     }
 
     private void initListData() {
 
-        matchId.setText(matchID);
+        matchId.setText("比赛id:"+matchID);
         matchTime.setText(Util.Second2Minute(Integer.parseInt(match.getResult().getDuration()))+"分钟");
         matchLobby.setText(Util.getLobby(match.getResult().getLobbyType()));
         matchMode.setText(Util.getMode(match.getResult().getGameMode()));
@@ -124,23 +165,19 @@ public class MatchDetailActivity extends BaseActivity {
 
             //计算参战率
             if (Util.isRadiant(father.get(j).getPlayerSlot())){
-                msg("Fig","he"+((father.get(j).getKills() + father.get(j).getAssists())/RadKill));
-                float f = ((father.get(j).getKills() + father.get(j).getAssists())/RadKill)*100;
-                msg("Fig","*之后"+f);
-                player.setFight(f);
+                int he = father.get(j).getKills()+father.get(j).getAssists();
+//                msg("Fig",);
+                player.setFight((float)(he*100/RadKill));
             }else {
-                float f = ((father.get(j).getKills() + father.get(j).getAssists())/RadKill)*100;
-                player.setFight(f);
+                int he = father.get(j).getKills()+father.get(j).getAssists();
+                player.setFight((float)(he*100/DirKill));
             }
-            msg("Fig",""+player.getFight());
             //计算kda
             int d=father.get(j).getDeaths();
             if (d==0){
                 d=1;
             }
-            msg("d",""+d);
-            player.setKda((float)((father.get(j).getKills()+father.get(j).getAssists()) / d));
-            msg("d",""+player.getKda());
+            player.setKda((float) ((father.get(j).getKills() + father.get(j).getAssists()) / d));
             list.add(player);
             map.put(father.get(j),list);
         }

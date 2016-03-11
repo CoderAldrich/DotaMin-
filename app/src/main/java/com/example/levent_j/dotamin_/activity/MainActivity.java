@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -180,14 +181,14 @@ public class MainActivity extends BaseActivity
                 }
                 new InputDialog.Builder(this)
                         .setTitle("搜索")
-                        .setInputMaxWords(9)
+                        .setInputMaxWords(10)
                         .setInputHint("在此填入" + searchTitle)
                         .setPositiveButton("搜索", new InputDialog.ButtonActionListener() {
                             @Override
                             public void onClick(CharSequence inputText) {
                                 switch (searchFlag){
                                     case 1:
-                                        if (inputText.length() != 9) {
+                                        if (inputText.length() == 0) {
                                             Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
                                                     .setAction("Action", null).show();
                                         } else {
@@ -203,6 +204,10 @@ public class MainActivity extends BaseActivity
                                         break;
                                     case 2:
                                         //搜索比赛的活动
+                                        String s = inputText.toString().trim();
+                                        Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
+                                        intent.putExtra("matchid",s);
+                                        startActivity(intent);
                                         break;
                                     case 3:
                                         //搜索英雄的活动

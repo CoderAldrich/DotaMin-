@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.levent_j.dotamin_.pojo.Match;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.pojo.Matches;
 import com.example.levent_j.dotamin_.pojo.MatchesHistory;
+import com.example.levent_j.dotamin_.utils.Heroes;
 import com.example.levent_j.dotamin_.utils.Util;
 
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class HistoryFragment extends BaseFragment{
     private List<HistoryItemBean> historyItemBeans;
     private int flag;
     private int count;
+    private boolean isLoading;
 
     public static HistoryFragment newInstance(String title) {
 
@@ -66,6 +69,8 @@ public class HistoryFragment extends BaseFragment{
         historyItemBeans = new ArrayList<>();
         flag = 1;
         count = 10;
+        isLoading = true;
+        historyItemBeans.clear();
     }
 
     @Override
@@ -76,6 +81,14 @@ public class HistoryFragment extends BaseFragment{
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                isLoading = true;
+                loadDate(id);
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                count=count+5;
                 loadDate(id);
             }
         });
@@ -84,13 +97,18 @@ public class HistoryFragment extends BaseFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        loadDate(id);
     }
 
     public void loadDate(String s) {
+        historyItemBeans.clear();
         //在此发起网络请求获取数据
         //s是64 bit
         id = s;
-        Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
+        if (isLoading){
+            Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
+        }
+
     }
 
     @Override
@@ -103,36 +121,33 @@ public class HistoryFragment extends BaseFragment{
         public void onCompleted() {
             matchesList = new ArrayList<>(mymatchesHistory.getResult().getMatches());
             for (int i=0;i<matchesList.size();i++){
-                msg("His","the games are:"+matchesList.get(i).getMatch_id());
                 Api.getInstance().getMatchDeatials(""+matchesList.get(i).getMatch_id(), matchObserver);
             }
-
-            for (int i=0;i<3;i++){
-                for (int j=0;j<matchesList.size();j++){
-                    msg("Test","第"+i+"次遍历，the games are:"+matchesList.get(j).getMatch_id());
-                }
-            }
-
-            historyAdapter.updateHistoryList(historyItemBeans);
-            historyrecyclerView.setAdapter(historyAdapter);
             materialRefreshLayout.finishRefresh();
-
+            isLoading = false;
         }
 
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Net", "NET_ERROR");
-            loadDate(id);
-            //如果服务器炸了，就在此发起网络请求
+            msg("Net", "Mess:" + e.getLocalizedMessage());
+            if (e.getLocalizedMessage().equals("collection == null")){
+                Snackbar.make(getView(), "无比赛信息", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                materialRefreshLayout.finishRefresh();
+            }else if (e.getLocalizedMessage().equals("HTTP 503 Service Unavailable")){
+//                loadDate(id);
+                //如果服务器炸了，就在此发起网络请求
+                Snackbar.make(getView(), "网络链接失败，请重试", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+
         }
 
         @Override
         public void onNext(MatchesHistory matchesHistory) {
             if (matchesHistory==null){
-                msg("His","Null");
             }else {
-                msg("His","it is"+matchesHistory);
                 mymatchesHistory = matchesHistory;
             }
 
@@ -143,7 +158,6 @@ public class HistoryFragment extends BaseFragment{
         @Override
         public void onCompleted() {
             HistoryItemBean historyItemBean = new HistoryItemBean();
-
 
             historyItemBean.setMatchid(match.getResult().getMatchId());
             historyItemBean.setTime(Util.formRelativeDate(match.getResult().getStart_time()));
@@ -167,6 +181,7 @@ public class HistoryFragment extends BaseFragment{
                     }else {
                         historyItemBean.setWin("失败");
                     }
+                    msg("Win", ""+Heroes.HERO_NAME[Integer.parseInt(historyItemBean.getHeroName())-1]+historyItemBean.isWin());
                     //查询kda
                     historyItemBean.setK(player.getKills());
                     historyItemBean.setD(player.getDeaths());
@@ -175,15 +190,17 @@ public class HistoryFragment extends BaseFragment{
                     break;
                 }
             }
-
-            if (flag>10){
-//                historyItemBeans.clear();
-//                flag = 1;
+            historyItemBeans.add(historyItemBean);
+            historyAdapter.updateHistoryList(historyItemBeans);
+            if (flag==count){
+                flag = 1;
+                historyrecyclerView.setAdapter(historyAdapter);
+                matchesList.clear();
+                mymatchesHistory = null;
+                match = null;
             }else {
-                historyItemBeans.add(historyItemBean);
                 flag++;
             }
-
         }
 
         @Override
@@ -197,7 +214,6 @@ public class HistoryFragment extends BaseFragment{
             if (m==null){
                 msg("Match","no match!");
             }else {
-                msg("Match","id is"+m.getResult().getMatchId());
                 match = m;
             }
 
