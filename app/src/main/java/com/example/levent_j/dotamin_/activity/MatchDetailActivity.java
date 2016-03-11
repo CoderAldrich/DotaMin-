@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.graphics.Bitmap;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
@@ -34,8 +35,8 @@ import rx.Observer;
 public class MatchDetailActivity extends BaseActivity {
     @Bind(R.id.details_expandablelistview)
     ExpandableListView expandableListView;
-    @Bind(R.id.tv_match_id)
-    TextView matchId;
+//    @Bind(R.id.tv_match_id)
+//    TextView matchId;
     @Bind(R.id.tv_match_lobby)
     TextView matchLobby;
     @Bind(R.id.tv_match_mode)
@@ -58,9 +59,9 @@ public class MatchDetailActivity extends BaseActivity {
     TextView radName;
     @Bind(R.id.tv_dir_name)
     TextView dirName;
+    @Bind(R.id.toolbar_detail)
+    Toolbar toolbar;
 
-    @Bind(R.id.linearLayout4)
-    LinearLayout linearLayout;
 
     private String matchID;
     public List<MatchPlayer> father;
@@ -90,7 +91,8 @@ public class MatchDetailActivity extends BaseActivity {
 
     private void initListData() {
 
-        matchId.setText("比赛id:"+matchID);
+        toolbar.setTitle("比赛id:"+matchID);
+//        matchId.setText("比赛id:"+matchID);
         matchTime.setText(Util.Second2Minute(Integer.parseInt(match.getResult().getDuration()))+"分钟");
         matchLobby.setText(Util.getLobby(match.getResult().getLobbyType()));
         matchMode.setText(Util.getMode(match.getResult().getGameMode()));

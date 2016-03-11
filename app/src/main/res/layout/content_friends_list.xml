@@ -7,10 +7,10 @@
     app:isLoadMore="true"
     app:overlay="false"
     app:wave_show="true"
-    app:wave_color="@color/colorPrimary"
+    app:wave_color="@color/colorWhite"
     app:wave_height_type="normal"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

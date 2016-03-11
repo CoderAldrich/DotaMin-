@@ -101,7 +101,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         steamurl.setOnClickListener(this);
         loadingPopPoint.setVisibility(View.INVISIBLE);
         recyclerView_friends.setLayoutManager(new LinearLayoutManager(recyclerView_friends.getContext()));
-        recyclerView_friends.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL_LIST));
+//        recyclerView_friends.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL_LIST));
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -171,9 +171,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(i).getSteamid(),userFriendObserver);
             }
             msg("load", "first,size is" + basePlayerList.size());
-//            friendsAdapter.updateFriends(basePlayerList, isClear);
-//            recyclerView_friends.setAdapter(friendsAdapter);
-//            materialRefreshLayout.finishRefresh();
             materialRefreshLayout.finishRefreshLoadMore();
 
             msg("load", "now,size is" + basePlayerList.size());
