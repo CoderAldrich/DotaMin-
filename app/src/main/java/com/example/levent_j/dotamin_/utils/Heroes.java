@@ -18,7 +18,7 @@ public class Heroes {
             "灵魂行者","矮人直升机","炼金术士","祈求者","沉默术士","黑耀毁灭者","狼人","熊猫酒仙","暗影恶魔","德鲁伊",
             "混沌骑士","地卜师","树精卫士","食人魔法师","不朽尸王","拉比克","干扰者","司夜刺客","娜迦海妖","光之守卫",
             "小精灵","死灵飞龙","鱼人夜行者","美杜莎","巨魔战将","半人马酋长","半人猛犸","地精收割机","刚背兽","巨牙海民",
-            "天怒法师","亚巴顿","上古巨神","军团指挥官","地精工程师","灰烬之灵","大地之灵","","灵魂守卫","凤凰",
+            "天怒法师","亚巴顿","上古巨神","军团指挥官","地精工程师","灰烬之灵","大地之灵","无","灵魂守卫","凤凰",
             "神谕者","寒冬飞龙","弧光"
     };
 
@@ -46,6 +46,31 @@ public class Heroes {
                 R.drawable.skywrath_mage_full,R.drawable.abaddon_full,R.drawable.elder_titan_full,R.drawable.legion_commander_full,R.drawable.techies_full,
                 R.drawable.ember_spirit_full,R.drawable.earth_spirit_full,0,R.drawable.terrorblade_full,R.drawable.phoenix_full,
                 R.drawable.oracle_full,R.drawable.winter_wyvern_full,R.drawable.arc_warden_full
+        };
+
+        public static int[] HERO_IMAGE_VERT = {
+                R.drawable.antimage_vert,R.drawable.axe_vert,R.drawable.bane_vert,R.drawable.bloodseeker_vert,R.drawable.crystal_maiden_vert,
+                R.drawable.drow_ranger_vert,R.drawable.earthshaker_vert,R.drawable.juggernaut_vert,R.drawable.mirana_vert,R.drawable.nevermore_vert,
+                R.drawable.morphling_vert,R.drawable.phantom_lancer_vert,R.drawable.puck_vert,R.drawable.pudge_vert,R.drawable.razor_vert,
+                R.drawable.sand_king_vert,R.drawable.storm_spirit_vert,R.drawable.sven_vert,R.drawable.tiny_vert,R.drawable.ember_spirit_vert,
+                R.drawable.windrunner_vert,R.drawable.zuus_vert,R.drawable.kunkka_vert,0,R.drawable.lina_vert,
+                R.drawable.lion_vert, R.drawable.shadow_shaman_vert,R.drawable.slardar_vert,R.drawable.tidehunter_vert,R.drawable.witch_doctor_vert,
+                R.drawable.lich_vert,R.drawable.riki_vert,R.drawable.enigma_vert,R.drawable.tinker_vert,R.drawable.sniper_vert,
+                R.drawable.necrolyte_vert,R.drawable.warlock_vert,R.drawable.beastmaster_vert,R.drawable.queenofpain_vert,R.drawable.venomancer_vert,
+                R.drawable.faceless_void_vert,R.drawable.skeleton_king_vert,R.drawable.death_prophet_vert,R.drawable.phantom_assassin_vert,R.drawable.pugna_vert,
+                R.drawable.templar_assassin_vert,R.drawable.viper_vert,R.drawable.luna_vert,R.drawable.dragon_knight_vert,R.drawable.dazzle_vert,
+                R.drawable.rattletrap_vert,R.drawable.leshrac_vert,R.drawable.furion_vert,R.drawable.life_stealer_vert,R.drawable.dark_seer_vert,
+                R.drawable.clinkz_vert,R.drawable.omniknight_vert,R.drawable.enchantress_vert,R.drawable.huskar_vert,R.drawable.night_stalker_vert,
+                R.drawable.chen_vert,R.drawable.spectre_vert,R.drawable.ancient_apparition_vert,R.drawable.doom_bringer_vert,R.drawable.ursa_vert,
+                R.drawable.spirit_breaker_vert,R.drawable.gyrocopter_vert,R.drawable.alchemist_vert,R.drawable.invoker_vert,R.drawable.silencer_vert,
+                R.drawable.obsidian_destroyer_vert,R.drawable.lycan_vert,R.drawable.brewmaster_vert,R.drawable.shadow_demon_vert,R.drawable.lone_druid_vert,
+                R.drawable.chaos_knight_vert,R.drawable.meepo_vert,R.drawable.treant_vert,R.drawable.ogre_magi_vert,R.drawable.undying_vert,
+                R.drawable.rubick_vert,R.drawable.disruptor_vert,R.drawable.nyx_assassin_vert,R.drawable.naga_siren_vert,R.drawable.keeper_of_the_light_vert,
+                R.drawable.wisp_vert,R.drawable.visage_vert,R.drawable.slark_vert,R.drawable.medusa_vert,R.drawable.troll_warlord_vert,
+                R.drawable.centaur_vert,R.drawable.magnataur_vert,R.drawable.shredder_vert,R.drawable.bristleback_vert,R.drawable.tusk_vert,
+                R.drawable.skywrath_mage_vert,R.drawable.abaddon_vert,R.drawable.elder_titan_vert,R.drawable.legion_commander_vert,R.drawable.techies_vert,
+                R.drawable.ember_spirit_vert,R.drawable.earth_spirit_vert,0,R.drawable.terrorblade_vert,R.drawable.phoenix_vert,
+                R.drawable.oracle_vert,R.drawable.winter_wyvern_vert,R.drawable.arc_warden_vert
         };
 
 

@@ -28,6 +28,8 @@ import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
 import com.example.levent_j.dotamin_.utils.InputDialog;
 import com.example.levent_j.dotamin_.utils.Util;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +99,9 @@ public class MainActivity extends BaseActivity
             msg("tiao",""+s);
             historyFragment.loadDate(Util.get32Id(Long.parseLong(s)));
         }
+
+        //parse
+
 
     }
 

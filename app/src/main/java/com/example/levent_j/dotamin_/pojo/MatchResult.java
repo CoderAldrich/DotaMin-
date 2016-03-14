@@ -27,7 +27,7 @@ public class MatchResult implements Parcelable{
     private int leagueid;
     private int positiveVotes;
     private int negativeVotes;
-    private int gameMode;
+    private int game_mode;
     private int flags;
     private int engine;
 
@@ -49,7 +49,7 @@ public class MatchResult implements Parcelable{
         leagueid = in.readInt();
         positiveVotes = in.readInt();
         negativeVotes = in.readInt();
-        gameMode = in.readInt();
+        game_mode = in.readInt();
         flags = in.readInt();
         engine = in.readInt();
     }
@@ -203,10 +203,10 @@ public class MatchResult implements Parcelable{
 
 
     public void setGameMode(int gameMode) {
-        this.gameMode = gameMode;
+        this.game_mode = gameMode;
     }
     public int getGameMode() {
-        return gameMode;
+        return game_mode;
     }
 
 
@@ -248,7 +248,7 @@ public class MatchResult implements Parcelable{
         dest.writeInt(leagueid);
         dest.writeInt(positiveVotes);
         dest.writeInt(negativeVotes);
-        dest.writeInt(gameMode);
+        dest.writeInt(game_mode);
         dest.writeInt(flags);
         dest.writeInt(engine);
     }

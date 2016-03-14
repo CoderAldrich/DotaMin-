@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.levent_j.dotamin_.utils.Heroes;
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -17,6 +21,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
         setListener();
+//
+//        Parse.enableLocalDatastore(this);
+//
+//        Parse.initialize(this);
+
+//
+//        for (int i=0;i< Heroes.HERO_NAME.length;i++){
+//            ParseObject testObject = new ParseObject("Hero");
+//            testObject.put("heroName",Heroes.HERO_NAME[i]);
+//            testObject.saveInBackground();
+//            Log.d("Parse",Heroes.HERO_NAME[i]);
+//        }
+
+
     }
 
     protected abstract void init();

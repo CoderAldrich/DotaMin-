@@ -1,19 +1,32 @@
 package com.example.levent_j.dotamin_.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.example.levent_j.dotamin_.R;
+import com.example.levent_j.dotamin_.adapter.HeroesAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
+import com.example.levent_j.dotamin_.utils.Heroes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
 
 /**
  * Created by levent_j on 16-3-3.
  */
 public class HeroFragment extends BaseFragment{
+    @Bind(R.id.recycler_view_heros)
+    RecyclerView recyclerView;
 
     private static final String ARGS = "HERO";
     private static final String KEY_HERO = "Hero";
     private String mPage;
+    private HeroesAdapter heroesAdapter;
 
     public static HeroFragment newInstance(String title) {
 
@@ -30,22 +43,29 @@ public class HeroFragment extends BaseFragment{
         if (getArguments()!=null){
             mPage = getArguments().getString(ARGS,KEY_HERO);
         }
-        //填充list
+        heroesAdapter = new HeroesAdapter(getActivity());
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        loadDate();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadDate();
+        recyclerView.setAdapter(heroesAdapter);
     }
 
     private void loadDate() {
-        //在此发起网络请求获取数据
+        List<String> strings = new ArrayList<>();
+        for (int i=0;i<10;i++){
+            strings.add(Heroes.HERO_NAME[i]);
+        }
+        heroesAdapter.initArrayList(strings);
     }
 
     @Override

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.levent_j.dotamin_" >
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="O5g1AirxMlvxFGOWPNu4ELlkJwbLYAGXmWtLp9b8" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="VTeTj4oizhyeJ3XEige6guKDLANu3HKNyWe2z3Nu" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
