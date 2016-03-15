@@ -48,6 +48,7 @@ public class HistoryFragment extends BaseFragment{
     private int flag;
     private int count;
     private boolean isLoading;
+    private boolean isloadmore;
 
     public static HistoryFragment newInstance(String title) {
 
@@ -71,6 +72,7 @@ public class HistoryFragment extends BaseFragment{
         flag = 1;
         count = 10;
         isLoading = true;
+        isloadmore = false;
     }
 
     @Override
@@ -85,6 +87,14 @@ public class HistoryFragment extends BaseFragment{
                 isLoading = true;
                 loadDate(id);
             }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                isloadmore = true;
+                count += 5;
+                loadDate(id);
+            }
         });
     }
 
@@ -95,14 +105,16 @@ public class HistoryFragment extends BaseFragment{
     }
 
     public void loadDate(String s) {
-        historyItemBeans = new ArrayList<>();
-        historyItemBeans.clear();
-        //在此发起网络请求获取数据
-        //s是64 bit
         id = s;
-        if (isLoading){
+        if (isLoading||isloadmore){
+            historyItemBeans = new ArrayList<>();
+            historyItemBeans.clear();
+            //在此发起网络请求获取数据
+            //s是64 bit
             Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
         }
+
+
 
     }
 
@@ -118,8 +130,14 @@ public class HistoryFragment extends BaseFragment{
             for (int i=0;i<matchesList.size();i++){
                 Api.getInstance().getMatchDeatials(""+matchesList.get(i).getMatch_id(), matchObserver);
             }
-            materialRefreshLayout.finishRefresh();
-            isLoading = false;
+            if (isloadmore){
+                materialRefreshLayout.finishRefreshLoadMore();
+                isloadmore = false;
+            }
+            if (isLoading){
+                materialRefreshLayout.finishRefresh();
+                isLoading = false;
+            }
         }
 
         @Override
@@ -170,7 +188,12 @@ public class HistoryFragment extends BaseFragment{
                         historyItemBean.setTeam("夜魇");
                     }
                     //查询是否获胜
-                    if (Util.isRadiant(player.getPlayerSlot())&&match.getResult().isRadiantWin()){
+                    msg("TAG","i am"+Util.isRadiant(player.getPlayerSlot())+"rad win?"+match.getResult().isRadiantWin());
+                    if (
+                            (Util.isRadiant(player.getPlayerSlot())&&match.getResult().isRadiantWin())
+                            ||
+                                    (!(Util.isRadiant(player.getPlayerSlot()))&&!(match.getResult().isRadiantWin()))
+                            ){
                         historyItemBean.setWin("获胜");
                     }else {
                         historyItemBean.setWin("失败");

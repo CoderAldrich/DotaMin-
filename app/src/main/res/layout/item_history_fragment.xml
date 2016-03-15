@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/refresh_history"
-    app:isLoadMore="false"
+    app:isLoadMore="true"
     app:overlay="false"
     app:wave_show="true"
     app:wave_color="@color/colorPrimary"

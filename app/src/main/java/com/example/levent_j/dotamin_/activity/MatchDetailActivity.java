@@ -92,7 +92,6 @@ public class MatchDetailActivity extends BaseActivity {
     private void initListData() {
 
         toolbar.setTitle("比赛id:"+matchID);
-//        matchId.setText("比赛id:"+matchID);
         matchTime.setText(Util.Second2Minute(Integer.parseInt(match.getResult().getDuration()))+"分钟");
         matchLobby.setText(Util.getLobby(match.getResult().getLobbyType()));
         matchMode.setText(Util.getMode(match.getResult().getGameMode()));
@@ -105,8 +104,8 @@ public class MatchDetailActivity extends BaseActivity {
             radName.setText("天辉（胜）");
             dirName.setText("夜魇（败）");
         }else {
-            radName.setText("夜魇（胜）");
-            dirName.setText("夜魇（败）");
+            radName.setText("天辉（败）");
+            dirName.setText("夜魇（胜）");
         }
 
         int RadKill = 0;

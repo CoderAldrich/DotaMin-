@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.HeroesAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
@@ -22,11 +24,16 @@ import butterknife.Bind;
 public class HeroFragment extends BaseFragment{
     @Bind(R.id.recycler_view_heros)
     RecyclerView recyclerView;
+    @Bind(R.id.refresh_hero)
+    MaterialRefreshLayout materialRefreshLayout;
 
     private static final String ARGS = "HERO";
     private static final String KEY_HERO = "Hero";
     private String mPage;
     private HeroesAdapter heroesAdapter;
+    private int count;
+    private boolean isloading;
+    private boolean isloadmore;
 
     public static HeroFragment newInstance(String title) {
 
@@ -43,7 +50,10 @@ public class HeroFragment extends BaseFragment{
         if (getArguments()!=null){
             mPage = getArguments().getString(ARGS,KEY_HERO);
         }
+        isloading = true;
+        isloadmore = false;
         heroesAdapter = new HeroesAdapter(getActivity());
+        count = 10;
     }
 
     @Override
@@ -51,6 +61,21 @@ public class HeroFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                isloading = true;
+                loadDate();
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                count += 5;
+                isloadmore = true;
+                loadDate();
+            }
+        });
         loadDate();
     }
 
@@ -61,11 +86,21 @@ public class HeroFragment extends BaseFragment{
     }
 
     private void loadDate() {
-        List<String> strings = new ArrayList<>();
-        for (int i=0;i<10;i++){
-            strings.add(Heroes.HERO_NAME[i]);
+        if (isloading||isloadmore){
+            List<String> strings = new ArrayList<>();
+            for (int i=0;i<count;i++){
+                strings.add(Heroes.HERO_NAME[i]);
+            }
+            heroesAdapter.initArrayList(strings);
         }
-        heroesAdapter.initArrayList(strings);
+        if (isloading){
+            materialRefreshLayout.finishRefresh();
+            isloading = false;
+        }
+        if (isloadmore){
+            materialRefreshLayout.finishRefreshLoadMore();
+            isloadmore = false;
+        }
     }
 
     @Override

@@ -45,13 +45,15 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.mViewHolde
 
     @Override
     public void onBindViewHolder(mViewHolder holder, int position) {
-        holder.heroName.setText(heroeslist.get(position));
-        int max = 470;
-        int min = 335;
-        Random random = new Random();
-        int width = random.nextInt(max)%(max-min+1)+min;
-        int height = (int) (width*1.16);
-        Picasso.with(context).load(Heroes.HERO_IMAGE_VERT[position]).resize(width,height).into(holder.heroAvater);
+        if (Heroes.HERO_IMAGE_VERT[position]!=0){
+            holder.heroName.setText(heroeslist.get(position));
+            int max = 470;
+            int min = 335;
+            Random random = new Random();
+            int width = random.nextInt(max)%(max-min+1)+min;
+            int height = (int) (width*1.16);
+            Picasso.with(context).load(Heroes.HERO_IMAGE_VERT[position]).resize(width,height).into(holder.heroAvater);
+        }
     }
 
     @Override
