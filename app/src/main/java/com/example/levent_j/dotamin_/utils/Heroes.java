@@ -61,6 +61,7 @@ public class Heroes {
                 R.drawable.templar_assassin_vert,R.drawable.viper_vert,R.drawable.luna_vert,R.drawable.dragon_knight_vert,R.drawable.dazzle_vert,
                 R.drawable.rattletrap_vert,R.drawable.leshrac_vert,R.drawable.furion_vert,R.drawable.life_stealer_vert,R.drawable.dark_seer_vert,
                 R.drawable.clinkz_vert,R.drawable.omniknight_vert,R.drawable.enchantress_vert,R.drawable.huskar_vert,R.drawable.night_stalker_vert,
+                R.drawable.broodmother_vert,R.drawable.bounty_hunter_vert,R.drawable.weaver_vert,R.drawable.jakiro_vert,R.drawable.batrider_vert,
                 R.drawable.chen_vert,R.drawable.spectre_vert,R.drawable.ancient_apparition_vert,R.drawable.doom_bringer_vert,R.drawable.ursa_vert,
                 R.drawable.spirit_breaker_vert,R.drawable.gyrocopter_vert,R.drawable.alchemist_vert,R.drawable.invoker_vert,R.drawable.silencer_vert,
                 R.drawable.obsidian_destroyer_vert,R.drawable.lycan_vert,R.drawable.brewmaster_vert,R.drawable.shadow_demon_vert,R.drawable.lone_druid_vert,

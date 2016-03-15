@@ -1,6 +1,7 @@
 package com.example.levent_j.dotamin_.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
+import com.example.levent_j.dotamin_.activity.HeroDetailActivity;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.squareup.picasso.Picasso;
 
@@ -81,7 +83,10 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.mViewHolde
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,heroeslist.get(getPosition()),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"txt:"+heroeslist.get(getPosition())+"pos:"+getPosition(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, HeroDetailActivity.class);
+                    intent.putExtra("name",heroeslist.get(getPosition()));
+                    context.startActivity(intent);
                 }
             });
         }

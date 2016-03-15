@@ -191,8 +191,8 @@ public class HistoryFragment extends BaseFragment{
                     msg("TAG","i am"+Util.isRadiant(player.getPlayerSlot())+"rad win?"+match.getResult().isRadiantWin());
                     if (
                             (Util.isRadiant(player.getPlayerSlot())&&match.getResult().isRadiantWin())
-                            ||
-                                    (!(Util.isRadiant(player.getPlayerSlot()))&&!(match.getResult().isRadiantWin()))
+                                ||
+                            (!(Util.isRadiant(player.getPlayerSlot()))&&!(match.getResult().isRadiantWin()))
                             ){
                         historyItemBean.setWin("获胜");
                     }else {

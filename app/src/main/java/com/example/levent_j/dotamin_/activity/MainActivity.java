@@ -101,7 +101,9 @@ public class MainActivity extends BaseActivity
         }
 
         //parse
-
+//与parse取得链接
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this);
 
     }
 
