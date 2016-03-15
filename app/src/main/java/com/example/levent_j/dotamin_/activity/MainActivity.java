@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void init() {
+
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -88,6 +89,7 @@ public class MainActivity extends BaseActivity
         String s = getIntent().getStringExtra("id");
         if (s==null){
             msg("Intent","First come");
+
         }else {
             msg("Intent","again and s is:"+s);
             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
@@ -101,9 +103,7 @@ public class MainActivity extends BaseActivity
         }
 
         //parse
-//与parse取得链接
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this);
+
 
     }
 
