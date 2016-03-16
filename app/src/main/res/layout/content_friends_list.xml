@@ -17,6 +17,6 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_friends_list"
         android:clipToPadding="false"
-        android:scrollbars="vertical"/>
+        android:scrollbars="none"/>
 
 </com.cjj.MaterialRefreshLayout>
