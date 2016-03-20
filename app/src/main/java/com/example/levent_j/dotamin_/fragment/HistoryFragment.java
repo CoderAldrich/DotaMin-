@@ -66,7 +66,7 @@ public class HistoryFragment extends BaseFragment{
             mPage = getArguments().getString(ARGS,KEY_HISTORY);
         }
         //填充list
-        mymatchesHistory = new MatchesHistory();
+//        mymatchesHistory = new MatchesHistory();
         historyAdapter = new HistoryAdapter(getActivity());
         historyItemBeans = new ArrayList<>();
         flag = 1;
@@ -80,7 +80,7 @@ public class HistoryFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         historyrecyclerView.setLayoutManager(new LinearLayoutManager(historyrecyclerView.getContext()));
         historyrecyclerView.setItemAnimator(new DefaultItemAnimator());
-        historyrecyclerView.setAdapter(historyAdapter);
+//        historyrecyclerView.setAdapter(historyAapter);
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -107,11 +107,11 @@ public class HistoryFragment extends BaseFragment{
     public void loadDate(String s) {
         id = s;
         if (isLoading||isloadmore){
-            historyItemBeans = new ArrayList<>();
-            historyItemBeans.clear();
             //在此发起网络请求获取数据
             //s是64 bit
             Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
+
+
         }
 
 
@@ -128,16 +128,20 @@ public class HistoryFragment extends BaseFragment{
         public void onCompleted() {
             matchesList = new ArrayList<>(mymatchesHistory.getResult().getMatches());
             for (int i=0;i<matchesList.size();i++){
+//                msg("DEBUG","id:"+matchesList.get(i).getMatch_id());
+                try {
+                    Thread.currentThread().sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Api.getInstance().getMatchDeatials(""+matchesList.get(i).getMatch_id(), matchObserver);
+                try {
+                    Thread.currentThread().sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            if (isloadmore){
-                materialRefreshLayout.finishRefreshLoadMore();
-                isloadmore = false;
-            }
-            if (isLoading){
-                materialRefreshLayout.finishRefresh();
-                isLoading = false;
-            }
+
         }
 
         @Override
@@ -160,6 +164,7 @@ public class HistoryFragment extends BaseFragment{
         public void onNext(MatchesHistory matchesHistory) {
             if (matchesHistory==null){
             }else {
+                historyItemBeans.clear();
                 mymatchesHistory = matchesHistory;
             }
 
@@ -181,7 +186,6 @@ public class HistoryFragment extends BaseFragment{
                     //查询英雄名
                     historyItemBean.setHeroName("" + player.getHero_id());
                     //查询阵营名
-
                     if (Util.isRadiant(player.getPlayerSlot())){
                         historyItemBean.setTeam("天辉");
                     }else {
@@ -207,13 +211,21 @@ public class HistoryFragment extends BaseFragment{
                 }
             }
             historyItemBeans.add(historyItemBean);
-            historyAdapter.updateHistoryList(historyItemBeans);
             if (flag==count){
+                historyAdapter.updateHistoryList(historyItemBeans);
                 flag = 1;
                 historyrecyclerView.setAdapter(historyAdapter);
                 matchesList.clear();
                 mymatchesHistory = null;
                 match = null;
+                if (isloadmore){
+                    materialRefreshLayout.finishRefreshLoadMore();
+                    isloadmore = false;
+                }
+                if (isLoading){
+                    materialRefreshLayout.finishRefresh();
+                    isLoading = false;
+                }
             }else {
                 flag++;
             }
@@ -231,6 +243,7 @@ public class HistoryFragment extends BaseFragment{
                 msg("Match","no match!");
             }else {
                 match = m;
+                msg("DEBUG","id:"+m.getResult().getMatchId());
             }
 
         }

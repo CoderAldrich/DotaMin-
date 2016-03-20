@@ -170,7 +170,18 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 flag = false;
             }
             for (int i =0;i<count;i++){
-                Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(i).getSteamid(),userFriendObserver);
+                msg("USERNAME", mfriends.getFriendslist().getFriends().get(i).getSteamid());
+                try {
+                    Thread.currentThread().sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(i).getSteamid(), userFriendObserver);
+                try {
+                    Thread.currentThread().sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             msg("load", "first,size is" + basePlayerList.size());
             materialRefreshLayout.finishRefreshLoadMore();
