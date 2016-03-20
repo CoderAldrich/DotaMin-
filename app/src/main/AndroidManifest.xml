@@ -33,6 +33,8 @@
         <activity
             android:name=".activity.HeroDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.AboutActivity"></activity>
+        <activity android:name=".activity.FeedBackActivity"></activity>
     </application>
 
 </manifest>

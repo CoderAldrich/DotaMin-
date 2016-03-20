@@ -1,198 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
-        <ImageView
-            android:id="@+id/iv_detail_hero_avater"
-            android:layout_width="470px"
-            android:layout_height="544px"
-            android:background="@drawable/default_avater"
-            android:layout_marginRight="10dp"/>
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="英雄" />
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:layout_gravity="center"
+            android:id="@+id/loading"/>
         <LinearLayout
+            android:id="@+id/layout"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
+            android:padding="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="14pt"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:id="@+id/iv_detail_hero_avater"
+                    android:layout_width="470px"
+                    android:layout_height="544px"
+                    android:background="@drawable/default_avater"
+                    android:layout_marginRight="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/iv_detail_hero_avater"
+                    android:layout_toEndOf="@+id/iv_detail_hero_avater"
+                    android:layout_alignBottom="@+id/iv_detail_hero_avater">
+                    <TextView
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="14pt"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_detail_hero_name"
+                        android:layout_weight="1" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1">
+                        <!--攻击-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xx"
+                            android:id="@+id/tv_attack"
+                            android:layout_centerVertical="true"
+                            android:layout_weight="1"
+                            android:gravity="center" />
+                        <!--//护甲-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xx"
+                            android:id="@+id/tv_armor"
+                            android:layout_alignParentTop="false"
+                            android:layout_alignParentRight="false"
+                            android:layout_alignParentEnd="false"
+                            android:layout_weight="1"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="xx + xx"
+                        android:id="@+id/tv_power"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="xx + xx"
+                        android:id="@+id/tv_agile"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/tv_know"
+                        android:layout_toStartOf="@+id/tv_know"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="xx + xx"
+                        android:id="@+id/tv_know"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:text="英雄描述"
+                android:textSize="8pt"
+                android:id="@+id/tv_hero_description"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+                <ImageView
+                    android:id="@+id/skill_1"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:src="@color/colorBlack"/>
+                <ImageView
+                    android:id="@+id/skill_2"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:src="@color/colorPrimary"/>
+                <ImageView
+                    android:id="@+id/skill_3"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:src="@color/colorBlack"/>
+                <ImageView
+                    android:id="@+id/skill_4"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:src="@color/colorPrimary"/>
+                <ImageView
+                    android:id="@+id/skill_5"
+                    android:layout_width="180px"
+                    android:layout_height="180px"
+                    android:src="@color/colorBlack"/>
+            </LinearLayout>
+            <TextView
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
                 android:textStyle="bold"
-                android:id="@+id/tv_detail_hero_name"/>
-            <RelativeLayout
+                android:text="技能名称"
+                android:id="@+id/tv_skill_name" />
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-                <!--攻击-->
-                <ImageView
-                    android:layout_width="40px"
-                    android:layout_height="40px"
-                    android:background="@color/colorPrimary"
-                    android:id="@+id/imageView2"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="攻击力"
-                    android:id="@+id/tv_attack"
-                    android:layout_alignBottom="@+id/imageView2"
-                    android:layout_toRightOf="@+id/imageView2"
-                    android:layout_toEndOf="@+id/imageView2" />
-                <!--//护甲-->
-                <ImageView
-                    android:layout_width="40px"
-                    android:layout_height="40px"
-                    android:background="@color/colorPrimary"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/tv_armor"
-                    android:layout_toStartOf="@+id/tv_armor" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="护甲"
-                    android:id="@+id/tv_armor"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="28dp"
-                    android:layout_marginEnd="28dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-                <ImageView
-                    android:layout_width="40px"
-                    android:layout_height="40px"
-                    android:background="@color/colorPrimary"
-                    android:id="@+id/iv_power" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="力量"
-                    android:id="@+id/tv_power"
-                    android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/iv_power"
-                    android:layout_toEndOf="@+id/iv_power" />
-                <ImageView
-                    android:layout_width="40px"
-                    android:layout_height="40px"
-                    android:background="@color/colorPrimary"
-                    android:id="@+id/iv_agile"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/tv_agile"
-                    android:layout_toStartOf="@+id/tv_agile" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="敏捷"
-                    android:id="@+id/tv_agile"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/iv_know"
-                    android:layout_toStartOf="@+id/iv_know"
-                    android:layout_marginRight="34dp"
-                    android:layout_marginEnd="34dp" />
-                <ImageView
-                    android:layout_width="40px"
-                    android:layout_height="40px"
-                    android:background="@color/colorPrimary"
-                    android:id="@+id/iv_know"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/tv_know"
-                    android:layout_toStartOf="@+id/tv_know" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="智力"
-                    android:id="@+id/tv_know"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-            </RelativeLayout>
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="每点属性增加1点攻击力"/>
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="每点增加19点生命值"
-                android:id="@+id/tv_detail_health"/>
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="每点提升0.03点点生命回复数率"
-                android:id="@+id/tv_detail_rate"/>
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="英雄每升一级获得点数：2.90"
-                android:id="@+id/tv_detail_growth"/>
+                android:textSize="8pt"
+                android:text="技能描述"
+                android:id="@+id/tv_skill_description" />
         </LinearLayout>
-    </LinearLayout>
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="5"
-        android:ellipsize="end"
-        android:text="英雄描述"
-        android:textSize="8pt"
-        android:id="@+id/tv_hero_description"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
-        <ImageView
-            android:id="@+id/skill_1"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorBlack"/>
-        <ImageView
-            android:id="@+id/skill_2"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorPrimary"/>
-        <ImageView
-            android:id="@+id/skill_3"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorBlack"/>
-        <ImageView
-            android:id="@+id/skill_4"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorPrimary"/>
-        <ImageView
-            android:id="@+id/skill_5"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorBlack"/>
-        <ImageView
-            android:id="@+id/skill_6"
-            android:layout_width="90px"
-            android:layout_height="90px"
-            android:src="@color/colorPrimary"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="8pt"
-        android:text="技能描述"/>
-</LinearLayout>
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+

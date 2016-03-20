@@ -17,8 +17,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
@@ -28,14 +26,11 @@ import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
 import com.example.levent_j.dotamin_.utils.InputDialog;
 import com.example.levent_j.dotamin_.utils.Util;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -157,17 +152,18 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_main) {
             // Handle the camera action
-            msg("item", "nav_main");
-        } else if (id == R.id.nav_gallery) {
-            msg("item", "nav_gallery");
-        } else if (id == R.id.nav_slideshow) {
-            msg("item", "nav_slideshow");
-        } else if (id == R.id.nav_manage) {
-            msg("item", "nav_manage");
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_news) {
+            Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_gba) {
+            Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_data) {
+            Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_feedback) {
             msg("item", "nav_share");
-        } else if (id == R.id.nav_send) {
+            startActivity(new Intent(this,FeedBackActivity.class));
+        } else if (id == R.id.nav_about) {
             msg("item", "nav_send");
+            startActivity(new Intent(this, AboutActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
