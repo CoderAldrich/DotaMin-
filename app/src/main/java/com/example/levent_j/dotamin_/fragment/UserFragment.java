@@ -222,6 +222,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             msg("Net","name is "+muser.getResponse().getPlayers().get(0).getPersonaname());
             changeUserView(muser);
             loadingPopPoint.setVisibility(View.INVISIBLE);
+            muser=null;
         }
 
         @Override

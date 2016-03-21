@@ -38,7 +38,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
 
     private Context context;
     private final LayoutInflater layoutInflater;
-    private ArrayList<Player> playerArrayList;
+    private List<Player> playerArrayList;
 
 
     public FriendsAdapter(Context context){
@@ -73,10 +73,11 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
     }
 
     public void updateFriends(List<Player> players,boolean isClear){
-        if (isClear){
-            playerArrayList.clear();
-        }
-        playerArrayList = new ArrayList<>(players);
+//        if (isClear){
+//            playerArrayList.clear();
+//        }
+        playerArrayList.clear();
+        playerArrayList .addAll(players);
         notifyDataSetChanged();
 
     }

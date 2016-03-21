@@ -68,6 +68,7 @@ public class HistoryFragment extends BaseFragment{
         //填充list
         historyAdapter = new HistoryAdapter(getActivity());
         historyItemBeans = new ArrayList<>();
+        matchesList = new ArrayList<>();
         count = 10;
         isLoading = true;
         isloadmore = false;
@@ -196,8 +197,8 @@ public class HistoryFragment extends BaseFragment{
             }
             historyItemBeans.add(historyItemBean);
             if (hisIndex==count-1){
-                historyAdapter.updateHistoryList(historyItemBeans);
                 hisIndex = 0;
+                historyAdapter.updateHistoryList(historyItemBeans);
                 historyrecyclerView.setAdapter(historyAdapter);
                 matchesList.clear();
                 mymatchesHistory = null;
@@ -212,6 +213,7 @@ public class HistoryFragment extends BaseFragment{
                 }
             }else {
                 hisIndex++;
+                match = null;
                 Api.getInstance().getMatchDeatials(""+matchesList.get(hisIndex).getMatch_id(), matchObserver);
             }
         }

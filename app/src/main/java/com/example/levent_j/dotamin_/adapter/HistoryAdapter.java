@@ -71,7 +71,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
 
     public void updateHistoryList(List<HistoryItemBean> historyItemBeans){
         historyItemBeanArrayList.clear();
-        historyItemBeanArrayList = new ArrayList<>(historyItemBeans);
+        historyItemBeanArrayList.addAll(historyItemBeans);
         notifyDataSetChanged();
     }
 
