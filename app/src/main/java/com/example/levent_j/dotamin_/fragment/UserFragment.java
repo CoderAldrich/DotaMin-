@@ -1,5 +1,7 @@
 package com.example.levent_j.dotamin_.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -66,9 +68,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private int count;
     public boolean flag;
     private boolean isClear;
-    private int recount;
-
-    private Bundle savedState;
+    private int userIndex;
 
     public static UserFragment newInstance(String title) {
 
@@ -91,9 +91,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         mfriends = new FriendResult();
         friendsAdapter = new FriendsAdapter(getActivity());
         count = 5;
-        recount = 0;
         flag = true;
         isClear = true;
+        userIndex = 0;
     }
 
     @Override
@@ -103,7 +103,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         loadingPopPoint.setVisibility(View.INVISIBLE);
         recyclerView_friends.setLayoutManager(new LinearLayoutManager(recyclerView_friends.getContext()));
         recyclerView_friends.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView_friends.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL_LIST));
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -169,24 +168,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 count = mfriends.getFriendslist().getFriends().size();
                 flag = false;
             }
-            for (int i =0;i<count;i++){
-                msg("USERNAME", mfriends.getFriendslist().getFriends().get(i).getSteamid());
-                try {
-                    Thread.currentThread().sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(i).getSteamid(), userFriendObserver);
-                try {
-                    Thread.currentThread().sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            msg("load", "first,size is" + basePlayerList.size());
+            Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(userIndex).getSteamid(), userFriendObserver);
             materialRefreshLayout.finishRefreshLoadMore();
-
-            msg("load", "now,size is" + basePlayerList.size());
         }
 
         @Override
@@ -209,12 +192,15 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onCompleted() {
             basePlayerList.add(mfrienduser.getResponse().getPlayers().get(0));
-            if (recount==count){
+            if (userIndex==count-1){
                 friendsAdapter.updateFriends(basePlayerList, isClear);
                 recyclerView_friends.setAdapter(friendsAdapter);
                 materialRefreshLayout.finishRefresh();
-                recount = 0;
+                userIndex = 0;
                 basePlayerList.clear();
+            }else {
+                userIndex++;
+                Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(userIndex).getSteamid(), userFriendObserver);
             }
         }
 
@@ -225,7 +211,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onNext(User user) {
-            recount++;
             mfrienduser.setResponse(user.getResponse());
         }
     };
@@ -264,6 +249,11 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 //跳转至浏览器
                 Snackbar.make(v, "跳转至浏览器", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent intent= new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(steamURL);
+                intent.setData(content_url);
+                startActivity(intent);
                 break;
         }
     }

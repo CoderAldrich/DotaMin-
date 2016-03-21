@@ -45,10 +45,10 @@ public class HistoryFragment extends BaseFragment{
     private HistoryAdapter historyAdapter;
     private Match match;
     private List<HistoryItemBean> historyItemBeans;
-    private int flag;
     private int count;
     private boolean isLoading;
     private boolean isloadmore;
+    private int hisIndex=0;
 
     public static HistoryFragment newInstance(String title) {
 
@@ -66,10 +66,8 @@ public class HistoryFragment extends BaseFragment{
             mPage = getArguments().getString(ARGS,KEY_HISTORY);
         }
         //填充list
-//        mymatchesHistory = new MatchesHistory();
         historyAdapter = new HistoryAdapter(getActivity());
         historyItemBeans = new ArrayList<>();
-        flag = 1;
         count = 10;
         isLoading = true;
         isloadmore = false;
@@ -80,7 +78,6 @@ public class HistoryFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         historyrecyclerView.setLayoutManager(new LinearLayoutManager(historyrecyclerView.getContext()));
         historyrecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        historyrecyclerView.setAdapter(historyAapter);
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -127,20 +124,7 @@ public class HistoryFragment extends BaseFragment{
         @Override
         public void onCompleted() {
             matchesList = new ArrayList<>(mymatchesHistory.getResult().getMatches());
-            for (int i=0;i<matchesList.size();i++){
-//                msg("DEBUG","id:"+matchesList.get(i).getMatch_id());
-                try {
-                    Thread.currentThread().sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Api.getInstance().getMatchDeatials(""+matchesList.get(i).getMatch_id(), matchObserver);
-                try {
-                    Thread.currentThread().sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            Api.getInstance().getMatchDeatials(""+matchesList.get(hisIndex).getMatch_id(), matchObserver);
 
         }
 
@@ -211,9 +195,9 @@ public class HistoryFragment extends BaseFragment{
                 }
             }
             historyItemBeans.add(historyItemBean);
-            if (flag==count){
+            if (hisIndex==count-1){
                 historyAdapter.updateHistoryList(historyItemBeans);
-                flag = 1;
+                hisIndex = 0;
                 historyrecyclerView.setAdapter(historyAdapter);
                 matchesList.clear();
                 mymatchesHistory = null;
@@ -227,7 +211,8 @@ public class HistoryFragment extends BaseFragment{
                     isLoading = false;
                 }
             }else {
-                flag++;
+                hisIndex++;
+                Api.getInstance().getMatchDeatials(""+matchesList.get(hisIndex).getMatch_id(), matchObserver);
             }
         }
 
