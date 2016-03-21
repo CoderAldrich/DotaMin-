@@ -1,5 +1,7 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +15,11 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,15 +47,15 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     TextView heroArmor;
     @Bind(R.id.tv_hero_description)
     TextView heroDescription;
-    @Bind(R.id.skill_1)
+    @Bind(R.id.iv_skill_1)
     ImageView skillAvater1;
-    @Bind(R.id.skill_2)
+    @Bind(R.id.iv_skill_2)
     ImageView skillAvater2;
-    @Bind(R.id.skill_3)
+    @Bind(R.id.iv_skill_3)
     ImageView skillAvater3;
-    @Bind(R.id.skill_4)
+    @Bind(R.id.iv_skill_4)
     ImageView skillAvater4;
-    @Bind(R.id.skill_5)
+    @Bind(R.id.iv_skill_5)
     ImageView skillAvater5;
     @Bind(R.id.tv_skill_description)
     TextView skillDescription;
@@ -61,8 +67,10 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     LoadingPopPoint loadingPopPoint;
 
     private String getName;
+    private int heroIndex;
     private int flag = 0;
     private int heroMin;
+    private int skillCount;
     private Map<String,String> skillMap;
     private String[] skillNames;
 
@@ -73,6 +81,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 //        Parse.initialize(this);
         linearLayout.setVisibility(View.INVISIBLE);
         getName = getIntent().getStringExtra("name");
+        heroIndex = getHeroIndex(getName);
         loadDate(getName);
         skillMap = new HashMap<>();
         skillAvater1.setOnClickListener(this);
@@ -82,6 +91,15 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         skillAvater5.setOnClickListener(this);
 
 //        Toast.makeText(this,name,Toast.LENGTH_SHORT).show();
+    }
+
+    private int getHeroIndex(String getName) {
+        for (int i=0;i<Heroes.HERO_NAME.length;i++){
+            if (getName.equals(Heroes.HERO_NAME[i])){
+                return i;
+            }
+        }
+        return 0;
     }
 
     private void loadDate(final String getName) {
@@ -105,20 +123,26 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                         heroArmor.setText(objects.get(i).getString("heroArmor"));
                         heroDescription.setText(objects.get(i).getString("Description"));
                         heroMin = objects.get(i).getInt("heroMin");
-                        int count = objects.get(i).getInt("skillCount");
-                        if (count == 4) {
-                            skillAvater5.setVisibility(View.INVISIBLE);
-                        }
-                        skillNames = new String[count];
-                        for (int j = 1; j <= count; j++) {
+
+                        skillCount = objects.get(i).getInt("skillCount");
+                        skillNames = new String[skillCount];
+                        for (int j = 1; j <= skillCount; j++) {
                             skillNames[j - 1] = objects.get(i).getString("heroSkill_" + j);
                             skillMap.put(objects.get(i).getString("heroSkill_" + j), objects.get(i).getString("heroSkill_" + j + "_des"));
                         }
-                        //Test
-                        for (int j = 1; j <= count; j++) {
-                            msg("TestDetail", "name is:" + skillNames[j - 1] + "\nand des is:" + skillMap.get(skillNames[j - 1]));
+
+                        if (skillCount == 4) {
+                            skillAvater5.setVisibility(View.GONE);
+                        }else {
+                            skillAvater5.setVisibility(View.VISIBLE);
+                            setSkill(5, skillAvater5);
                         }
-                        setSkill(1);
+                        setSkill(4,skillAvater4);
+                        setSkill(3,skillAvater3);
+                        setSkill(2,skillAvater2);
+                        setSkill(1,skillAvater1);
+                        skillAvater1.setAlpha(180);
+
                         int index = 0;
                         for (int j = 0; j < Heroes.HERO_NAME.length; j++) {
                             if (Heroes.HERO_NAME[j].equals(getName)) {
@@ -127,6 +151,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                             }
                         }
                         heroAvater.setBackgroundResource(Heroes.HERO_IMAGE_VERT[index]);
+
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "网络错误", Toast.LENGTH_SHORT).show();
@@ -150,28 +175,49 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        skillAvater1.setAlpha(255);
+        skillAvater2.setAlpha(255);
+        skillAvater3.setAlpha(255);
+        skillAvater4.setAlpha(255);
+        skillAvater5.setAlpha(255);
         switch (v.getId()){
-            case R.id.skill_1:
-                setSkill(1);
+            case R.id.iv_skill_1:
+                setSkill(1, skillAvater1);
+                skillAvater1.setAlpha(180);
                 break;
-            case R.id.skill_2:
-                setSkill(2);
+            case R.id.iv_skill_2:
+                setSkill(2, skillAvater2);
+                skillAvater2.setAlpha(180);
                 break;
-            case R.id.skill_3:
-                setSkill(3);
+            case R.id.iv_skill_3:
+                setSkill(3,skillAvater3);
+                skillAvater3.setAlpha(180);
                 break;
-            case R.id.skill_4:
-                setSkill(4);
+            case R.id.iv_skill_4:
+                setSkill(4,skillAvater4);
+                skillAvater4.setAlpha(180);
                 break;
-            case R.id.skill_5:
-                setSkill(5);
+            case R.id.iv_skill_5:
+                setSkill(5,skillAvater5);
+                skillAvater5.setAlpha(180);
                 break;
         }
     }
 
-    private void setSkill(int i) {
+    private void setSkill(int i,ImageView imageView) {
         skillName.setText(skillNames[i-1]);
         skillDescription.setText(skillMap.get(skillNames[i-1]));
+        setSkillAvater(heroIndex,i,imageView);
+    }
+
+    private void setSkillAvater(int heroId,int skillId,ImageView imageView){
+        try {
+            InputStream inputStream = getAssets().open(heroId+"/"+skillId+".png");
+            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+            imageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -135,31 +135,35 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="10dp">
                 <ImageView
-                    android:id="@+id/skill_1"
-                    android:layout_width="180px"
-                    android:layout_height="180px"
+                    android:layout_weight="1"
+                    android:id="@+id/iv_skill_1"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
                     android:src="@color/colorBlack"/>
                 <ImageView
-                    android:id="@+id/skill_2"
-                    android:layout_width="180px"
-                    android:layout_height="180px"
+                    android:layout_weight="1"
+                    android:id="@+id/iv_skill_2"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
                     android:src="@color/colorPrimary"/>
                 <ImageView
-                    android:id="@+id/skill_3"
-                    android:layout_width="180px"
-                    android:layout_height="180px"
+                    android:layout_weight="1"
+                    android:id="@+id/iv_skill_3"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
                     android:src="@color/colorBlack"/>
                 <ImageView
-                    android:id="@+id/skill_4"
-                    android:layout_width="180px"
-                    android:layout_height="180px"
+                    android:layout_weight="1"
+                    android:id="@+id/iv_skill_4"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
                     android:src="@color/colorPrimary"/>
-                <ImageView
-                    android:id="@+id/skill_5"
-                    android:layout_width="180px"
-                    android:layout_height="180px"
-                    android:src="@color/colorBlack"/>
             </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_skill_5"
+                android:layout_width="240px"
+                android:layout_height="240px"
+                android:src="@color/colorBlack"/>
             <TextView
                 android:paddingBottom="10dp"
                 android:layout_width="match_parent"
