@@ -2,6 +2,7 @@ package com.example.levent_j.dotamin_.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -89,6 +90,8 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         skillAvater3.setOnClickListener(this);
         skillAvater4.setOnClickListener(this);
         skillAvater5.setOnClickListener(this);
+        heroDescription.setMovementMethod(new ScrollingMovementMethod());
+//        skillLayout.setOverScrollMode(View.SCROLL_AXIS_HORIZONTAL);
 
 //        Toast.makeText(this,name,Toast.LENGTH_SHORT).show();
     }
@@ -121,7 +124,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                         heroKnow.setText(objects.get(i).getString("heroKno"));
                         heroAttack.setText(objects.get(i).getString("heroAttack"));
                         heroArmor.setText(objects.get(i).getString("heroArmor"));
-                        heroDescription.setText(objects.get(i).getString("Description"));
+                        heroDescription.setText(objects.get(i).getString("heroDescription"));
                         heroMin = objects.get(i).getInt("heroMin");
 
                         skillCount = objects.get(i).getInt("skillCount");
@@ -215,6 +218,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
             InputStream inputStream = getAssets().open(heroId+"/"+skillId+".png");
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             imageView.setImageBitmap(bitmap);
+            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
