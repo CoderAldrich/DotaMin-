@@ -63,6 +63,7 @@ public class MatchDetailActivity extends BaseActivity {
     Toolbar toolbar;
 
 
+
     private String matchID;
     public List<MatchPlayer> father;
     public Map<MatchPlayer,List<PlayerDetailBean>> map;

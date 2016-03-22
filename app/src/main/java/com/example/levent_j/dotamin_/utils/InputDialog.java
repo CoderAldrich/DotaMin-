@@ -522,6 +522,7 @@ public class InputDialog {
             }
         }
 
+
         private void initEditText(AlertDialog dialog) {
             EditText input = obtainEditText(dialog);
             if (inputMaxWords >= 0) {

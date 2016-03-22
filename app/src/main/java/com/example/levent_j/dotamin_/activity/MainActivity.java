@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
@@ -26,6 +27,10 @@ import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
 import com.example.levent_j.dotamin_.utils.InputDialog;
 import com.example.levent_j.dotamin_.utils.Util;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,9 +163,6 @@ public class MainActivity extends BaseActivity
             Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_data) {
             Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_feedback) {
-            msg("item", "nav_share");
-            startActivity(new Intent(this,FeedBackActivity.class));
         } else if (id == R.id.nav_about) {
             msg("item", "nav_send");
             startActivity(new Intent(this, AboutActivity.class));
@@ -212,12 +214,28 @@ public class MainActivity extends BaseActivity
                                     case 2:
                                         //搜索比赛的活动
                                         String s = inputText.toString().trim();
-                                        Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
+                                        final Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
                                         intent.putExtra("matchid",s);
                                         startActivity(intent);
                                         break;
                                     case 3:
                                         //搜索英雄的活动
+                                        final String name = inputText.toString().trim();
+                                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Hero");
+                                        query.whereEqualTo("heroName", name);
+                                        query.findInBackground(new FindCallback<ParseObject>() {
+                                            @Override
+                                            public void done(List<ParseObject> objects, ParseException e) {
+                                                if (e==null){
+                                                    Intent intent1 = new Intent(MainActivity.this,HeroDetailActivity.class);
+                                                    intent1.putExtra("name", name);
+                                                    startActivity(intent1);
+                                                }else {
+                                                    Snackbar.make(v, "输入错误！", Snackbar.LENGTH_LONG)
+                                                            .setAction("Action", null).show();
+                                                }
+                                            }
+                                        });
                                         break;
                                 }
 

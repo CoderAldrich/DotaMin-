@@ -29,12 +29,17 @@
         </activity>
         <activity
             android:name=".activity.MatchDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity
             android:name=".activity.HeroDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.AboutActivity"></activity>
-        <activity android:name=".activity.FeedBackActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

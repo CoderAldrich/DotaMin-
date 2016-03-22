@@ -99,7 +99,6 @@ public class HistoryFragment extends BaseFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        loadDate(id);
     }
 
     public void loadDate(String s) {
@@ -108,8 +107,6 @@ public class HistoryFragment extends BaseFragment{
             //在此发起网络请求获取数据
             //s是64 bit
             Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
-
-
         }
 
 

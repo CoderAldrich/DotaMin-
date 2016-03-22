@@ -1,7 +1,10 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
@@ -66,6 +69,8 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     LinearLayout linearLayout;
     @Bind(R.id.loading)
     LoadingPopPoint loadingPopPoint;
+    @Bind(R.id.tv_hero_description_title)
+    TextView desTitle;
 
     private String getName;
     private int heroIndex;
@@ -74,6 +79,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     private int skillCount;
     private Map<String,String> skillMap;
     private String[] skillNames;
+    private boolean isVisible;
 
     @Override
     protected void init() {
@@ -90,10 +96,10 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         skillAvater3.setOnClickListener(this);
         skillAvater4.setOnClickListener(this);
         skillAvater5.setOnClickListener(this);
+        desTitle.setOnClickListener(this);
         heroDescription.setMovementMethod(new ScrollingMovementMethod());
-//        skillLayout.setOverScrollMode(View.SCROLL_AXIS_HORIZONTAL);
-
-//        Toast.makeText(this,name,Toast.LENGTH_SHORT).show();
+        isVisible = false;
+        heroDescription.setVisibility(View.GONE);
     }
 
     private int getHeroIndex(String getName) {
@@ -142,9 +148,10 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                         }
                         setSkill(4,skillAvater4);
                         setSkill(3,skillAvater3);
-                        setSkill(2,skillAvater2);
-                        setSkill(1,skillAvater1);
+                        setSkill(2, skillAvater2);
+                        setSkill(1, skillAvater1);
                         skillAvater1.setAlpha(180);
+                        setHeroMain(heroMin);
 
                         int index = 0;
                         for (int j = 0; j < Heroes.HERO_NAME.length; j++) {
@@ -164,6 +171,30 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         });
     }
 
+
+    private void setHeroMain(int heroMin) {
+        switch (heroMin){
+            case 1:
+                String p = heroPower.getText().toString();
+                p = p+"(主)";
+                heroPower.setText(p);
+//                heroPower.setCompoundDrawables(getDrawable(R.drawable.ic_power_main),null,null,null);
+//                heroPower.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_power_main),null);
+                break;
+            case 2:
+                String a = heroPower.getText().toString();
+                a = a+"(主)";
+                heroPower.setText(a);
+//                heroAgile.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_agi_main),null);
+                break;
+            case 3:
+                String k = heroPower.getText().toString();
+                k = k+"(主)";
+                heroPower.setText(k);
+//                heroKnow.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_know_main),null);
+                break;
+        }
+    }
 
 
     @Override
@@ -203,6 +234,20 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.iv_skill_5:
                 setSkill(5,skillAvater5);
                 skillAvater5.setAlpha(180);
+                break;
+            case R.id.tv_hero_description_title:
+                if (isVisible){
+                    //已经显示
+                    heroDescription.setVisibility(View.GONE);
+                    desTitle.setText("背景故事(点击显示)");
+                    isVisible = false;
+                }else {
+                    //已经隐藏
+                    heroDescription.setVisibility(View.VISIBLE);
+                    desTitle.setText("背景故事(点击隐藏)");
+                    isVisible = true;
+                }
+
                 break;
         }
     }
