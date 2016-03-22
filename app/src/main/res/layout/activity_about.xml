@@ -186,25 +186,10 @@
                     android:paddingBottom="5dp"
                     android:text="网络框架：Retrofit + Okhttp + RxJava\n图片加载库：Picasso\n网络数ORM：Parse\n下拉刷新控件：cjj.materialrefeshlayout\n滚动小球loading图：liangpengfei:LoadingPopPoint"/>
             </android.support.v7.widget.CardView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="反馈（BUG）"/>
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="帮助作者"/>
-            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_gain"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_search" />
+        android:src="@drawable/ic_gain" />
 </android.support.design.widget.CoordinatorLayout>
