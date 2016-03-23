@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by levent_j on 16-3-1.
+ * 这里是所有Activity的父类，封装了基本的方法
  */
 public abstract class BaseFragment extends Fragment{
 

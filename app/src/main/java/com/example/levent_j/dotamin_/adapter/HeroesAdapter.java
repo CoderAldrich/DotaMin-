@@ -50,7 +50,7 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.mViewHolde
         if (Heroes.HERO_IMAGE_VERT[position]!=0){
             holder.heroName.setText(heroeslist.get(position));
             int max = 470;
-            int min = 335;
+            int min = 300;
             Random random = new Random();
             int width = random.nextInt(max)%(max-min+1)+min;
             int height = (int) (width*1.16);

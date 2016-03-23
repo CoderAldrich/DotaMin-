@@ -105,7 +105,6 @@ public class HistoryFragment extends BaseFragment{
         id = s;
         if (isLoading||isloadmore){
             //在此发起网络请求获取数据
-            //s是64 bit
             Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
         }
 
@@ -129,7 +128,10 @@ public class HistoryFragment extends BaseFragment{
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Net", "Mess:" + e.getLocalizedMessage());
+            isLoading = false;
+            isloadmore = false;
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
             if (e.getLocalizedMessage().equals("collection == null")){
                 Snackbar.make(getView(), "无比赛信息", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -174,7 +176,6 @@ public class HistoryFragment extends BaseFragment{
                         historyItemBean.setTeam("夜魇");
                     }
                     //查询是否获胜
-                    msg("TAG","i am"+Util.isRadiant(player.getPlayerSlot())+"rad win?"+match.getResult().isRadiantWin());
                     if (
                             (Util.isRadiant(player.getPlayerSlot())&&match.getResult().isRadiantWin())
                                 ||
@@ -218,16 +219,17 @@ public class HistoryFragment extends BaseFragment{
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Net", "HIS_NET_ERROR");
+            isLoading = false;
+            isloadmore = false;
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override
         public void onNext(Match m) {
             if (m==null){
-                msg("Match","no match!");
             }else {
                 match = m;
-                msg("DEBUG","id:"+m.getResult().getMatchId());
             }
 
         }

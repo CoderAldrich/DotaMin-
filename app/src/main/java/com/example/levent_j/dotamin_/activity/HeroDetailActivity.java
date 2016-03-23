@@ -74,7 +74,6 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 
     private String getName;
     private int heroIndex;
-    private int flag = 0;
     private int heroMin;
     private int skillCount;
     private Map<String,String> skillMap;
@@ -83,9 +82,6 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void init() {
-//        //与parse取得链接
-//        Parse.enableLocalDatastore(this);
-//        Parse.initialize(this);
         linearLayout.setVisibility(View.INVISIBLE);
         getName = getIntent().getStringExtra("name");
         heroIndex = getHeroIndex(getName);
@@ -165,7 +161,6 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "网络错误", Toast.LENGTH_SHORT).show();
-                    msg("Hero", "NET_ERROR,msg is" + e.getMessage());
                 }
             }
         });
@@ -178,20 +173,16 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                 String p = heroPower.getText().toString();
                 p = p+"(主)";
                 heroPower.setText(p);
-//                heroPower.setCompoundDrawables(getDrawable(R.drawable.ic_power_main),null,null,null);
-//                heroPower.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_power_main),null);
                 break;
             case 2:
                 String a = heroPower.getText().toString();
                 a = a+"(主)";
                 heroPower.setText(a);
-//                heroAgile.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_agi_main),null);
                 break;
             case 3:
                 String k = heroPower.getText().toString();
                 k = k+"(主)";
                 heroPower.setText(k);
-//                heroKnow.setCompoundDrawables(null,null,getDrawable(R.drawable.ic_know_main),null);
                 break;
         }
     }

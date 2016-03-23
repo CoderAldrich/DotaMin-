@@ -58,6 +58,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARGS = "USER";
     private static final String KEY_USER = "User";
     private String mPage;
+    //一些处理网络请求时用到的实例
     private User muser;
     private User mfrienduser;
     private FriendResult mfriends;
@@ -123,7 +124,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     public void loadFrinedsDate(String id){
         //在此发起网络请求
-        //Api......
         steamID = id;
         flag = true;
         Api.getInstance().getFriends(id, friendResultObserver);
@@ -131,9 +131,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     public void loadMore(String id){
         //在此发起网络请求
-        //Api......
         count=count+1;
-        msg("load","load more,count is "+count);
         steamID = id;
         flag = true;
         Api.getInstance().getFriends(id, friendResultObserver);
@@ -163,7 +161,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private Observer<FriendResult> friendResultObserver = new Observer<FriendResult>() {
         @Override
         public void onCompleted() {
-            msg("Net", "NET_SUCCESS");
             if (flag&&mfriends.getFriendslist().getFriends().size()<count){
                 count = mfriends.getFriendslist().getFriends().size();
                 flag = false;
@@ -175,7 +172,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Net","NET_ERROR");
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override
@@ -183,7 +181,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             if (friendResult!=null){
                 mfriends.setFriendslist(friendResult.getFriendslist());
             }else {
-                msg("Net","friends is null");
             }
         }
     };
@@ -206,7 +203,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onError(Throwable e) {
-
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override
@@ -218,8 +216,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private Observer<User> userObserver = new Observer<User>() {
         @Override
         public void onCompleted() {
-            msg("Net", "NET_SUCCESS");
-            msg("Net","name is "+muser.getResponse().getPlayers().get(0).getPersonaname());
             changeUserView(muser);
             loadingPopPoint.setVisibility(View.INVISIBLE);
             muser=null;
@@ -228,16 +224,15 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Net","NET_ERROR");
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override
         public void onNext(User user) {
             if (user!=null){
-                msg("Net","size is"+user.getResponse().getPlayers().size());
                 muser.setResponse(user.getResponse());
             }else {
-                msg("Net","user is null");
             }
 
         }

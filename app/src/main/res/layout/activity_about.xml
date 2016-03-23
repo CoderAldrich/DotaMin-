@@ -98,9 +98,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-
-
                     <LinearLayout
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
@@ -154,6 +151,33 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="爬取数据"
+                                android:textColor="@color/colorGray"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="140px"
+                            android:layout_height="140px"
+                            android:background="@drawable/ic_cyl" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="20dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cyl"
+                                android:textSize="9pt" />
+                            <TextView
+                                android:textSize="8pt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="美工妹纸"
                                 android:textColor="@color/colorGray"/>
                         </LinearLayout>
 

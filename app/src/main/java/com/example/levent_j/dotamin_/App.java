@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 
 /**
  * Created by levent_j on 16-3-15.
+ * 在这里先把parse配置好
  */
 public class App extends Application{
     @Override

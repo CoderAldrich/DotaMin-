@@ -1,5 +1,6 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +18,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity
     public MyFragmentAdapter myFragmentAdapter;
     private static final String[] TITLE = {"User","History","Hero"};
     private int[] tabicon = {R.drawable.ic_user,R.drawable.ic_history,R.drawable.ic_dota};
-    private int searchFlag;
+    private int searchType;
     private String searchTitle;
 
     @Override
@@ -88,23 +88,16 @@ public class MainActivity extends BaseActivity
         //在此处理显示好友信息界面
         String s = getIntent().getStringExtra("id");
         if (s==null){
-            msg("Intent","First come");
-
+            //第一次开启MainActivity
         }else {
-            msg("Intent","again and s is:"+s);
+            //通过点击好友开启新的MainActivity时要加载他的好友列表和比赛历史
             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
             userFragment.loadUserDate(s);
             userFragment.loadFrinedsDate(s);
             userFragment.flag=true;
             HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
-            msg("tiao",""+historyFragment);
-            msg("tiao",""+s);
             historyFragment.loadDate(Util.get32Id(Long.parseLong(s)));
         }
-
-        //parse
-
-
     }
 
     @Override
@@ -143,6 +136,9 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new AlertDialog.Builder(this)
+                    .setMessage("请点击下方“搜索”按钮来，输入自己的dota2ID或比赛ID")
+                    .show();
             return true;
         }
 
@@ -168,7 +164,6 @@ public class MainActivity extends BaseActivity
         }else if (id == R.id.nav_feed){
             startActivity(new Intent(this, FeedActivity.class));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -180,13 +175,13 @@ public class MainActivity extends BaseActivity
             case R.id.fab:
                 final String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
                 if (s.equals("User")){
-                    searchFlag = 1;
+                    searchType = 1;
                     searchTitle = "steam id";
                 }else if (s.equals("History")){
-                    searchFlag = 2;
+                    searchType = 2;
                     searchTitle = "比赛 id";
                 }else {
-                    searchFlag = 3;
+                    searchType = 3;
                     searchTitle = "英雄名称";
                 }
                 new InputDialog.Builder(this)
@@ -196,7 +191,7 @@ public class MainActivity extends BaseActivity
                         .setPositiveButton("搜索", new InputDialog.ButtonActionListener() {
                             @Override
                             public void onClick(CharSequence inputText) {
-                                switch (searchFlag){
+                                switch (searchType){
                                     case 1:
                                         if (inputText.length() == 0) {
                                             Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
@@ -221,13 +216,16 @@ public class MainActivity extends BaseActivity
                                         break;
                                     case 3:
                                         //搜索英雄的活动
+                                        Snackbar.make(v, "正在搜索,请稍后", Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
                                         final String name = inputText.toString().trim();
                                         ParseQuery<ParseObject> query = ParseQuery.getQuery("Hero");
                                         query.whereEqualTo("heroName", name);
                                         query.findInBackground(new FindCallback<ParseObject>() {
                                             @Override
                                             public void done(List<ParseObject> objects, ParseException e) {
-                                                if (e==null){
+                                                if (e==null&&objects.size()!=0){
+
                                                     Intent intent1 = new Intent(MainActivity.this,HeroDetailActivity.class);
                                                     intent1.putExtra("name", name);
                                                     startActivity(intent1);
@@ -249,9 +247,6 @@ public class MainActivity extends BaseActivity
                             }
                         })
                         .show();
-
-
-                msg("url", "url is http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=A7CAFA33562B6310ACDC0C3864B9DC1B&steamids=" + Util.get64Id(129639720));
                 break;
         }
 

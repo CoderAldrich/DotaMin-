@@ -11,6 +11,11 @@ import com.parse.ParseObject;
 
 import butterknife.ButterKnife;
 
+/**
+ * Created by levent_j on 16-3-1.
+ * 这里是所有Activity的父类，封装了基本的方法
+ */
+
 public abstract class BaseActivity extends AppCompatActivity {
 
 
@@ -21,28 +26,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
         setListener();
-//
-//        Parse.enableLocalDatastore(this);
-//
-//        Parse.initialize(this);
-
-//
-//        for (int i=0;i< Heroes.HERO_NAME.length;i++){
-//            ParseObject testObject = new ParseObject("Hero");
-//            testObject.put("heroName",Heroes.HERO_NAME[i]);
-//            testObject.saveInBackground();
-//            Log.d("Parse",Heroes.HERO_NAME[i]);
-//        }
-
-
     }
 
     protected abstract void init();
 
+    /**封装了设置布局文件的方法
+     * @return
+     */
     protected abstract int getLayoutId();
 
     protected abstract void setListener();
 
+    /**封装了Log方法，使用起来更方便了
+     * @param tag
+     * @param s
+     */
     protected void msg(String tag,String s){
         Log.d(tag, s);
     }

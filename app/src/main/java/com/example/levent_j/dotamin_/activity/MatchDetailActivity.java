@@ -1,23 +1,16 @@
 package com.example.levent_j.dotamin_.activity;
 
-import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.DetailsAdapter;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.net.Api;
 import com.example.levent_j.dotamin_.pojo.Item;
-import com.example.levent_j.dotamin_.pojo.Items;
 import com.example.levent_j.dotamin_.pojo.Match;
 import com.example.levent_j.dotamin_.pojo.MatchPlayer;
-import com.example.levent_j.dotamin_.pojo.MatchResult;
 import com.example.levent_j.dotamin_.pojo.PlayerDetailBean;
 import com.example.levent_j.dotamin_.utils.Util;
 
@@ -35,8 +28,6 @@ import rx.Observer;
 public class MatchDetailActivity extends BaseActivity {
     @Bind(R.id.details_expandablelistview)
     ExpandableListView expandableListView;
-//    @Bind(R.id.tv_match_id)
-//    TextView matchId;
     @Bind(R.id.tv_match_lobby)
     TextView matchLobby;
     @Bind(R.id.tv_match_mode)
@@ -68,7 +59,6 @@ public class MatchDetailActivity extends BaseActivity {
     public List<MatchPlayer> father;
     public Map<MatchPlayer,List<PlayerDetailBean>> map;
     private DetailsAdapter detailsAdapter;
-    private MatchResult matchResult;
     private Match match;
     private Map<Integer,String> itemUrl;
     private Item item;
@@ -79,13 +69,9 @@ public class MatchDetailActivity extends BaseActivity {
         matchID = getIntent().getStringExtra("matchid");
         msg("Details", "intent ,id is" + matchID);
         match = new Match();
-        //发起网络请求
-//        Api.getInstance().getMatchDeatials(matchID, matchObserver);
-
         Api.getInstance().getItems(itemObserver);
         father = new ArrayList<>();
         map = new HashMap<>();
-//        for (int i=0;i<1500)
         itemUrl = new HashMap<>();
         item = new Item();
     }
@@ -180,23 +166,18 @@ public class MatchDetailActivity extends BaseActivity {
     private Observer<Match> matchObserver = new Observer<Match>() {
         @Override
         public void onCompleted() {
-            msg("Details","size is"+match.getResult().getPlayers().size());
             initListData();
         }
 
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("Details","ERROR");
         }
 
         @Override
         public void onNext(Match m) {
             if (m.getResult()==null){
-                msg("Details","NO MATCH RESULT!!!");
             }else {
-//                match.setResult(m.getResult());
-                msg("Details",""+m.getResult().getPlayers().size());
                 match.setResult(m.getResult());
             }
 
@@ -212,20 +193,17 @@ public class MatchDetailActivity extends BaseActivity {
                 itemUrl.put(item.getItemResult().getItmes().get(i).getId(),url);
             }
             Api.getInstance().getMatchDeatials(matchID, matchObserver);
-            msg("item",""+itemUrl.get(1));
 
         }
 
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            msg("item","error:"+e.getLocalizedMessage());
         }
 
         @Override
         public void onNext(Item i) {
             item.setItemResult(i.getItemResult());
-            msg("item",""+item.getItemResult().getItmes().size());
         }
     };
 }

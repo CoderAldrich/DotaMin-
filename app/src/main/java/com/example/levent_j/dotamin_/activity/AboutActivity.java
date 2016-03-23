@@ -52,12 +52,9 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fab_gain:
-                ImageView imageView = new ImageView(this);
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_gain_2));
-
+                View view = View.inflate(this,R.layout.item_gain,null);
                 new AlertDialog.Builder(this)
-                        .setIcon(getResources().getDrawable(R.drawable.ic_gain))
-                        .setView(imageView)
+                        .setView(view)
                         .setPositiveButton("保存", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
