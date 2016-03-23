@@ -45,6 +45,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     private void saveImage(){
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_gain_2);
         MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "title", "description");
+        Toast.makeText(this,"图片已保存至本地相册",Toast.LENGTH_SHORT).show();
     }
 
     @Override

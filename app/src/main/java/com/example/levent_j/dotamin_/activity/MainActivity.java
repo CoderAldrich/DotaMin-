@@ -164,8 +164,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_data) {
             Toast.makeText(this,"抱歉，该功能暂未实现",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
-            msg("item", "nav_send");
             startActivity(new Intent(this, AboutActivity.class));
+        }else if (id == R.id.nav_feed){
+            startActivity(new Intent(this, FeedActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
