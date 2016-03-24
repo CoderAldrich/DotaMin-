@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.levent_j.dotamin_.utils.Heroes;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 import butterknife.ButterKnife;
 

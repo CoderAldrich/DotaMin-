@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity
                 final String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
                 if (s.equals("User")){
                     searchType = 1;
-                    searchTitle = "steam id";
+                    searchTitle = "dota2 id";
                 }else if (s.equals("History")){
                     searchType = 2;
                     searchTitle = "比赛 id";
