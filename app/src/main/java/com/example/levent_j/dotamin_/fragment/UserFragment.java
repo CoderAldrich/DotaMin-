@@ -203,8 +203,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onError(Throwable e) {
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+//            materialRefreshLayout.finishRefresh();
+//            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override
@@ -218,7 +218,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         public void onCompleted() {
             changeUserView(muser);
             loadingPopPoint.setVisibility(View.INVISIBLE);
-            muser=null;
         }
 
         @Override

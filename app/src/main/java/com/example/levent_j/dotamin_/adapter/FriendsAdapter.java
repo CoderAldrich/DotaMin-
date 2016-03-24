@@ -57,9 +57,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
     public void onBindViewHolder(mViewHolder holder, int position) {
         //更新各个view
         //发起网络请求，获取用户数据
-//        if (!"离线".equals(Util.getState(playerArrayList.get(position).getPersonastate())){
-//
-//        }
         holder.name.setText(playerArrayList.get(position).getPersonaname());
         holder.state.setText(Util.getState(playerArrayList.get(position).getPersonastate()));
         Picasso.with(context).load(playerArrayList.get(position).getAvatar()).into(holder.avater);
@@ -73,9 +70,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.mViewHol
     }
 
     public void updateFriends(List<Player> players,boolean isClear){
-//        if (isClear){
-//            playerArrayList.clear();
-//        }
         playerArrayList.clear();
         playerArrayList .addAll(players);
         notifyDataSetChanged();

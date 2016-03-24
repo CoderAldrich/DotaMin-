@@ -29,11 +29,17 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
     }
 
 
     protected void msg(String tag,String s){
         Log.d(tag,s);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

@@ -146,8 +146,7 @@ public class HistoryFragment extends BaseFragment{
 
         @Override
         public void onNext(MatchesHistory matchesHistory) {
-            if (matchesHistory==null){
-            }else {
+            if (matchesHistory!=null){
                 historyItemBeans.clear();
                 mymatchesHistory = matchesHistory;
             }
@@ -199,8 +198,6 @@ public class HistoryFragment extends BaseFragment{
                 historyAdapter.updateHistoryList(historyItemBeans);
                 historyrecyclerView.setAdapter(historyAdapter);
                 matchesList.clear();
-                mymatchesHistory = null;
-                match = null;
                 if (isloadmore){
                     materialRefreshLayout.finishRefreshLoadMore();
                     isloadmore = false;
@@ -211,8 +208,10 @@ public class HistoryFragment extends BaseFragment{
                 }
             }else {
                 hisIndex++;
-                match = null;
-                Api.getInstance().getMatchDeatials(""+matchesList.get(hisIndex).getMatch_id(), matchObserver);
+                if (matchesList.size()>0){
+                    Api.getInstance().getMatchDeatials(""+matchesList.get(hisIndex).getMatch_id(), matchObserver);
+                }
+
             }
         }
 

@@ -4,6 +4,7 @@ package com.example.levent_j.dotamin_.base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import butterknife.ButterKnife;
@@ -14,6 +15,8 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private long lastExitTime = 0;
 
 
     @Override
@@ -40,5 +43,16 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void msg(String tag,String s){
         Log.d(tag, s);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if ((System.currentTimeMillis() - lastExitTime) > 3000) {
+            Toast.makeText(this,"重复操作退出应用",Toast.LENGTH_SHORT).show();
+            lastExitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }
