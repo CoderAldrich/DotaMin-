@@ -188,7 +188,6 @@ public class HistoryFragment extends BaseFragment{
                     historyItemBean.setK(player.getKills());
                     historyItemBean.setD(player.getDeaths());
                     historyItemBean.setA(player.getAssists());
-
                     break;
                 }
             }
@@ -227,6 +226,7 @@ public class HistoryFragment extends BaseFragment{
         @Override
         public void onNext(Match m) {
             if (m==null){
+                msg("HeroFragment","no match");
             }else {
                 match = m;
             }
