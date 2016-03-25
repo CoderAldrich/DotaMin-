@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cjj.MaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<FrameLayout
     android:layout_height="match_parent"
-    android:id="@+id/refresh_history"
-    app:isLoadMore="true"
-    app:overlay="false"
-    app:wave_show="true"
-    app:wave_color="@color/colorPrimary"
-    app:wave_height_type="normal">
-
-    <android.support.v7.widget.RecyclerView
-        android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12pt"
+        android:text="暂无记录"
+        android:id="@+id/tv_his_no_content"
+        android:textColor="@color/colorGray"/>
+    <com.cjj.MaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_view_history"
-        android:clipToPadding="true"
-        android:scrollbars="none"/>
+        android:id="@+id/refresh_history"
+        app:isLoadMore="true"
+        app:overlay="false"
+        app:wave_show="true"
+        app:wave_color="@color/colorPrimary"
+        app:wave_height_type="normal">
 
-</com.cjj.MaterialRefreshLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view_history"
+            android:clipToPadding="true"
+            android:scrollbars="none"/>
+
+    </com.cjj.MaterialRefreshLayout>
+</FrameLayout>
+

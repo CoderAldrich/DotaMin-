@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -19,6 +20,7 @@ import com.example.levent_j.dotamin_.pojo.MatchPlayer;
 import com.example.levent_j.dotamin_.pojo.Matches;
 import com.example.levent_j.dotamin_.pojo.MatchesHistory;
 import com.example.levent_j.dotamin_.utils.Heroes;
+import com.example.levent_j.dotamin_.utils.SpaceItemDecoration;
 import com.example.levent_j.dotamin_.utils.Util;
 
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class HistoryFragment extends BaseFragment{
     RecyclerView historyrecyclerView;
     @Bind(R.id.refresh_history)
     MaterialRefreshLayout materialRefreshLayout;
+    @Bind(R.id.tv_his_no_content)
+    TextView noContent;
 
     private static final String ARGS = "ARGS";
     private static final String KEY_HISTORY = "History";
@@ -49,6 +53,8 @@ public class HistoryFragment extends BaseFragment{
     private boolean isLoading;
     private boolean isloadmore;
     private int hisIndex=0;
+    private int spacingInPixels;
+
 
     public static HistoryFragment newInstance(String title) {
 
@@ -72,6 +78,8 @@ public class HistoryFragment extends BaseFragment{
         count = 10;
         isLoading = true;
         isloadmore = false;
+        spacingInPixels = getResources().getDimensionPixelSize(R.dimen.space);
+
     }
 
     @Override
@@ -79,6 +87,9 @@ public class HistoryFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         historyrecyclerView.setLayoutManager(new LinearLayoutManager(historyrecyclerView.getContext()));
         historyrecyclerView.setItemAnimator(new DefaultItemAnimator());
+        historyrecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        historyrecyclerView.setHasFixedSize(true);
+
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -102,6 +113,7 @@ public class HistoryFragment extends BaseFragment{
     }
 
     public void loadDate(String s) {
+        noContent.setText("请等待");
         id = s;
         if (isLoading||isloadmore){
             //在此发起网络请求获取数据
@@ -141,6 +153,7 @@ public class HistoryFragment extends BaseFragment{
                 Snackbar.make(getView(), "网络链接失败，请重试", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
+            noContent.setText("网络错误");
 
         }
 
@@ -205,6 +218,7 @@ public class HistoryFragment extends BaseFragment{
                     materialRefreshLayout.finishRefresh();
                     isLoading = false;
                 }
+                noContent.setVisibility(View.GONE);
             }else {
                 hisIndex++;
                 if (matchesList.size()>0){

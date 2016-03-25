@@ -58,6 +58,8 @@ public class MainActivity extends BaseActivity
     private int[] tabicon = {R.drawable.ic_user,R.drawable.ic_history,R.drawable.ic_dota};
     private int searchType;
     private String searchTitle;
+    private long lastExitTime = 0;
+
 
     @Override
     protected void init() {
@@ -112,11 +114,17 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if ((System.currentTimeMillis() - lastExitTime) > 3000) {
+                Toast.makeText(this,"重复操作退出应用",Toast.LENGTH_SHORT).show();
+                lastExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
         }
     }
 
@@ -137,7 +145,7 @@ public class MainActivity extends BaseActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             new AlertDialog.Builder(this)
-                    .setMessage("请点击下方“搜索”按钮来，输入自己的dota2ID或比赛ID")
+                    .setMessage("请点击下方“搜索”按钮并输入自己的dota2ID（如：129639720）/比赛ID（如：2217239289）/英雄名（如：敌法师）")
                     .show();
             return true;
         }
@@ -275,6 +283,7 @@ public class MainActivity extends BaseActivity
         public int getCount() {
             return titleList.size();
         }
+
 
         public void addFragment(Fragment fragment,String title){
             fragmentList.add(fragment);

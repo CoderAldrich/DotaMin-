@@ -2,13 +2,16 @@ package com.example.levent_j.dotamin_.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
@@ -27,6 +30,10 @@ import butterknife.Bind;
 public class AboutActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.fab_gain)
     FloatingActionButton gain;
+    @Bind(R.id.layout_lwj)
+    LinearLayout layoutlwj;
+    @Bind(R.id.layout_hjq)
+    LinearLayout layouthjq;
 
     @Override
     protected void init() {
@@ -40,7 +47,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void setListener() {
-
+        layoutlwj.setOnClickListener(this);
+        layouthjq.setOnClickListener(this);
     }
     private void saveImage(){
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_gain_2);
@@ -69,6 +77,20 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
                         })
                         .show();
 
+                break;
+            case R.id.layout_lwj:
+                Intent intent1 = new Intent();
+                intent1.setAction("android.intent.action.VIEW");
+                Uri content_url_lwj = Uri.parse("https://github.com/Levent-J");
+                intent1.setData(content_url_lwj);
+                startActivity(intent1);
+                break;
+            case R.id.layout_hjq:
+                Intent intent2 = new Intent();
+                intent2.setAction("android.intent.action.VIEW");
+                Uri content_url_hjq = Uri.parse("https://github.com/AwesomeIcon");
+                intent2.setData(content_url_hjq);
+                startActivity(intent2);
                 break;
         }
     }

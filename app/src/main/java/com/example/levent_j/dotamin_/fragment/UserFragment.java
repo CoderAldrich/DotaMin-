@@ -54,6 +54,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     RecyclerView recyclerView_friends;
     @Bind(R.id.friends_refresh)
     MaterialRefreshLayout materialRefreshLayout;
+    @Bind(R.id.tv_user_no_content)
+    TextView noContent;
 
     private static final String ARGS = "USER";
     private static final String KEY_USER = "User";
@@ -123,6 +125,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void loadFrinedsDate(String id){
+        noContent.setText("请等待");
         //在此发起网络请求
         steamID = id;
         flag = true;
@@ -161,9 +164,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private Observer<FriendResult> friendResultObserver = new Observer<FriendResult>() {
         @Override
         public void onCompleted() {
-            if (flag&&mfriends.getFriendslist().getFriends().size()<count){
+            if (mfriends.getFriendslist().getFriends().size()<count){
                 count = mfriends.getFriendslist().getFriends().size();
-                flag = false;
+//                flag = false;
             }
             Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(userIndex).getSteamid(), userFriendObserver);
             materialRefreshLayout.finishRefreshLoadMore();
@@ -174,6 +177,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             e.printStackTrace();
             materialRefreshLayout.finishRefresh();
             materialRefreshLayout.finishRefreshLoadMore();
+            noContent.setText("网络错误");
         }
 
         @Override
@@ -195,6 +199,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 materialRefreshLayout.finishRefresh();
                 userIndex = 0;
                 basePlayerList.clear();
+                noContent.setVisibility(View.GONE);
             }else {
                 userIndex++;
                 Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(userIndex).getSteamid(), userFriendObserver);
@@ -203,8 +208,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onError(Throwable e) {
-//            materialRefreshLayout.finishRefresh();
-//            materialRefreshLayout.finishRefreshLoadMore();
+            materialRefreshLayout.finishRefresh();
+            materialRefreshLayout.finishRefreshLoadMore();
         }
 
         @Override

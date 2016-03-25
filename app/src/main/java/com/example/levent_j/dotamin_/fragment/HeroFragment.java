@@ -12,6 +12,8 @@ import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.HeroesAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
 import com.example.levent_j.dotamin_.utils.Heroes;
+import com.example.levent_j.dotamin_.utils.SGDecoration;
+import com.example.levent_j.dotamin_.utils.SpaceItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class HeroFragment extends BaseFragment{
     private int count;
     private boolean isloading;
     private boolean isloadmore;
+    private int spacingInPixels;
+
 
     public static HeroFragment newInstance(String title) {
 
@@ -54,12 +58,15 @@ public class HeroFragment extends BaseFragment{
         isloadmore = false;
         heroesAdapter = new HeroesAdapter(getActivity());
         count = 10;
+        spacingInPixels = getResources().getDimensionPixelSize(R.dimen.hero);
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new SGDecoration(spacingInPixels));
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
