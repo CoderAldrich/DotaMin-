@@ -50,7 +50,7 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.mViewHolde
         if (Heroes.HERO_IMAGE_VERT[position]!=0){
             holder.heroName.setText(heroeslist.get(position));
             int max = 470;
-            int min = 270;
+            int min = 350;
             Random random = new Random();
             int width = random.nextInt(max)%(max-min+1)+min;
             int height = (int) (width*1.16);
@@ -83,7 +83,7 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.mViewHolde
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"txt:"+heroeslist.get(getPosition())+"pos:"+getPosition(),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"txt:"+heroeslist.get(getPosition())+"pos:"+getPosition(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HeroDetailActivity.class);
                     intent.putExtra("name",heroeslist.get(getPosition()));
                     context.startActivity(intent);
