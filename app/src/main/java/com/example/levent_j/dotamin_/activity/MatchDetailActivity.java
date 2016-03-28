@@ -82,10 +82,10 @@ public class MatchDetailActivity extends BaseActivity {
         matchTime.setText(Util.Second2Minute(Integer.parseInt(match.getResult().getDuration()))+"分钟");
         matchLobby.setText(Util.getLobby(match.getResult().getLobbyType()));
         matchMode.setText(Util.getMode(match.getResult().getGameMode()));
-        radTower.setText("防御塔数："+Util.getTowerNumber(match.getResult().getTower_status_radiant()));
-        radBar.setText("兵营数："+Util.getBarNumber(match.getResult().getBarracks_status_radiant()));
-        dirWower.setText("防御塔数："+Util.getTowerNumber(match.getResult().getTower_status_dire()));
-        dirBar.setText("兵营数：" + Util.getBarNumber(match.getResult().getBarracks_status_dire()));
+        radTower.setText("防御塔："+Util.getTowerNumber(match.getResult().getTower_status_radiant()));
+        radBar.setText("兵营："+Util.getBarNumber(match.getResult().getBarracks_status_radiant()));
+        dirWower.setText("防御塔："+Util.getTowerNumber(match.getResult().getTower_status_dire()));
+        dirBar.setText("兵营：" + Util.getBarNumber(match.getResult().getBarracks_status_dire()));
 
         if (match.getResult().isRadiantWin()){
             radName.setText("天辉（胜）");
@@ -107,8 +107,8 @@ public class MatchDetailActivity extends BaseActivity {
                 DirKill = DirKill + match.getResult().getPlayers().get(i).getKills();
             }
         }
-        radKills.setText("人头:"+RadKill);
-        dirKills.setText("人头:"+DirKill);
+        radKills.setText("击杀:"+RadKill);
+        dirKills.setText("击杀:"+DirKill);
 
 
         for (int j=0;j<father.size();j++){

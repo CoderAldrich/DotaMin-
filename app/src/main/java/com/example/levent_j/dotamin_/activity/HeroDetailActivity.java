@@ -170,19 +170,13 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     private void setHeroMain(int heroMin) {
         switch (heroMin){
             case 1:
-                String p = heroPower.getText().toString();
-                p = p+"(主)";
-                heroPower.setText(p);
+                heroPower.setText(heroPower.getText().toString().concat("(主)"));
                 break;
             case 2:
-                String a = heroPower.getText().toString();
-                a = a+"(主)";
-                heroPower.setText(a);
+                heroAgile.setText(heroAgile.getText().toString().concat("(主)"));
                 break;
             case 3:
-                String k = heroPower.getText().toString();
-                k = k+"(主)";
-                heroPower.setText(k);
+                heroKnow.setText(heroKnow.getText().toString().concat("(主)"));
                 break;
         }
     }

@@ -126,7 +126,13 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         herokill.setText("击杀："+matchPlayer.getKills());
         herodeath.setText("死亡："+matchPlayer.getDeaths());
         heroass.setText("助攻：" + matchPlayer.getAssists());
+
         Picasso.with(context).load(Heroes.HERO_IMAGE_FULL[matchPlayer.getHero_id() - 1]).into(avater);
+        if ("天辉".equals(heroteam.getText().toString())){
+            heroteam.setTextColor(context.getResources().getColor(R.color.material_green));
+        }else {
+            heroteam.setTextColor(context.getResources().getColor(R.color.material_red));
+        }
         return convertView;
     }
 

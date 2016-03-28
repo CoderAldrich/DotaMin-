@@ -56,6 +56,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.mViewHol
         holder.team.setText(bean.getTeam());
         holder.team.setText(bean.getTeam());
         holder.win.setText(bean.isWin());
+        if ("获胜".equals(bean.isWin())){
+            holder.win.setTextColor(context.getResources().getColor(R.color.material_green));
+        }else {
+            holder.win.setTextColor(context.getResources().getColor(R.color.material_red));
+        }
         holder.k.setText("K:"+bean.getK());
         holder.d.setText("D:"+bean.getD());
         holder.a.setText("A:"+bean.getA());
