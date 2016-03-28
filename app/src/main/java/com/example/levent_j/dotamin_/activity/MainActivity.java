@@ -182,10 +182,10 @@ public class MainActivity extends BaseActivity
         switch (v.getId()){
             case R.id.fab:
                 final String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
-                if (s.equals("User")){
+                if (s.equals(TITLE[0])){
                     searchType = 1;
                     searchTitle = "dota2 id";
-                }else if (s.equals("History")){
+                }else if (s.equals(TITLE[1])){
                     searchType = 2;
                     searchTitle = "比赛 id";
                 }else {
@@ -201,26 +201,35 @@ public class MainActivity extends BaseActivity
                             public void onClick(CharSequence inputText) {
                                 switch (searchType){
                                     case 1:
-                                        if (inputText.length() == 0) {
-                                            Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
-                                                    .setAction("Action", null).show();
-                                        } else {
-                                            String s = inputText.toString().trim();
-                                            UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
-                                            userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
-                                            userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
-                                            userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
-                                            //在此同时加载比赛记录列表
-                                            HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
-                                            historyFragment.loadDate(s);
-                                        }
+                                            try {
+                                                String s = inputText.toString().trim();
+                                                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+                                                userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+                                                userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
+                                                userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
+                                                //在此同时加载比赛记录列表
+                                                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+                                                historyFragment.loadDate(s);
+                                            }catch (NumberFormatException e){
+                                                Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
+                                                        .setAction("Action", null).show();
+                                                msg("debug",e.getMessage());
+                                            }
+
                                         break;
                                     case 2:
                                         //搜索比赛的活动
-                                        String s = inputText.toString().trim();
-                                        final Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
-                                        intent.putExtra("matchid",s);
-                                        startActivity(intent);
+                                        try {
+                                            String s = inputText.toString().trim();
+                                            final Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
+                                            intent.putExtra("matchid",s);
+                                            startActivity(intent);
+                                        }catch (NumberFormatException e){
+                                            Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
+                                                    .setAction("Action", null).show();
+                                            msg("debug",e.getMessage());
+                                        }
+
                                         break;
                                     case 3:
                                         //搜索英雄的活动

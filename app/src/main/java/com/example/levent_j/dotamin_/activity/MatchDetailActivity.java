@@ -1,8 +1,10 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.DetailsAdapter;
@@ -176,7 +178,10 @@ public class MatchDetailActivity extends BaseActivity {
 
         @Override
         public void onNext(Match m) {
-            if (m.getResult()==null){
+            if (m.getResult().getPlayers()==null){
+
+                Toast.makeText(getApplicationContext(),"未找到任何比赛信息",Toast.LENGTH_SHORT).show();
+                finish();
             }else {
                 match.setResult(m.getResult());
             }
