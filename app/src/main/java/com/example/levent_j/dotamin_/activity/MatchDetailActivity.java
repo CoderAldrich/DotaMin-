@@ -1,7 +1,11 @@
 package com.example.levent_j.dotamin_.activity;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +31,7 @@ import rx.Observer;
 /**
  * Created by levent_j on 16-3-7.
  */
-public class MatchDetailActivity extends BaseActivity {
+public class MatchDetailActivity extends BaseActivity implements GestureDetector.OnGestureListener, View.OnTouchListener {
     @Bind(R.id.details_expandablelistview)
     ExpandableListView expandableListView;
     @Bind(R.id.tv_match_lobby)
@@ -54,6 +58,8 @@ public class MatchDetailActivity extends BaseActivity {
     TextView dirName;
     @Bind(R.id.toolbar_detail)
     Toolbar toolbar;
+    @Bind(R.id.layout_match_detail)
+    CoordinatorLayout coordinatorLayout;
 
 
 
@@ -64,6 +70,9 @@ public class MatchDetailActivity extends BaseActivity {
     private Match match;
     private Map<Integer,String> itemUrl;
     private Item item;
+    GestureDetector gestureDetector;
+    private int verticalMinDistance = 20;
+    private int minVelocity = 0;
 
     @Override
     protected void init() {
@@ -76,6 +85,9 @@ public class MatchDetailActivity extends BaseActivity {
         map = new HashMap<>();
         itemUrl = new HashMap<>();
         item = new Item();
+        gestureDetector = new GestureDetector(this);
+        coordinatorLayout.setOnTouchListener(this);
+        coordinatorLayout.setLongClickable(true);
     }
 
     private void initListData() {
@@ -211,4 +223,45 @@ public class MatchDetailActivity extends BaseActivity {
             item.setItemResult(i.getItemResult());
         }
     };
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (e1.getX() - e2.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
+            //左
+        } else if (e2.getX() - e1.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
+            //右
+            finish();
+        }
+
+        return false;    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
 }

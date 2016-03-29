@@ -7,8 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,16 +30,25 @@ import butterknife.Bind;
 /**
  * Created by levent_j on 16-3-20.
  */
-public class AboutActivity extends BaseActivity implements View.OnClickListener {
+public class AboutActivity extends BaseActivity implements View.OnClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     @Bind(R.id.fab_gain)
     FloatingActionButton gain;
     @Bind(R.id.layout_lwj)
     LinearLayout layoutlwj;
     @Bind(R.id.layout_hjq)
     LinearLayout layouthjq;
+    @Bind(R.id.layout_about)
+    CoordinatorLayout coordinatorLayout;
+
+    GestureDetector gestureDetector;
+    private int verticalMinDistance = 20;
+    private int minVelocity = 0;
 
     @Override
     protected void init() {
+        gestureDetector = new GestureDetector(this);
+        coordinatorLayout.setOnTouchListener(this);
+        coordinatorLayout.setLongClickable(true);
         gain.setOnClickListener(this);
     }
 
@@ -93,5 +105,46 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intent2);
                 break;
         }
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (e1.getX() - e2.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
+            //左
+        } else if (e2.getX() - e1.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
+            //右
+            finish();
+        }
+
+        return false;    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
     }
 }
