@@ -125,7 +125,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void loadFrinedsDate(String id){
-        noContent.setText("请等待");
+//        noContent.setText("请等待");
         steamID = id;
         flag = true;
         Api.getInstance().getFriends(id, friendResultObserver);

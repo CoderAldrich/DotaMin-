@@ -26,6 +26,7 @@ import com.example.levent_j.dotamin_.fragment.HeroFragment;
 import com.example.levent_j.dotamin_.fragment.HistoryFragment;
 import com.example.levent_j.dotamin_.fragment.UserFragment;
 import com.example.levent_j.dotamin_.utils.InputDialog;
+import com.example.levent_j.dotamin_.utils.PreferceService;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -33,7 +34,9 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 
@@ -59,6 +62,8 @@ public class MainActivity extends BaseActivity
     private int searchType;
     private String searchTitle;
     private long lastExitTime = 0;
+    private PreferceService preferceService;
+    private boolean isFirst;
 
 
     @Override
@@ -75,11 +80,12 @@ public class MainActivity extends BaseActivity
 
         myFragmentAdapter.addFragment(UserFragment.newInstance(TITLE[0]),TITLE[0]);
         myFragmentAdapter.addFragment(HistoryFragment.newInstance(TITLE[1]),TITLE[1]);
-        myFragmentAdapter.addFragment(HeroFragment.newInstance(TITLE[2]),TITLE[2]);
+        myFragmentAdapter.addFragment(HeroFragment.newInstance(TITLE[2]), TITLE[2]);
         viewPager.setAdapter(myFragmentAdapter);
         viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
 
         //为tab的标题设置icon
         for (int i=0;i<tabLayout.getTabCount();i++){
@@ -87,11 +93,29 @@ public class MainActivity extends BaseActivity
         }
 
 
+
         //在此处理显示好友信息界面
         String s = getIntent().getStringExtra("id");
         if (s==null){
+            isFirst = true;
             //第一次开启MainActivity
+            // 做本地缓存
+            preferceService = new PreferceService(this);
+            Map<String,String> params = preferceService.getPreferences();
+            String id = params.get(PreferceService.KEY);
+            if (!id.equals("null")){
+                msg("save","share id is"+id);
+                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+                userFragment.loadUserDate(Util.get64Id(Long.parseLong(id)));
+                userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(id)));
+                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+                historyFragment.setId(id);
+                historyFragment.loadDate(id);
+            }
+
+            msg("save","main id :"+id);
         }else {
+            isFirst = false;
             //通过点击好友开启新的MainActivity时要加载他的好友列表和比赛历史
             UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
             userFragment.loadUserDate(s);
@@ -101,6 +125,7 @@ public class MainActivity extends BaseActivity
             historyFragment.loadDate(Util.get32Id(Long.parseLong(s)));
         }
     }
+
 
     @Override
     protected int getLayoutId() {
@@ -119,12 +144,18 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if ((System.currentTimeMillis() - lastExitTime) > 3000) {
-                Toast.makeText(this,"重复操作退出应用",Toast.LENGTH_SHORT).show();
-                lastExitTime = System.currentTimeMillis();
-            } else {
+            if (isFirst){
+                if ((System.currentTimeMillis() - lastExitTime) > 3000) {
+                    Toast.makeText(this,"重复操作退出应用",Toast.LENGTH_SHORT).show();
+                    lastExitTime = System.currentTimeMillis();
+                } else {
+                    finish();
+                }
+            }else {
                 finish();
             }
+
+
         }
     }
 
@@ -203,13 +234,14 @@ public class MainActivity extends BaseActivity
                                     case 1:
                                             try {
                                                 String s = inputText.toString().trim();
-                                                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
-                                                userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
-                                                userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
-                                                userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
-                                                //在此同时加载比赛记录列表
-                                                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
-                                                historyFragment.loadDate(s);
+                                                loadAllDate(s);
+//                                                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+//                                                userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+//                                                userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
+//                                                userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
+//                                                //在此同时加载比赛记录列表
+//                                                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+//                                                historyFragment.loadDate(s);
                                             }catch (NumberFormatException e){
                                                 Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
                                                         .setAction("Action", null).show();
@@ -267,6 +299,27 @@ public class MainActivity extends BaseActivity
                 break;
         }
 
+    }
+
+    private void loadAllDate(String s) {
+        try {
+        UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+        userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
+        userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
+        userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
+        //在此同时加载比赛记录列表
+        HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+        historyFragment.loadDate(s);
+        save("id", s);
+        }catch (NumberFormatException e){
+
+        }
+    }
+
+    private void save(String id, String s) {
+        msg("save",s);
+
+        preferceService.save(id,s);
     }
 
     private class MyFragmentAdapter extends FragmentPagerAdapter{

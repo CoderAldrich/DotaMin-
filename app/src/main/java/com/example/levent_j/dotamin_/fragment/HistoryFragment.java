@@ -113,15 +113,16 @@ public class HistoryFragment extends BaseFragment{
     }
 
     public void loadDate(String s) {
-        noContent.setText("请等待");
+//        noContent.setText("请等待");
         id = s;
         if (isLoading||isloadmore){
             //在此发起网络请求获取数据
             Api.getInstance().getMatchesHistory(s,String.valueOf(count),matchesHistoryObserver);
         }
+    }
 
-
-
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -153,7 +154,7 @@ public class HistoryFragment extends BaseFragment{
                 Snackbar.make(getView(), "网络链接失败，请重试", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-            noContent.setText("网络错误");
+//            noContent.setText("网络错误");
 
         }
 
