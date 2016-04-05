@@ -2,7 +2,6 @@ package com.example.levent_j.dotamin_.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
-import com.example.levent_j.dotamin_.activity.MainActivity;
 import com.example.levent_j.dotamin_.activity.MatchDetailActivity;
-import com.example.levent_j.dotamin_.pojo.HistoryItemBean;
+import com.example.levent_j.dotamin_.model.HistoryItemBean;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.squareup.picasso.Picasso;
 

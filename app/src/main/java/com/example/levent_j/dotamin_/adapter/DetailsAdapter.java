@@ -1,29 +1,25 @@
 package com.example.levent_j.dotamin_.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
-import com.example.levent_j.dotamin_.pojo.Item;
-import com.example.levent_j.dotamin_.pojo.MatchPlayer;
-import com.example.levent_j.dotamin_.pojo.PlayerDetailBean;
+import com.example.levent_j.dotamin_.activity.HeroDetailActivity;
+import com.example.levent_j.dotamin_.model.MatchPlayer;
+import com.example.levent_j.dotamin_.model.PlayerDetailBean;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by levent_j on 16-3-9.
@@ -120,7 +116,8 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         avater = (ImageView) convertView.findViewById(R.id.iv_hero_avater);
 
         MatchPlayer matchPlayer = matchPlayerList.get(groupPosition);
-        heroname.setText(Heroes.HERO_NAME[matchPlayer.getHero_id() - 1]);
+        final String name = Heroes.HERO_NAME[matchPlayer.getHero_id() - 1];
+        heroname.setText(name);
         herolevel.setText("等级"+matchPlayer.getLevel());
         heroteam.setText((Util.isRadiant(matchPlayer.getPlayerSlot()))?"天辉":"夜魇");
         herokill.setText("击杀："+matchPlayer.getKills());
@@ -133,6 +130,16 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         }else {
             heroteam.setTextColor(context.getResources().getColor(R.color.material_red));
         }
+
+        avater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HeroDetailActivity.class);
+                intent.putExtra("name",name);
+                context.startActivity(intent);
+                Log.d("Debug","heroname is"+name);
+            }
+        });
         return convertView;
     }
 

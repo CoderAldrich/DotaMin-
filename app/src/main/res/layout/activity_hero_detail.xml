@@ -237,8 +237,6 @@
                 android:layout_height="match_parent"
                 android:textSize="8pt"
                 android:text="技能描述"
-                android:maxLines="5"
-                android:ellipsize="end"
                 android:scrollbars="vertical"
                 android:id="@+id/tv_skill_description"
                 android:layout_marginLeft="10dp" />

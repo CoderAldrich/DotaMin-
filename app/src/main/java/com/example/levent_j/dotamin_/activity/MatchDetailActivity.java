@@ -1,7 +1,6 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -14,10 +13,10 @@ import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.DetailsAdapter;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.net.Api;
-import com.example.levent_j.dotamin_.pojo.Item;
-import com.example.levent_j.dotamin_.pojo.Match;
-import com.example.levent_j.dotamin_.pojo.MatchPlayer;
-import com.example.levent_j.dotamin_.pojo.PlayerDetailBean;
+import com.example.levent_j.dotamin_.model.Item;
+import com.example.levent_j.dotamin_.model.Match;
+import com.example.levent_j.dotamin_.model.MatchPlayer;
+import com.example.levent_j.dotamin_.model.PlayerDetailBean;
 import com.example.levent_j.dotamin_.utils.Util;
 
 import java.util.ArrayList;

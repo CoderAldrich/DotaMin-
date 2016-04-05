@@ -14,12 +14,11 @@ import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.adapter.HistoryAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
 import com.example.levent_j.dotamin_.net.Api;
-import com.example.levent_j.dotamin_.pojo.HistoryItemBean;
-import com.example.levent_j.dotamin_.pojo.Match;
-import com.example.levent_j.dotamin_.pojo.MatchPlayer;
-import com.example.levent_j.dotamin_.pojo.Matches;
-import com.example.levent_j.dotamin_.pojo.MatchesHistory;
-import com.example.levent_j.dotamin_.utils.Heroes;
+import com.example.levent_j.dotamin_.model.HistoryItemBean;
+import com.example.levent_j.dotamin_.model.Match;
+import com.example.levent_j.dotamin_.model.MatchPlayer;
+import com.example.levent_j.dotamin_.model.Matches;
+import com.example.levent_j.dotamin_.model.MatchesHistory;
 import com.example.levent_j.dotamin_.utils.SpaceItemDecoration;
 import com.example.levent_j.dotamin_.utils.Util;
 

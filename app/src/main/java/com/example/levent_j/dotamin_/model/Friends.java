@@ -1,4 +1,4 @@
-package com.example.levent_j.dotamin_.pojo;
+package com.example.levent_j.dotamin_.model;
 
 import java.util.List;
 

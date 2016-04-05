@@ -3,8 +3,6 @@ package com.example.levent_j.dotamin_.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.style.ImageSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +11,7 @@ import android.widget.TextView;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.activity.MainActivity;
-import com.example.levent_j.dotamin_.fragment.UserFragment;
-import com.example.levent_j.dotamin_.net.Api;
-import com.example.levent_j.dotamin_.pojo.Friend;
-import com.example.levent_j.dotamin_.pojo.FriendResult;
-import com.example.levent_j.dotamin_.pojo.Friends;
-import com.example.levent_j.dotamin_.pojo.Player;
-import com.example.levent_j.dotamin_.pojo.User;
-import com.example.levent_j.dotamin_.pojo.UserResponse;
+import com.example.levent_j.dotamin_.model.Player;
 import com.example.levent_j.dotamin_.utils.Util;
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +20,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.Observer;
 
 /**
  * Created by levent_j on 16-3-4.

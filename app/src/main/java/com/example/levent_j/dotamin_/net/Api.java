@@ -1,13 +1,10 @@
 package com.example.levent_j.dotamin_.net;
 
-import android.util.Log;
-
-import com.example.levent_j.dotamin_.pojo.FriendResult;
-import com.example.levent_j.dotamin_.pojo.Item;
-import com.example.levent_j.dotamin_.pojo.Match;
-import com.example.levent_j.dotamin_.pojo.MatchesHistory;
-import com.example.levent_j.dotamin_.pojo.User;
-import com.example.levent_j.dotamin_.utils.Util;
+import com.example.levent_j.dotamin_.model.FriendResult;
+import com.example.levent_j.dotamin_.model.Item;
+import com.example.levent_j.dotamin_.model.Match;
+import com.example.levent_j.dotamin_.model.MatchesHistory;
+import com.example.levent_j.dotamin_.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
