@@ -11,11 +11,11 @@ Dota2战绩查询app，模仿DotaMax+，android练手项目 ，也是本人第�
 
 以下截图是用我自己手机截屏的
 
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen1.png)  
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen2.png)  
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen3.png)  
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen4.png)  
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen5.png)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen1.jpg)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen2.jpg)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen3.jpg)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen4.jpg)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen5.jpg)  
 
 
 ---  
