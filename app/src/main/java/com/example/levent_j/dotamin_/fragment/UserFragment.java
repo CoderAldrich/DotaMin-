@@ -144,7 +144,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         Player player = u.getResponse().getPlayers().get(0);
         username.setText(player.getPersonaname());
         logoff.setText("上次登陆：" + Util.formRelativeDate(player.getLastlogoff()));
-        steamid.setText("steam id:" + Util.get32Id(Long.parseLong(player.getSteamid())));
+        steamid.setText("Dota2 id:" + Util.get32Id(Long.parseLong(player.getSteamid())));
         steamURL = player.getProfileurl();
         steamurl.setText("点击访问社区页面");
         state.setText("当前："+Util.getState(player.getPersonastate()));
