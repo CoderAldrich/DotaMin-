@@ -6,6 +6,17 @@ Dota2战绩查询app，模仿DotaMax+，android练手项目 ，也是本人第�
         数据内容来源于steam提供的api以及完美dota2官网提供的英雄详细资料（这里非常感谢 @黄俊钦 菊苣通过爬虫帮我获取所有英雄技能图片）  
         完全开源，代码提供Android开发者学习，如果觉得不错，可以请我吃顿饭（也可以打赏or捐助ヾ (o ° ω ° O ) ノ゙）有不足之处请多多指出，好的app时靠大家一起完善的！
 
+---  
+##截图  
+
+以下截图是用我自己手机截屏的
+
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen1.png)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen2.png)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen3.png)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen4.png)  
+![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen5.png)  
+
 
 ---  
 
