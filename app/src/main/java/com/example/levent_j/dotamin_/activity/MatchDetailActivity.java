@@ -70,8 +70,8 @@ public class MatchDetailActivity extends BaseActivity implements GestureDetector
     private Map<Integer,String> itemUrl;
     private Item item;
     GestureDetector gestureDetector;
-    private int verticalMinDistance = 20;
-    private int minVelocity = 0;
+    private static final int verticalMinDistance = 20;
+    private static final int minVelocity = 0;
 
     @Override
     protected void init() {

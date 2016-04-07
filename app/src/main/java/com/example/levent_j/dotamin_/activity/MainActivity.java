@@ -34,7 +34,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -311,7 +310,7 @@ public class MainActivity extends BaseActivity
         HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
         historyFragment.loadDate(s);
         save("id", s);
-        }catch (NumberFormatException e){
+        }catch (NumberFormatException ignored){
 
         }
     }

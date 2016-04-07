@@ -1,4 +1,5 @@
 # DotaMin-
+
 Dota2战绩查询app，模仿DotaMax+，android练手项目 ，也是本人第一个开源项目，代码比较渣，希望由大家一起来完善 
 
 这是一款程序猿必备的Material Design风格的dota2盒子～  

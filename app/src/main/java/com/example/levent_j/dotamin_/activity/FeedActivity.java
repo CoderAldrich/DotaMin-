@@ -1,7 +1,6 @@
 package com.example.levent_j.dotamin_.activity;
 
 import android.annotation.TargetApi;
-import android.gesture.GestureOverlayView;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.GestureDetector;
@@ -21,8 +20,8 @@ public class FeedActivity extends BaseActivity implements View.OnTouchListener, 
     CoordinatorLayout coordinatorLayout;
 
     GestureDetector gestureDetector;
-    private int verticalMinDistance = 20;
-    private int minVelocity = 0;
+    private static final int verticalMinDistance = 20;
+    private static final int minVelocity = 0;
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override

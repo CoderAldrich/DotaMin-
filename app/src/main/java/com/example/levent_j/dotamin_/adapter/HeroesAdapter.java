@@ -9,17 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.activity.HeroDetailActivity;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

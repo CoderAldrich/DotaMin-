@@ -1,11 +1,9 @@
 package com.example.levent_j.dotamin_.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.example.levent_j.dotamin_.R;
@@ -13,11 +11,8 @@ import com.example.levent_j.dotamin_.adapter.HeroesAdapter;
 import com.example.levent_j.dotamin_.base.BaseFragment;
 import com.example.levent_j.dotamin_.utils.Heroes;
 import com.example.levent_j.dotamin_.utils.SGDecoration;
-import com.example.levent_j.dotamin_.utils.SpaceItemDecoration;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 
 /**
@@ -94,9 +89,7 @@ public class HeroFragment extends BaseFragment{
     private void loadDate() {
         if (isloading||isloadmore){
             List<String> strings = new ArrayList<>();
-            for (int i=0;i<count;i++){
-                strings.add(Heroes.HERO_NAME[i]);
-            }
+            for (int i=0; count > i;i++) strings.add(Heroes.HERO_NAME[i]);
             heroesAdapter.initArrayList(strings);
         }
         if (isloading){

@@ -179,7 +179,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         public void onNext(FriendResult friendResult) {
             if (friendResult!=null){
                 mfriends.setFriendslist(friendResult.getFriendslist());
-            }else {
             }
         }
     };
@@ -231,7 +230,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         public void onNext(User user) {
             if (user!=null){
                 muser.setResponse(user.getResponse());
-            }else {
             }
 
         }

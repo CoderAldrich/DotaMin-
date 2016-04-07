@@ -1,17 +1,13 @@
 package com.example.levent_j.dotamin_.activity;
 
-import android.annotation.TargetApi;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 import com.example.levent_j.dotamin_.utils.Heroes;
@@ -19,9 +15,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -72,7 +65,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.tv_hero_description_title)
     TextView desTitle;
 
-    private String getName;
+    private final ThreadLocal<String> nameGetted = new ThreadLocal<>();
     private int heroIndex;
     private int heroMin;
     private int skillCount;
@@ -83,9 +76,9 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void init() {
         linearLayout.setVisibility(View.INVISIBLE);
-        getName = getIntent().getStringExtra("name");
-        heroIndex = getHeroIndex(getName);
-        loadDate(getName);
+        nameGetted.set(getIntent().getStringExtra("name"));
+        heroIndex = getHeroIndex(nameGetted.get());
+        loadDate(nameGetted.get());
         skillMap = new HashMap<>();
         skillAvater1.setOnClickListener(this);
         skillAvater2.setOnClickListener(this);

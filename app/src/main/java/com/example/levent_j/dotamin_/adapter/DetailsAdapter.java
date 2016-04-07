@@ -25,30 +25,6 @@ import java.util.Map;
  * Created by levent_j on 16-3-9.
  */
 public class DetailsAdapter extends BaseExpandableListAdapter {
-    private TextView heroname;
-    private TextView herolevel;
-    private TextView heroteam;
-    private TextView herokill;
-    private TextView herodeath;
-    private TextView heroass;
-    private ImageView avater;
-
-
-    private TextView hits;
-    private TextView denis;
-    private TextView gpm;
-    private TextView xpm;
-    private TextView heroDamage;
-    private TextView towerDamage;
-    private TextView heroHealing;
-    private TextView kda;
-    private TextView fight;
-    private ImageView item0;
-    private ImageView item1;
-    private ImageView item2;
-    private ImageView item3;
-    private ImageView item4;
-    private ImageView item5;
 
     private Context context;
     private List<MatchPlayer> matchPlayerList;
@@ -69,8 +45,7 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         MatchPlayer key = matchPlayerList.get(groupPosition);
-        int size = matchPlayerListMap.get(key).size();
-        return size;
+        return matchPlayerListMap.get(key).size();
     }
 
     @Override
@@ -107,13 +82,13 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.layout_parent,null);
         }
 
-        heroname = (TextView) convertView.findViewById(R.id.tv_hero_name);
-        herolevel = (TextView) convertView.findViewById(R.id.tv_hero_level);
-        heroteam = (TextView) convertView.findViewById(R.id.tv_hero_team);
-        herokill = (TextView) convertView.findViewById(R.id.tv_hero_kill);
-        herodeath = (TextView) convertView.findViewById(R.id.tv_hero_death);
-        heroass = (TextView) convertView.findViewById(R.id.tv_hero_ass);
-        avater = (ImageView) convertView.findViewById(R.id.iv_hero_avater);
+        TextView heroname = (TextView) convertView.findViewById(R.id.tv_hero_name);
+        TextView herolevel = (TextView) convertView.findViewById(R.id.tv_hero_level);
+        TextView heroteam = (TextView) convertView.findViewById(R.id.tv_hero_team);
+        TextView herokill = (TextView) convertView.findViewById(R.id.tv_hero_kill);
+        TextView herodeath = (TextView) convertView.findViewById(R.id.tv_hero_death);
+        TextView heroass = (TextView) convertView.findViewById(R.id.tv_hero_ass);
+        ImageView avater = (ImageView) convertView.findViewById(R.id.iv_hero_avater);
 
         MatchPlayer matchPlayer = matchPlayerList.get(groupPosition);
         final String name = Heroes.HERO_NAME[matchPlayer.getHero_id() - 1];
@@ -121,7 +96,7 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
         herolevel.setText("等级"+matchPlayer.getLevel());
         heroteam.setText((Util.isRadiant(matchPlayer.getPlayerSlot()))?"天辉":"夜魇");
         herokill.setText("击杀："+matchPlayer.getKills());
-        herodeath.setText("死亡："+matchPlayer.getDeaths());
+        herodeath.setText("死亡：" + matchPlayer.getDeaths());
         heroass.setText("助攻：" + matchPlayer.getAssists());
 
         Picasso.with(context).load(Heroes.HERO_IMAGE_FULL[matchPlayer.getHero_id() - 1]).into(avater);
@@ -152,21 +127,21 @@ public class DetailsAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.layout_children,null);
         }
 
-        hits = (TextView) convertView.findViewById(R.id.tv_hits);
-        denis = (TextView) convertView.findViewById(R.id.tv_denis);
-        xpm = (TextView) convertView.findViewById(R.id.tv_XPM);
-        gpm = (TextView) convertView.findViewById(R.id.tv_GPM);
-        heroDamage = (TextView) convertView.findViewById(R.id.tv_hero_damage);
-        towerDamage = (TextView) convertView.findViewById(R.id.tv_tower_damage);
-        heroHealing = (TextView) convertView.findViewById(R.id.tv_hero_healing);
-        kda = (TextView) convertView.findViewById(R.id.tv_hero_kda);
-        fight = (TextView) convertView.findViewById(R.id.tv_hero_fight);
-        item0 = (ImageView) convertView.findViewById(R.id.iv_item_0);
-        item1 = (ImageView) convertView.findViewById(R.id.iv_item_1);
-        item2 = (ImageView) convertView.findViewById(R.id.iv_item_2);
-        item3 = (ImageView) convertView.findViewById(R.id.iv_item_3);
-        item4 = (ImageView) convertView.findViewById(R.id.iv_item_4);
-        item5 = (ImageView) convertView.findViewById(R.id.iv_item_5);
+        TextView hits = (TextView) convertView.findViewById(R.id.tv_hits);
+        TextView denis = (TextView) convertView.findViewById(R.id.tv_denis);
+        TextView xpm = (TextView) convertView.findViewById(R.id.tv_XPM);
+        TextView gpm = (TextView) convertView.findViewById(R.id.tv_GPM);
+        TextView heroDamage = (TextView) convertView.findViewById(R.id.tv_hero_damage);
+        TextView towerDamage = (TextView) convertView.findViewById(R.id.tv_tower_damage);
+        TextView heroHealing = (TextView) convertView.findViewById(R.id.tv_hero_healing);
+        TextView kda = (TextView) convertView.findViewById(R.id.tv_hero_kda);
+        TextView fight = (TextView) convertView.findViewById(R.id.tv_hero_fight);
+        ImageView item0 = (ImageView) convertView.findViewById(R.id.iv_item_0);
+        ImageView item1 = (ImageView) convertView.findViewById(R.id.iv_item_1);
+        ImageView item2 = (ImageView) convertView.findViewById(R.id.iv_item_2);
+        ImageView item3 = (ImageView) convertView.findViewById(R.id.iv_item_3);
+        ImageView item4 = (ImageView) convertView.findViewById(R.id.iv_item_4);
+        ImageView item5 = (ImageView) convertView.findViewById(R.id.iv_item_5);
 
         hits.setText("正补数："+info.getHits());
         denis.setText("反补数：" + info.getDenies());

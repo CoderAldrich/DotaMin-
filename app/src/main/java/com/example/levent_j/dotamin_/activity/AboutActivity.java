@@ -9,21 +9,15 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.levent_j.dotamin_.R;
 import com.example.levent_j.dotamin_.base.BaseActivity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import butterknife.Bind;
 
@@ -41,8 +35,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener,
     CoordinatorLayout coordinatorLayout;
 
     GestureDetector gestureDetector;
-    private int verticalMinDistance = 20;
-    private int minVelocity = 0;
+    private static final int verticalMinDistance = 20;
+    private static final int minVelocity = 0;
 
     @Override
     protected void init() {
@@ -136,9 +130,11 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener,
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (e1.getX() - e2.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
             //左
-        } else if (e2.getX() - e1.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
-            //右
-            finish();
+        } else {
+            if (e2.getX() - e1.getX() > verticalMinDistance && Math.abs(velocityX) > minVelocity) {
+                //右
+                finish();
+            }
         }
 
         return false;    }
