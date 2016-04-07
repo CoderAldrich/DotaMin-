@@ -2,6 +2,8 @@
 
 Dota2战绩查询app，模仿DotaMax+，android练手项目 ，也是本人第一个开源项目，代码比较渣，希望由大家一起来完善 
 
+apk在这儿：[apk](https://github.com/Levent-J/DotaMin-/blob/master/app/app-release.apk "Apk")  
+
 这是一款程序猿必备的Material Design风格的dota2盒子～  
 这是第一版，主要参考了app DotaMax+(废话从名字就看的出来 (｡・`ω´･) )，在用户主页可以根据dota2账号id查询个人steam信息以及好友列表，同时会在历史列表显示dota2比赛历史记录，在英雄界面将所有英雄以瀑布流的形式呈现出来，点击英雄大图即可即使查询英雄详细信息～(其他功能暂未实现)  
         数据内容来源于steam提供的api以及完美dota2官网提供的英雄详细资料（这里非常感谢 @黄俊钦 菊苣通过爬虫帮我获取所有英雄技能图片）  
