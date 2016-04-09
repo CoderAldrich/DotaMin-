@@ -2,6 +2,7 @@ package com.example.levent_j.dotamin_.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,8 +63,6 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     LinearLayout linearLayout;
     @Bind(R.id.loading)
     LoadingPopPoint loadingPopPoint;
-    @Bind(R.id.tv_hero_description_title)
-    TextView desTitle;
 
     private final ThreadLocal<String> nameGetted = new ThreadLocal<>();
     private int heroIndex;
@@ -85,10 +84,9 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         skillAvater3.setOnClickListener(this);
         skillAvater4.setOnClickListener(this);
         skillAvater5.setOnClickListener(this);
-        desTitle.setOnClickListener(this);
+        heroDescription.setOnClickListener(this);
         heroDescription.setMovementMethod(new ScrollingMovementMethod());
         isVisible = false;
-        heroDescription.setVisibility(View.GONE);
     }
 
     private int getHeroIndex(String getName) {
@@ -195,38 +193,34 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.iv_skill_1:
                 setSkill(1, skillAvater1);
-                skillAvater1.setAlpha(180);
+                skillAvater1.setAlpha(160);
                 break;
             case R.id.iv_skill_2:
                 setSkill(2, skillAvater2);
-                skillAvater2.setAlpha(180);
+                skillAvater2.setAlpha(160);
                 break;
             case R.id.iv_skill_3:
                 setSkill(3,skillAvater3);
-                skillAvater3.setAlpha(180);
+                skillAvater3.setAlpha(160);
                 break;
             case R.id.iv_skill_4:
                 setSkill(4,skillAvater4);
-                skillAvater4.setAlpha(180);
+                skillAvater4.setAlpha(160);
                 break;
             case R.id.iv_skill_5:
                 setSkill(5,skillAvater5);
                 skillAvater5.setAlpha(180);
                 break;
-            case R.id.tv_hero_description_title:
-                if (isVisible){
-                    //已经显示
-                    heroDescription.setVisibility(View.GONE);
-                    desTitle.setText("背景故事(点击显示)");
-                    isVisible = false;
-                }else {
-                    //已经隐藏
-                    heroDescription.setVisibility(View.VISIBLE);
-                    desTitle.setText("背景故事(点击隐藏)");
-                    isVisible = true;
+            case R.id.tv_hero_description:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    if (heroDescription.getMaxLines()==5){
+                        heroDescription.setMaxLines(100);
+                    }else {
+                        heroDescription.setMaxLines(5);
+                    }
                 }
-
                 break;
+
         }
     }
 
