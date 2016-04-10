@@ -7,7 +7,7 @@ apk在这儿：[apk](https://github.com/Levent-J/DotaMin-/blob/master/app/app-re
 这是一款程序猿必备的Material Design风格的dota2盒子～  
 这是第一版，主要参考了app DotaMax+(废话从名字就看的出来 (｡・`ω´･) )，在用户主页可以根据dota2账号id查询个人steam信息以及好友列表，同时会在历史列表显示dota2比赛历史记录，在英雄界面将所有英雄以瀑布流的形式呈现出来，点击英雄大图即可即使查询英雄详细信息～(其他功能暂未实现)  
         数据内容来源于steam提供的api以及完美dota2官网提供的英雄详细资料（这里非常感谢 @黄俊钦 菊苣通过爬虫帮我获取所有英雄技能图片）  
-        完全开源，代码提供Android开发者学习，如果觉得不错，可以请我吃顿饭（也可以打赏or捐助ヾ (o ° ω ° O ) ノ゙）有不足之处请多多指出，好的app时靠大家一起完善的！
+        完全开源，代码提供Android开发者学习，如果觉得不错，可以请我吃顿饭（也可以打赏or捐助ヾ (o ° ω ° O ) ノ゙）有不足之处请多多指出，好的app是靠大家一起完善的！
 
 ---  
 ##截图  
@@ -18,7 +18,6 @@ apk在这儿：[apk](https://github.com/Levent-J/DotaMin-/blob/master/app/app-re
 ![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen2.jpg)  
 ![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen3.jpg)  
 ![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen4.jpg)  
-![image](https://github.com/Levent-J/DotaMin-/blob/master/screen/screen5.jpg)  
 
 
 ---  
