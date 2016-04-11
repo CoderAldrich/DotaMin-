@@ -20,9 +20,9 @@ import butterknife.Bind;
  */
 public class HeroFragment extends BaseFragment{
     @Bind(R.id.recycler_view_heros)
-    RecyclerView recyclerView;
+    RecyclerView mRecyclerHeros;
     @Bind(R.id.refresh_hero)
-    MaterialRefreshLayout materialRefreshLayout;
+    MaterialRefreshLayout mMDRefresh;
 
     private static final String ARGS = "HERO";
     private static final String KEY_HERO = "Hero";
@@ -60,9 +60,9 @@ public class HeroFragment extends BaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.addItemDecoration(new SGDecoration(spacingInPixels));
-        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+        mRecyclerHeros.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerHeros.addItemDecoration(new SGDecoration(spacingInPixels));
+        mMDRefresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 isloading = true;
@@ -83,7 +83,7 @@ public class HeroFragment extends BaseFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView.setAdapter(heroesAdapter);
+        mRecyclerHeros.setAdapter(heroesAdapter);
     }
 
     private void loadDate() {
@@ -93,11 +93,11 @@ public class HeroFragment extends BaseFragment{
             heroesAdapter.initArrayList(strings);
         }
         if (isloading){
-            materialRefreshLayout.finishRefresh();
+            mMDRefresh.finishRefresh();
             isloading = false;
         }
         if (isloadmore){
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefreshLoadMore();
             isloadmore = false;
         }
     }

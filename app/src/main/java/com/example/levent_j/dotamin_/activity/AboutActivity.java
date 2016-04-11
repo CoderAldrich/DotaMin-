@@ -26,13 +26,13 @@ import butterknife.Bind;
  */
 public class AboutActivity extends BaseActivity implements View.OnClickListener, GestureDetector.OnGestureListener, View.OnTouchListener {
     @Bind(R.id.fab_gain)
-    FloatingActionButton gain;
+    FloatingActionButton mGain;
     @Bind(R.id.layout_lwj)
-    LinearLayout layoutlwj;
+    LinearLayout mLayoutLwj;
     @Bind(R.id.layout_hjq)
-    LinearLayout layouthjq;
+    LinearLayout mLayoutHjq;
     @Bind(R.id.layout_about)
-    CoordinatorLayout coordinatorLayout;
+    CoordinatorLayout mCoordLayout;
 
     GestureDetector gestureDetector;
     private static final int verticalMinDistance = 20;
@@ -41,9 +41,9 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void init() {
         gestureDetector = new GestureDetector(this);
-        coordinatorLayout.setOnTouchListener(this);
-        coordinatorLayout.setLongClickable(true);
-        gain.setOnClickListener(this);
+        mCoordLayout.setOnTouchListener(this);
+        mCoordLayout.setLongClickable(true);
+        mGain.setOnClickListener(this);
     }
 
     @Override
@@ -53,8 +53,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     protected void setListener() {
-        layoutlwj.setOnClickListener(this);
-        layouthjq.setOnClickListener(this);
+        mLayoutLwj.setOnClickListener(this);
+        mLayoutHjq.setOnClickListener(this);
     }
     private void saveImage(){
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ic_gain_2);

@@ -42,17 +42,17 @@ import butterknife.Bind;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mTooBarr;
     @Bind(R.id.fab)
-    FloatingActionButton fab;
+    FloatingActionButton mFab;
     @Bind(R.id.drawer_layout)
-    DrawerLayout drawer;
+    DrawerLayout mDrawer;
     @Bind(R.id.nav_view)
-    NavigationView navigationView;
+    NavigationView mNav;
     @Bind(R.id.viewpager)
-    ViewPager viewPager;
+    ViewPager mViewPager;
     @Bind(R.id.tabLayout)
-    TabLayout tabLayout;
+    TabLayout mTabLayout;
 
 
     public MyFragmentAdapter myFragmentAdapter;
@@ -68,27 +68,27 @@ public class MainActivity extends BaseActivity
     @Override
     protected void init() {
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mTooBarr);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawer, mTooBarr, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        mNav.setNavigationItemSelectedListener(this);
 
         myFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager(),this);
 
         myFragmentAdapter.addFragment(UserFragment.newInstance(TITLE[0]),TITLE[0]);
         myFragmentAdapter.addFragment(HistoryFragment.newInstance(TITLE[1]),TITLE[1]);
         myFragmentAdapter.addFragment(HeroFragment.newInstance(TITLE[2]), TITLE[2]);
-        viewPager.setAdapter(myFragmentAdapter);
-        viewPager.setOffscreenPageLimit(3);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mViewPager.setAdapter(myFragmentAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
 
         //为tab的标题设置icon
-        for (int i=0;i<tabLayout.getTabCount();i++){
-            tabLayout.getTabAt(i).setIcon(tabicon[i]);
+        for (int i=0;i< mTabLayout.getTabCount();i++){
+            mTabLayout.getTabAt(i).setIcon(tabicon[i]);
         }
 
 
@@ -104,10 +104,10 @@ public class MainActivity extends BaseActivity
             String id = params.get(PreferceService.KEY);
             if (!id.equals("null")){
                 msg("save","share id is"+id);
-                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(mViewPager.getCurrentItem());
                 userFragment.loadUserDate(Util.get64Id(Long.parseLong(id)));
                 userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(id)));
-                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(mViewPager.getCurrentItem()+1);
                 historyFragment.setId(id);
                 historyFragment.loadDate(id);
             }
@@ -116,11 +116,11 @@ public class MainActivity extends BaseActivity
         }else {
             isFirst = false;
             //通过点击好友开启新的MainActivity时要加载他的好友列表和比赛历史
-            UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+            UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(mViewPager.getCurrentItem());
             userFragment.loadUserDate(s);
             userFragment.loadFrinedsDate(s);
             userFragment.flag=true;
-            HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+            HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(mViewPager.getCurrentItem()+1);
             historyFragment.loadDate(Util.get32Id(Long.parseLong(s)));
         }
     }
@@ -133,7 +133,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void setListener() {
-        fab.setOnClickListener(this);
+        mFab.setOnClickListener(this);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class MainActivity extends BaseActivity
     public void onClick(final View v) {
         switch (v.getId()){
             case R.id.fab:
-                final String s = myFragmentAdapter.getTitle(viewPager.getCurrentItem());
+                final String s = myFragmentAdapter.getTitle(mViewPager.getCurrentItem());
                 if (s.equals(TITLE[0])){
                     searchType = 1;
                     searchTitle = "dota2 id";
@@ -234,13 +234,7 @@ public class MainActivity extends BaseActivity
                                             try {
                                                 String s = inputText.toString().trim();
                                                 loadAllDate(s);
-//                                                UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
-//                                                userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
-//                                                userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
-//                                                userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
-//                                                //在此同时加载比赛记录列表
-//                                                HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
-//                                                historyFragment.loadDate(s);
+//
                                             }catch (NumberFormatException e){
                                                 Snackbar.make(v, "填写错误！", Snackbar.LENGTH_LONG)
                                                         .setAction("Action", null).show();
@@ -302,12 +296,12 @@ public class MainActivity extends BaseActivity
 
     private void loadAllDate(String s) {
         try {
-        UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(viewPager.getCurrentItem());
+        UserFragment userFragment = (UserFragment) myFragmentAdapter.getItem(mViewPager.getCurrentItem());
         userFragment.loadUserDate(Util.get64Id(Long.parseLong(s)));
         userFragment.loadFrinedsDate(Util.get64Id(Long.parseLong(s)));
-        userFragment.loadingPopPoint.setVisibility(View.VISIBLE);
+        userFragment.mPopPoint.setVisibility(View.VISIBLE);
         //在此同时加载比赛记录列表
-        HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(viewPager.getCurrentItem()+1);
+        HistoryFragment historyFragment = (HistoryFragment)myFragmentAdapter.getItem(mViewPager.getCurrentItem()+1);
         historyFragment.loadDate(s);
         save("id", s);
         }catch (NumberFormatException ignored){

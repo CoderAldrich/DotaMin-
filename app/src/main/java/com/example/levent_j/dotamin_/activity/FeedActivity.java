@@ -17,7 +17,7 @@ import butterknife.Bind;
  */
 public class FeedActivity extends BaseActivity implements View.OnTouchListener, GestureDetector.OnGestureListener {
     @Bind(R.id.layout_feed)
-    CoordinatorLayout coordinatorLayout;
+    CoordinatorLayout mCoodLayout;
 
     GestureDetector gestureDetector;
     private static final int verticalMinDistance = 20;
@@ -27,8 +27,8 @@ public class FeedActivity extends BaseActivity implements View.OnTouchListener, 
     @Override
     protected void init() {
         gestureDetector = new GestureDetector(this);
-        coordinatorLayout.setOnTouchListener(this);
-        coordinatorLayout.setLongClickable(true);
+        mCoodLayout.setOnTouchListener(this);
+        mCoodLayout.setLongClickable(true);
     }
 
     @Override

@@ -34,23 +34,23 @@ import xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint;
  */
 public class UserFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.iv_user_avater)
-    ImageView avater;
+    ImageView mAvater;
     @Bind(R.id.tv_user_name)
-    TextView username;
+    TextView mUserName;
     @Bind(R.id.tv_last_logoff)
-    TextView logoff;
+    TextView mLogOff;
     @Bind(R.id.tv_user_state)
-    TextView state;
+    TextView mUserState;
     @Bind(R.id.tv_user_id)
-    TextView steamid;
+    TextView mSteamId;
     @Bind(R.id.tv_steam_url)
-    TextView steamurl;
+    TextView mSteamUrl;
     @Bind(R.id.loadingpoppoint)
-    public LoadingPopPoint loadingPopPoint;
+    public LoadingPopPoint mPopPoint;
     @Bind(R.id.recycler_friends_list)
-    RecyclerView recyclerView_friends;
+    RecyclerView mRecyclerFriends;
     @Bind(R.id.friends_refresh)
-    MaterialRefreshLayout materialRefreshLayout;
+    MaterialRefreshLayout mMDRefresh;
     @Bind(R.id.tv_user_no_content)
     TextView noContent;
 
@@ -99,11 +99,11 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        steamurl.setOnClickListener(this);
-        loadingPopPoint.setVisibility(View.INVISIBLE);
-        recyclerView_friends.setLayoutManager(new LinearLayoutManager(recyclerView_friends.getContext()));
-        recyclerView_friends.setItemAnimator(new DefaultItemAnimator());
-        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+        mSteamUrl.setOnClickListener(this);
+        mPopPoint.setVisibility(View.INVISIBLE);
+        mRecyclerFriends.setLayoutManager(new LinearLayoutManager(mRecyclerFriends.getContext()));
+        mRecyclerFriends.setItemAnimator(new DefaultItemAnimator());
+        mMDRefresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 loadFrinedsDate(steamID);
@@ -142,13 +142,13 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     private void changeUserView(User u){
         Player player = u.getResponse().getPlayers().get(0);
-        username.setText(player.getPersonaname());
-        logoff.setText("上次登陆：" + Util.formRelativeDate(player.getLastlogoff()));
-        steamid.setText("Dota2 id:" + Util.get32Id(Long.parseLong(player.getSteamid())));
+        mUserName.setText(player.getPersonaname());
+        mLogOff.setText("上次登陆：" + Util.formRelativeDate(player.getLastlogoff()));
+        mSteamId.setText("Dota2 id:" + Util.get32Id(Long.parseLong(player.getSteamid())));
         steamURL = player.getProfileurl();
-        steamurl.setText("点击访问社区页面");
-        state.setText("当前："+Util.getState(player.getPersonastate()));
-        Picasso.with(getContext()).load(player.getAvatarfull()).into(avater);
+        mSteamUrl.setText("点击访问社区页面");
+        mUserState.setText("当前：" + Util.getState(player.getPersonastate()));
+        Picasso.with(getContext()).load(player.getAvatarfull()).into(mAvater);
     }
 
     @Override
@@ -164,14 +164,14 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 //                flag = false;
             }
             Api.getInstance().getUsers(mfriends.getFriendslist().getFriends().get(userIndex).getSteamid(), userFriendObserver);
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefreshLoadMore();
         }
 
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefresh();
+            mMDRefresh.finishRefreshLoadMore();
             noContent.setText("网络错误");
         }
 
@@ -189,8 +189,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             basePlayerList.add(mfrienduser.getResponse().getPlayers().get(0));
             if (userIndex==count-1){
                 friendsAdapter.updateFriends(basePlayerList, isClear);
-                recyclerView_friends.setAdapter(friendsAdapter);
-                materialRefreshLayout.finishRefresh();
+                mRecyclerFriends.setAdapter(friendsAdapter);
+                mMDRefresh.finishRefresh();
                 userIndex = 0;
                 basePlayerList.clear();
                 noContent.setVisibility(View.GONE);
@@ -202,8 +202,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
         @Override
         public void onError(Throwable e) {
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefresh();
+            mMDRefresh.finishRefreshLoadMore();
         }
 
         @Override
@@ -216,14 +216,14 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         @Override
         public void onCompleted() {
             changeUserView(muser);
-            loadingPopPoint.setVisibility(View.INVISIBLE);
+            mPopPoint.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onError(Throwable e) {
             e.printStackTrace();
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefresh();
+            mMDRefresh.finishRefreshLoadMore();
         }
 
         @Override

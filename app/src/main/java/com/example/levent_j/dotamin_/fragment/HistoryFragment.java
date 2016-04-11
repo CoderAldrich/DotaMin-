@@ -33,9 +33,9 @@ import rx.Observer;
  */
 public class HistoryFragment extends BaseFragment{
     @Bind(R.id.recycler_view_history)
-    RecyclerView historyrecyclerView;
+    RecyclerView mRecyclerHis;
     @Bind(R.id.refresh_history)
-    MaterialRefreshLayout materialRefreshLayout;
+    MaterialRefreshLayout mMDRefresh;
     @Bind(R.id.tv_his_no_content)
     TextView noContent;
 
@@ -84,12 +84,12 @@ public class HistoryFragment extends BaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        historyrecyclerView.setLayoutManager(new LinearLayoutManager(historyrecyclerView.getContext()));
-        historyrecyclerView.setItemAnimator(new DefaultItemAnimator());
-        historyrecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
-        historyrecyclerView.setHasFixedSize(true);
+        mRecyclerHis.setLayoutManager(new LinearLayoutManager(mRecyclerHis.getContext()));
+        mRecyclerHis.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerHis.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        mRecyclerHis.setHasFixedSize(true);
 
-        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+        mMDRefresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 isLoading = true;
@@ -142,12 +142,12 @@ public class HistoryFragment extends BaseFragment{
             e.printStackTrace();
             isLoading = false;
             isloadmore = false;
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefresh();
+            mMDRefresh.finishRefreshLoadMore();
             if (e.getLocalizedMessage().equals("collection == null")){
                 Snackbar.make(getView(), "无比赛信息", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                materialRefreshLayout.finishRefresh();
+                mMDRefresh.finishRefresh();
             }else if (e.getLocalizedMessage().equals("HTTP 503 Service Unavailable")){
                 //如果服务器炸了，就在此发起网络请求
                 Snackbar.make(getView(), "网络链接失败，请重试", Snackbar.LENGTH_LONG)
@@ -208,14 +208,14 @@ public class HistoryFragment extends BaseFragment{
             if (hisIndex==count-1){
                 hisIndex = 0;
                 historyAdapter.updateHistoryList(historyItemBeans);
-                historyrecyclerView.setAdapter(historyAdapter);
+                mRecyclerHis.setAdapter(historyAdapter);
                 matchesList.clear();
                 if (isloadmore){
-                    materialRefreshLayout.finishRefreshLoadMore();
+                    mMDRefresh.finishRefreshLoadMore();
                     isloadmore = false;
                 }
                 if (isLoading){
-                    materialRefreshLayout.finishRefresh();
+                    mMDRefresh.finishRefresh();
                     isLoading = false;
                 }
                 noContent.setVisibility(View.GONE);
@@ -233,8 +233,8 @@ public class HistoryFragment extends BaseFragment{
             e.printStackTrace();
             isLoading = false;
             isloadmore = false;
-            materialRefreshLayout.finishRefresh();
-            materialRefreshLayout.finishRefreshLoadMore();
+            mMDRefresh.finishRefresh();
+            mMDRefresh.finishRefreshLoadMore();
         }
 
         @Override

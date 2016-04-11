@@ -30,39 +30,39 @@ import xhome.uestcfei.com.loadingpoppoint.LoadingPopPoint;
  */
 public class HeroDetailActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.tv_detail_hero_name)
-    TextView heroName;
+    TextView mHeroName;
     @Bind(R.id.iv_detail_hero_avater)
-    ImageView heroAvater;
+    ImageView mHeroAvater;
     @Bind(R.id.tv_power)
-    TextView heroPower;
+    TextView mHeroPower;
     @Bind(R.id.tv_agile)
-    TextView heroAgile;
+    TextView mHroAgile;
     @Bind(R.id.tv_know)
-    TextView heroKnow;
+    TextView mHeroKnow;
     @Bind(R.id.tv_attack)
-    TextView heroAttack;
+    TextView mHeroAttack;
     @Bind(R.id.tv_armor)
-    TextView heroArmor;
+    TextView mHeroArmor;
     @Bind(R.id.tv_hero_description)
-    TextView heroDescription;
+    TextView mHeroDescription;
     @Bind(R.id.iv_skill_1)
-    ImageView skillAvater1;
+    ImageView mSkillAvater1;
     @Bind(R.id.iv_skill_2)
-    ImageView skillAvater2;
+    ImageView mSkillAvater2;
     @Bind(R.id.iv_skill_3)
-    ImageView skillAvater3;
+    ImageView mSkillAvater3;
     @Bind(R.id.iv_skill_4)
-    ImageView skillAvater4;
+    ImageView mSkillAvater4;
     @Bind(R.id.iv_skill_5)
-    ImageView skillAvater5;
+    ImageView mSkillAvater5;
     @Bind(R.id.tv_skill_description)
-    TextView skillDescription;
+    TextView mSkillDescription;
     @Bind(R.id.tv_skill_name)
-    TextView skillName;
+    TextView mSkillName;
     @Bind(R.id.layout)
-    LinearLayout linearLayout;
+    LinearLayout mLinearLayout;
     @Bind(R.id.loading)
-    LoadingPopPoint loadingPopPoint;
+    LoadingPopPoint mPopPoint;
 
     private final ThreadLocal<String> nameGetted = new ThreadLocal<>();
     private int heroIndex;
@@ -74,18 +74,18 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void init() {
-        linearLayout.setVisibility(View.INVISIBLE);
+        mLinearLayout.setVisibility(View.INVISIBLE);
         nameGetted.set(getIntent().getStringExtra("name"));
         heroIndex = getHeroIndex(nameGetted.get());
         loadDate(nameGetted.get());
         skillMap = new HashMap<>();
-        skillAvater1.setOnClickListener(this);
-        skillAvater2.setOnClickListener(this);
-        skillAvater3.setOnClickListener(this);
-        skillAvater4.setOnClickListener(this);
-        skillAvater5.setOnClickListener(this);
-        heroDescription.setOnClickListener(this);
-        heroDescription.setMovementMethod(new ScrollingMovementMethod());
+        mSkillAvater1.setOnClickListener(this);
+        mSkillAvater2.setOnClickListener(this);
+        mSkillAvater3.setOnClickListener(this);
+        mSkillAvater4.setOnClickListener(this);
+        mSkillAvater5.setOnClickListener(this);
+        mHeroDescription.setOnClickListener(this);
+        mHeroDescription.setMovementMethod(new ScrollingMovementMethod());
         isVisible = false;
     }
 
@@ -107,17 +107,17 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
                         //设置可见
-                        loadingPopPoint.setVisibility(View.INVISIBLE);
-                        linearLayout.setVisibility(View.VISIBLE);
+                        mPopPoint.setVisibility(View.INVISIBLE);
+                        mLinearLayout.setVisibility(View.VISIBLE);
 
                         msg("Hero", "NET_SUCCESS,name is " + objects.get(i).getString("heroName"));
-                        heroName.setText(objects.get(i).getString("heroName"));
-                        heroPower.setText(objects.get(i).getString("heroPow"));
-                        heroAgile.setText(objects.get(i).getString("heroAgi"));
-                        heroKnow.setText(objects.get(i).getString("heroKno"));
-                        heroAttack.setText(objects.get(i).getString("heroAttack"));
-                        heroArmor.setText(objects.get(i).getString("heroArmor"));
-                        heroDescription.setText(objects.get(i).getString("heroDescription"));
+                        mHeroName.setText(objects.get(i).getString("heroName"));
+                        mHeroPower.setText(objects.get(i).getString("heroPow"));
+                        mHroAgile.setText(objects.get(i).getString("heroAgi"));
+                        mHeroKnow.setText(objects.get(i).getString("heroKno"));
+                        mHeroAttack.setText(objects.get(i).getString("heroAttack"));
+                        mHeroArmor.setText(objects.get(i).getString("heroArmor"));
+                        mHeroDescription.setText(objects.get(i).getString("heroDescription"));
                         heroMin = objects.get(i).getInt("heroMin");
 
                         skillCount = objects.get(i).getInt("skillCount");
@@ -128,16 +128,16 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                         }
 
                         if (skillCount == 4) {
-                            skillAvater5.setVisibility(View.GONE);
+                            mSkillAvater5.setVisibility(View.GONE);
                         }else {
-                            skillAvater5.setVisibility(View.VISIBLE);
-                            setSkill(5, skillAvater5);
+                            mSkillAvater5.setVisibility(View.VISIBLE);
+                            setSkill(5, mSkillAvater5);
                         }
-                        setSkill(4,skillAvater4);
-                        setSkill(3,skillAvater3);
-                        setSkill(2, skillAvater2);
-                        setSkill(1, skillAvater1);
-                        skillAvater1.setAlpha(180);
+                        setSkill(4, mSkillAvater4);
+                        setSkill(3, mSkillAvater3);
+                        setSkill(2, mSkillAvater2);
+                        setSkill(1, mSkillAvater1);
+                        mSkillAvater1.setAlpha(180);
                         setHeroMain(heroMin);
 
                         int index = 0;
@@ -147,7 +147,7 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
                                 break;
                             }
                         }
-                        heroAvater.setBackgroundResource(Heroes.HERO_IMAGE_VERT[index]);
+                        mHeroAvater.setBackgroundResource(Heroes.HERO_IMAGE_VERT[index]);
 
                     }
                 } else {
@@ -161,13 +161,13 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     private void setHeroMain(int heroMin) {
         switch (heroMin){
             case 1:
-                heroPower.setText(heroPower.getText().toString().concat("(主)"));
+                mHeroPower.setText(mHeroPower.getText().toString().concat("(主)"));
                 break;
             case 2:
-                heroAgile.setText(heroAgile.getText().toString().concat("(主)"));
+                mHroAgile.setText(mHroAgile.getText().toString().concat("(主)"));
                 break;
             case 3:
-                heroKnow.setText(heroKnow.getText().toString().concat("(主)"));
+                mHeroKnow.setText(mHeroKnow.getText().toString().concat("(主)"));
                 break;
         }
     }
@@ -185,38 +185,38 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        skillAvater1.setAlpha(255);
-        skillAvater2.setAlpha(255);
-        skillAvater3.setAlpha(255);
-        skillAvater4.setAlpha(255);
-        skillAvater5.setAlpha(255);
+        mSkillAvater1.setAlpha(255);
+        mSkillAvater2.setAlpha(255);
+        mSkillAvater3.setAlpha(255);
+        mSkillAvater4.setAlpha(255);
+        mSkillAvater5.setAlpha(255);
         switch (v.getId()){
             case R.id.iv_skill_1:
-                setSkill(1, skillAvater1);
-                skillAvater1.setAlpha(160);
+                setSkill(1, mSkillAvater1);
+                mSkillAvater1.setAlpha(160);
                 break;
             case R.id.iv_skill_2:
-                setSkill(2, skillAvater2);
-                skillAvater2.setAlpha(160);
+                setSkill(2, mSkillAvater2);
+                mSkillAvater2.setAlpha(160);
                 break;
             case R.id.iv_skill_3:
-                setSkill(3,skillAvater3);
-                skillAvater3.setAlpha(160);
+                setSkill(3, mSkillAvater3);
+                mSkillAvater3.setAlpha(160);
                 break;
             case R.id.iv_skill_4:
-                setSkill(4,skillAvater4);
-                skillAvater4.setAlpha(160);
+                setSkill(4, mSkillAvater4);
+                mSkillAvater4.setAlpha(160);
                 break;
             case R.id.iv_skill_5:
-                setSkill(5,skillAvater5);
-                skillAvater5.setAlpha(180);
+                setSkill(5, mSkillAvater5);
+                mSkillAvater5.setAlpha(180);
                 break;
             case R.id.tv_hero_description:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    if (heroDescription.getMaxLines()==5){
-                        heroDescription.setMaxLines(100);
+                    if (mHeroDescription.getMaxLines()==5){
+                        mHeroDescription.setMaxLines(100);
                     }else {
-                        heroDescription.setMaxLines(5);
+                        mHeroDescription.setMaxLines(5);
                     }
                 }
                 break;
@@ -225,8 +225,8 @@ public class HeroDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void setSkill(int i,ImageView imageView) {
-        skillName.setText(skillNames[i-1]);
-        skillDescription.setText(skillMap.get(skillNames[i-1]));
+        mSkillName.setText(skillNames[i - 1]);
+        mSkillDescription.setText(skillMap.get(skillNames[i - 1]));
         setSkillAvater(heroIndex,i,imageView);
     }
 
